@@ -11,3 +11,17 @@
     color: #cccccc;
     margin-right: 50px;
 }
+.AuthFooter{
+    position:absolute;
+    bottom: 0;
+    width:100%;
+    min-height:220px;
+    background:#fafafa;"
+}
+
+.AuthFooter .SetContent{
+    margin-top: 40px;
+    margin-left: 50px;
+    margin-right: 50px;
+    background-color: #fafafa
+}
