@@ -36,35 +36,53 @@
         </div>
     </nav>
 
+    <!--Login Section-->
     <div class="container" ng-controller="LoginController">
         <h2 class="text-info text-center" style="margin-bottom: 30px">Sign Up</h2>
         <form name="regForm">
-            <div class="form-group col-lg-4 col-lg-offset-4">
-                <input type="text" id="firstname" ng-model="firstname" class="form-control" placeholder="First Name">
+            <!--First Name Input Field-->
+            <div class="form-group col-lg-4 col-lg-offset-4" ng-class="{'has-error' : ((regForm.email.$error.required) && (submitted))}">
+                <input type="text" name="firstname" id="firstname" ng-model="firstname" class="form-control" placeholder="First Name"
+                       ng-change="resetSubmitted(); validate()" required>
+                <small class="help-block" ng-show="(regForm.firstname.$error.required) && (submitted)">First name is required</small>
             </div>
-            <div class="form-group col-lg-4 col-lg-offset-4">
-                <input type="text" id="lastname" class="form-control" placeholder="Last Name">
+            <!--Last Name Input Field-->
+            <div class="form-group col-lg-4 col-lg-offset-4" ng-class="{'has-error' : ((regForm.lastname.$error.required) && (submitted))}">
+                <input type="text" id="lastname" name="lastname" class="form-control" placeholder="Last Name" ng-model="lastname"
+                       ng-change="resetSubmitted(); validate()" required>
+                <small class="help-block" ng-show="(regForm.lastname.$error.required) && (submitted)">Last name is required</small>
             </div>
-            <div class="form-group col-lg-4 col-lg-offset-4" ng-class="{'has-error' : ((isEmailExist) || regForm.email.$error.email) || ((regForm.email.$error.required) && (submitted))}">
-                <input type="email" name="email" id="email" ng-model="email" class="form-control" placeholder="Email" ng-change="resetSubmitted()" required>
+            <!--User Email Input Field-->
+            <div class="form-group col-lg-4 col-lg-offset-4"
+                 ng-class="{'has-error' : ((isEmailExist) || regForm.email.$error.email) || ((regForm.email.$error.required) && (submitted))}">
+                <input type="email" name="email" id="email" ng-model="email" ng-model-options="{'allowInvalid': true}"
+                       ng-change="resetSubmitted(); validate();" class="form-control" placeholder="Email" required>
                 <small class="help-block" ng-show="isEmailExist">Email address is already taken.</small>
                 <small class="help-block" ng-show="regForm.email.$error.email">Email address is not valid</small>
-                <small class="help-block" ng-show="(regForm.email.$error.required) && (submitted)">Email address is not valid</small>
+                <small class="help-block" ng-show="(regForm.email.$error.required) && (submitted)">Email address is required</small>
             </div>
-            <div class="form-group col-lg-4 col-lg-offset-4">
-                <input type="text" id="password" class="form-control" placeholder="Password">
+            <!--User password Input Field-->
+            <div class="form-group col-lg-4 col-lg-offset-4" ng-class="{'has-error' : ((regForm.password.$error.required) && (submitted))}">
+                <input type="text" name="password" id="password" class="form-control" placeholder="Password" ng-model="password"
+                       ng-change="resetSubmitted(); validate()" required>
+                <small class="help-block" ng-show="(regForm.lastname.$error.required) && (submitted)">Password is required</small>
             </div>
-            <div class="form-group col-lg-4 col-lg-offset-4">
-                <input type="text" id="repassword" class="form-control" placeholder="Retype Password">
+            <!--User retype password Input Field-->
+            <div class="form-group col-lg-4 col-lg-offset-4"
+                 ng-class="{'has-error' : ((regForm.repassword.$error.required) && (submitted)) || ((repassword!==password) && repass)}">
+                <input type="text" name="repassword" id="repassword" class="form-control" placeholder="Retype Password" ng-model="repassword"
+                       ng-change="resetSubmitted();setRePass(repassword); validate()" required>
+                <small class="help-block" ng-show="(regForm.password.$error.required) && (submitted)">Retype your password</small>
+                <small class="help-block" ng-show="(repassword!==password) && repass">Password is not match</small>
             </div>
             <div class="form-group col-lg-12 text-center">
                 <input type="checkbox"> &nbsp; Yes! Send me genuinely useful emails every now and then.
             </div>
             <div class="form-group col-lg-12 text-center">
-                <input type="checkbox"> &nbsp; I agree to the <a href="#">Terms and Conditions</a>
+                <input type="checkbox" ng-model="chkTerms" ng-click="validate()"> &nbsp; I agree to the <a href="#">Terms and Conditions</a>
             </div>
             <div class="form-group col-lg-12 text-center">
-                <input type="button" ng-disabled="isComplete()" value="Get Started" class="btn btn-default" style="background-color: #23629f; color: white">
+                <input type="button" ng-disabled="!(isComplete)" ng-click="register()" value="Get Started" class="btn btn-default" style="background-color: #23629f; color: white">
             </div>
             <h1>{{message}}</h1>
         </form>
