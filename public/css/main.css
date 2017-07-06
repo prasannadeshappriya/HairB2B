@@ -1,0 +1,13 @@
+.AuthNavBarCSS{
+    background-color: #23629f;
+    color: #4cae4c;
+}
+.AuthNavBarCSS .container-fluid .navbar-header .AuthNavBarCSSBand{
+    font-size: 24px;
+    color: #cccccc;
+    margin-left: 50px;
+}
+.AuthNavBarCSS .container-fluid .collapse .nav .AuthNavBarDesc{
+    color: #cccccc;
+    margin-right: 50px;
+}
