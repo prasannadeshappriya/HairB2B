@@ -1,0 +1,1 @@
+A platform for freelancers (hair stylists) and job owners (salons) to find each other. Job owners want to find the most suitable freelancer for the job at hand, Freelancer want to find work to occupy their calendar and get paid for their services.
