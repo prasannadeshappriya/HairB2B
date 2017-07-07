@@ -14,6 +14,7 @@ app.controller('LoginController',['$scope','$http', function ($scope, $http) {
 
     $scope.resetSubmitted = function () {
         $scope.submitted = false;
+        $scope.isEmailExist = false
     };
 
     $scope.validate = function () {
@@ -29,16 +30,24 @@ app.controller('LoginController',['$scope','$http', function ($scope, $http) {
     $scope.register = function () {
         if(!($scope.regForm.email.$valid)) {return;}
         $http({
-            method: "GET",
-            url: "http://localhost:3000/auth/register/isexist",
-            params: {email: email},
+            method: "POST",
+            url: "http://localhost:3000/auth/register",
+            data: {firstname: $scope.firstname, lastname: $scope.lastname, email: $scope.email, password: $scope.password},
             headers: {'Content-Type': 'application/json'}
         }).then(function (resData){
-            if(typeof resData.data.status==="undefined"){return false;}
-            if(resData.data.status==="true"){return true;}
-            if(resData.data.status==="false"){return true;}
+            if(typeof resData.data.status==="undefined"){return $scope.message = "Server connection error";}
+            if(resData.data.status==="success"){
+                //Create session with the server
+                //Get the token
+
+
+
+
+            }else{
+                $scope.isEmailExist = true;
+            }
         },function (error){
-            $scope.message = "Something fail";
+            $scope.message = "Server connection error";
         });
     };
 }]);
