@@ -6,6 +6,7 @@ app.controller('LoginController',['$scope','$http', function ($scope, $http) {
     $scope.isComplete = false;
     $scope.submitted = false;
     $scope.repass = false;
+    $scope.server_error = false;
 
     $scope.setRePass = function (repassword) {
         if(repassword==="" || typeof repassword==="undefined"){$scope.repass = false;}
@@ -14,7 +15,8 @@ app.controller('LoginController',['$scope','$http', function ($scope, $http) {
 
     $scope.resetSubmitted = function () {
         $scope.submitted = false;
-        $scope.isEmailExist = false
+        $scope.isEmailExist = false;
+        $scope.server_error = false;
     };
 
     $scope.validate = function () {
@@ -39,14 +41,11 @@ app.controller('LoginController',['$scope','$http', function ($scope, $http) {
             if(resData.data.status==="success"){
                 //Create session with the server
                 //Get the token
-
-
-
-
             }else{
                 $scope.isEmailExist = true;
             }
         },function (error){
+            $scope.server_error = true;
             $scope.message = "Server connection error";
         });
     };
