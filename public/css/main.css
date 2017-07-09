@@ -26,3 +26,12 @@
     margin-right: 50px;
     background-color: #fafafa
 }
+
+body .container .signup_page .form-group .SubmitButton{
+    background-color: #23629f;
+    color: white;
+    /*left: 50%;*/
+    /*position: absolute;*/
+    /*transform: translate(-50%,-50%);*/
+    /*margin-top: 18px;*/
+}

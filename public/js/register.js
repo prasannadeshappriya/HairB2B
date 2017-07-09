@@ -6,7 +6,8 @@ app.controller('LoginController',['$scope','$http', function ($scope, $http) {
     $scope.isComplete = false;
     $scope.submitted = false;
     $scope.repass = false;
-    $scope.server_error = false;
+    $scope.server_error = false
+    $scope.isLoading = false;
 
     $scope.setRePass = function (repassword) {
         if(repassword==="" || typeof repassword==="undefined"){$scope.repass = false;}
@@ -31,12 +32,14 @@ app.controller('LoginController',['$scope','$http', function ($scope, $http) {
 
     $scope.register = function () {
         if(!($scope.regForm.email.$valid)) {return;}
+        $scope.isLoading = true;
         $http({
             method: "POST",
             url: "http://localhost:3000/auth/register",
             data: {firstname: $scope.firstname, lastname: $scope.lastname, email: $scope.email, password: $scope.password},
             headers: {'Content-Type': 'application/json'}
         }).then(function (resData){
+            $scope.isLoading = false;
             if(typeof resData.data.status==="undefined"){return $scope.message = "Server connection error";}
             if(resData.data.status==="success"){
                 //Create session with the server
@@ -45,6 +48,7 @@ app.controller('LoginController',['$scope','$http', function ($scope, $http) {
                 $scope.isEmailExist = true;
             }
         },function (error){
+            $scope.isLoading = false;
             $scope.server_error = true;
             $scope.message = "Server connection error";
         });
