@@ -1,13 +1,15 @@
 /**
  * Created by prasanna_d on 7/6/2017.
  */
+
 app.controller('LoginController',['$scope','$http', function ($scope, $http) {
     $scope.isEmailExist = false;
     $scope.isComplete = false;
     $scope.submitted = false;
     $scope.repass = false;
-    $scope.server_error = false
+    $scope.server_error = false;
     $scope.isLoading = false;
+
 
     $scope.setRePass = function (repassword) {
         if(repassword==="" || typeof repassword==="undefined"){$scope.repass = false;}
@@ -54,3 +56,4 @@ app.controller('LoginController',['$scope','$http', function ($scope, $http) {
         });
     };
 }]);
+

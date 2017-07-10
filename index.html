@@ -16,6 +16,8 @@
     <!--Import custom javascript files-->
     <script src="app/app.js"></script>
     <script src="app/controllers/register.js"></script>
+    <script src="app/directives/regform.js"></script>
+
 </head>
 <body ng-app="app">
     <nav class="navbar navbar-default AuthNavBarCSS">
@@ -35,8 +37,12 @@
             </div>
         </div>
     </nav>
+
     <!--Register Section-->
-    <!--<div class="container" ng-include="'views/forms/auth/signup.html'"></div>-->
+    <div ng-controller="LoginController">
+        <regform handlerid="modal1"></regform>
+        <a href="#pop" role="button" class="btn btn-success" data-toggle="modal">Launch Demo Modal</a>
+    </div>
 
 
     <div class="AuthFooter">
