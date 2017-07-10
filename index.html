@@ -5,17 +5,17 @@
     <title>HairB2B</title>
 
     <!--Import CSS files-->
-    <link rel="stylesheet" href="public/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="public/css/main.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css">
 
     <!--Import javascript framework files-->
-    <script src="public/js/frameworks/jquery-3.2.1.min.js"></script>
-    <script src="public/js/frameworks/bootstrap.js"></script>
-    <script src="public/js/frameworks/angular.js"></script>
+    <script src="app/vendor/jquery-3.2.1.min.js"></script>
+    <script src="app/vendor/bootstrap.js"></script>
+    <script src="app/vendor/angular.js"></script>
 
     <!--Import custom javascript files-->
-    <script src="public/js/app.js"></script>
-    <script src="public/js/register.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/controllers/register.js"></script>
 </head>
 <body ng-app="app">
     <nav class="navbar navbar-default AuthNavBarCSS">
@@ -36,7 +36,8 @@
         </div>
     </nav>
     <!--Register Section-->
-    <div class="container" ng-include="'views/forms/auth/signup.html'"></div>
+    <!--<div class="container" ng-include="'views/forms/auth/signup.html'"></div>-->
+
 
     <div class="AuthFooter">
         <div class="container-fluid SetContent">
