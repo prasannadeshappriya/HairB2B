@@ -46,6 +46,7 @@ app.directive('regform', function () {
     };
 
     $scope.register = function () {
+        $scope.server_error = false;
         $scope.submitted = true;
         if(!($scope.regForm.email.$valid)) {return;}
         $scope.isLoading = true;

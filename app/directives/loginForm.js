@@ -37,6 +37,9 @@ app.directive('loginForm', function () {
     };
 
     $scope.login = function () {
+        //Reset the server error flag
+        $scope.server_error = false;
+        //Let angular know data will start sending ton the server
         $scope.submitted = true;
         if(!($scope.loginForm.email.$valid)) {return;}
         $scope.isLoading = true;
@@ -51,7 +54,7 @@ app.directive('loginForm', function () {
             if(resData.data.status==="success"){
                 //Create session with the server
                 //Get the token
-                console.log('success');
+                console.log(resData.data.token);
             }else{
                 console.log('Username or password is invalid');
             }
