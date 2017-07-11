@@ -21,6 +21,10 @@ app.directive('loginForm', function () {
     $scope.isLoading = false;       //Processing image gif while server response
     $scope.handler = 'LogInForm';   //Show the window
 
+    $scope.showSignUpWindow = function () {
+        return $scope.$parent.showSignUpWindow();
+    };
+
     $scope.resetSubmitted = function () {
         $scope.submitted = false;
         $scope.server_error = false;

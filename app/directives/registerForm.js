@@ -41,6 +41,10 @@ app.directive('regform', function () {
         $scope.isComplete = true;
     };
 
+    $scope.showLoginWindow = function () {
+        return $scope.$parent.showLoginWindow();
+    };
+
     $scope.register = function () {
         $scope.submitted = true;
         if(!($scope.regForm.email.$valid)) {return;}

@@ -1,10 +1,10 @@
 <div id="{{handler}}" class="modal fade">
-    <div class="modal-dialog">
+    <div class="modal-dialog" style="width: 400px">
         <div class="modal-content">
             <div class="modal-body">
                 <div class="signup_page">
                     <h2 class="text-info text-center" style="margin-bottom: 30px">Sign Up</h2>
-                    <form name="regForm">
+                    <form name="regForm" style="width: 300px" class="center-block">
 
                         <!--First Name Input Field-->
                         <div ng-class="{'has-error' : ((regForm.email.$error.required) && (submitted))}"
@@ -73,13 +73,17 @@
                         </div>
 
                         <div class="form-group text-center">
-                            <input type="button" ng-disabled="!(isComplete)" ng-click="register()" value="Get Started" class="btn btn-default SubmitButton">
+                            <input type="button" ng-disabled="!(isComplete)" ng-click="register()" value="Get Started" class="btn btn-success SubmitButton">
                         </div>
 
                         <div class="text-center">
                             <img src="assets/img/svg/loading.svg" style="height: 35px" ng-show="isLoading">
                             <small class="text-info" style="color: red; text-align: center" ng-show="!(server_error) && isLoading">Connecting ...</small>
                             <small class="text-info" style="color: red; text-align: center" ng-show="server_error">{{message}}</small>
+                        </div>
+                        <div class="form-group text-center">
+                            Already have an account?
+                            <a href="#{{showLoginWindow()}}" data-toggle="modal" data-dismiss="modal">Log In</a>
                         </div>
                     </form>
                 </div>
