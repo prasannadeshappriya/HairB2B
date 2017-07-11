@@ -4,30 +4,39 @@
 }
 
 .AuthNavBarCSS{
-    background-color: #23629f;
+    /*background-color: #23629f;*/
+    background-color: rgba(0,0,0,0.4);
     color: #4cae4c;
+}
+
+.box{
+    border: black;
+    background-color: #000000;
+    color: white;
+    background-color: rgba(0,0,0,0.4);
+    margin-top: 100px";
 }
 
 .AuthNavBarCSS .container .navbar-header .AuthNavBarCSSBand{
     font-size: 24px;
     font-family: Pacifico;
-    color: #cccccc;
+    color: #ffffff;
 }
 .AuthNavBarCSS .container .collapse .nav .AuthNavBarDesc{
-    color: #cccccc;
+    color: #ffffff;
     text-align: center;
     width: 100px;
 }
 
 .AuthNavBarCSS .container .collapse .nav #signin:hover{
-    color: white;
+    color: #cccccc;
     /*background: #276caf;*/
-    background: #1f588f;
+    background: #323232;
 }
 
 .AuthNavBarCSS .container .collapse .nav #signup:hover{
-    color: white;
-    background: #1f588f;
+    color: #cccccc;
+    background: #323232;
 }
 
 .AuthFooter{

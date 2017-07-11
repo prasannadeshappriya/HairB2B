@@ -20,8 +20,8 @@
     <script src="app/directives/loginForm.js"></script>
 
 </head>
-<body ng-app="app" ng-controller="MainController">
-    <nav class="navbar navbar-default AuthNavBarCSS" >
+<body ng-app="app" ng-controller="MainController" background="assets/img/sl02.jpg">
+    <nav class="navbar navbar-inverse navbar-fixed-top AuthNavBarCSS" >
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#MainAuthNavBar" aria-expanded="false">
@@ -50,6 +50,10 @@
     <!--Register Section-->
     <div ng-controller="LoginController">
         <login-form handlerid="LogInForm"></login-form>
+    </div>
+
+    <div class="container box" style="margin-top: 150px">
+        <h1 class="text-center" style="padding: 120px">Search Place</h1>
     </div>
 
 
