@@ -15,11 +15,12 @@
 
     <!--Import custom javascript files-->
     <script src="app/app.js"></script>
-    <script src="app/controllers/register.js"></script>
-    <script src="app/directives/regform.js"></script>
+    <script src="app/controllers/mainController.js"></script>
+    <script src="app/directives/registerForm.js"></script>
+    <script src="app/directives/loginForm.js"></script>
 
 </head>
-<body ng-app="app">
+<body ng-app="app" ng-controller="MainController">
     <nav class="navbar navbar-default AuthNavBarCSS">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -39,9 +40,15 @@
     </nav>
 
     <!--Register Section-->
+    <div ng-controller="RegisterController">
+        <regform handlerid="SignupForm"></regform>
+        <a href="#{{showSignUpWindow()}}" role="button" class="btn btn-success" data-toggle="modal">Signup</a>
+    </div>
+
+    <!--Register Section-->
     <div ng-controller="LoginController">
-        <regform handlerid="modal1"></regform>
-        <a href="#pop" role="button" class="btn btn-success" data-toggle="modal">Launch Demo Modal</a>
+        <login-form handlerid="LogInForm"></login-form>
+        <a href="#{{showLoginWindow()}}" role="button" class="btn btn-success" data-toggle="modal">LogIn</a>
     </div>
 
 

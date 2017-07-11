@@ -1,15 +1,25 @@
 /**
- * Created by prasanna_d on 7/6/2017.
+ * Created by prasanna on 7/10/17.
  */
-
-app.controller('LoginController',['$scope','$http', function ($scope, $http) {
+app.directive('regform', function () {
+    return {
+        restrict: 'EA',
+        scope: {
+            handler: '=handlerid'
+        },
+        templateUrl: 'views/regform.html',
+        transclude: true,
+        controller: 'RegisterController'
+    };
+}).controller('RegisterController',['$scope','$http',function ($scope,$http) {
     $scope.isEmailExist = false;
     $scope.isComplete = false;
     $scope.submitted = false;
     $scope.repass = false;
     $scope.server_error = false;
     $scope.isLoading = false;
-
+    $scope.handler = 'RegForm';
+    $scope.shows = true;
 
     $scope.setRePass = function (repassword) {
         if(repassword==="" || typeof repassword==="undefined"){$scope.repass = false;}
