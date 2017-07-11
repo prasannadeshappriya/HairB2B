@@ -12,14 +12,13 @@ app.directive('regform', function () {
         controller: 'RegisterController'
     };
 }).controller('RegisterController',['$scope','$http',function ($scope,$http) {
-    $scope.isEmailExist = false;
-    $scope.isComplete = false;
-    $scope.submitted = false;
-    $scope.repass = false;
-    $scope.server_error = false;
-    $scope.isLoading = false;
-    $scope.handler = 'RegForm';
-    $scope.shows = true;
+    $scope.isEmailExist = false;    //Email exist error
+    $scope.isComplete = false;      //Check all the fields are filled
+    $scope.submitted = false;       //Error showing only after submit button clicked
+    $scope.repass = false;          //Check password match only after user retype password
+    $scope.server_error = false;    //Check connection Errors
+    $scope.isLoading = false;       //Processing image gif while server response
+    $scope.handler = 'RegForm';     //Show the window
 
     $scope.setRePass = function (repassword) {
         if(repassword==="" || typeof repassword==="undefined"){$scope.repass = false;}
@@ -43,6 +42,7 @@ app.directive('regform', function () {
     };
 
     $scope.register = function () {
+        $scope.submitted = true;
         if(!($scope.regForm.email.$valid)) {return;}
         $scope.isLoading = true;
         $http({

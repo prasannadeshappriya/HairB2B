@@ -15,6 +15,47 @@ app.directive('loginForm', function () {
         controller: 'LoginController'
     };
 }).controller('LoginController',['$scope','$http',function ($scope,$http) {
-    $scope.handler = 'LogInForm';
+    $scope.isComplete = false;      //Check all the fields are filled
+    $scope.submitted = false;       //Error showing only after submit button clicked
+    $scope.server_error = false;    //Check connection Errors
+    $scope.isLoading = false;       //Processing image gif while server response
+    $scope.handler = 'LogInForm';   //Show the window
+
+    $scope.resetSubmitted = function () {
+        $scope.submitted = false;
+        $scope.server_error = false;
+    };
+
+    $scope.validate = function () {
+        if(typeof $scope.email==="undefined" || $scope.email===""){$scope.isComplete = false;return;}
+        if(typeof $scope.password==="undefined" || $scope.password===""){$scope.isComplete = false;return;}
+        $scope.isComplete = true;
+    };
+
+    $scope.login = function () {
+        $scope.submitted = true;
+        if(!($scope.loginForm.email.$valid)) {return;}
+        $scope.isLoading = true;
+        $http({
+            method: "POST",
+            url: "http://localhost:3000/auth/login",
+            data: {email: $scope.email, password: $scope.password},
+            headers: {'Content-Type': 'application/json'}
+        }).then(function (resData){
+            $scope.isLoading = false;
+            if(typeof resData.data.status==="undefined"){return $scope.message = "Server connection error";}
+            if(resData.data.status==="success"){
+                //Create session with the server
+                //Get the token
+                console.log('success');
+            }else{
+                console.log('Username or password is invalid');
+            }
+        },function (error){
+            $scope.isLoading = false;
+            $scope.server_error = true;
+            $scope.message = "Server connection error";
+        });
+    };
 }]);
 

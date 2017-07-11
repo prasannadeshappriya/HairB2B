@@ -10,7 +10,6 @@ app.controller('MainController',['$scope','$http', function ($scope, $http) {
 
     //Show Login Dialog
     $scope.showLoginWindow = function () {
-        console.log('Damn');
         return "LogInForm";
     };
 }]);
