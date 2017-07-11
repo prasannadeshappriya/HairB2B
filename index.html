@@ -21,8 +21,8 @@
 
 </head>
 <body ng-app="app" ng-controller="MainController">
-    <nav class="navbar navbar-default AuthNavBarCSS">
-        <div class="container-fluid">
+    <nav class="navbar navbar-default AuthNavBarCSS" >
+        <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#MainAuthNavBar" aria-expanded="false">
                     <span class="icon-bar"></span>
@@ -31,9 +31,12 @@
                 </button>
                 <a href="#" class="navbar-brand AuthNavBarCSSBand">HairB2B</a>
             </div>
+            <!--User Login/Register/Visitor-->
             <div class="collapse navbar-collapse" id="MainAuthNavBar">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#" class="AuthNavBarDesc">Already have an account? <span style="color: #ffffff; text-decoration: underline ">Log in</span></a> </li>
+                    <li><a href="#{{showSignUpWindow()}}" data-toggle="modal" class="AuthNavBarDesc" id="signup"> Sign up </a> </li>
+                    <li><a href="#" style="color: white; font-size: 20px">|</a> </li>
+                    <li><a href="#{{showLoginWindow()}}"  data-toggle="modal" class="AuthNavBarDesc" id="signin"> Log in </a></li>
                 </ul>
             </div>
         </div>
@@ -42,18 +45,16 @@
     <!--Register Section-->
     <div ng-controller="RegisterController">
         <regform handlerid="SignupForm"></regform>
-        <a href="#{{showSignUpWindow()}}" role="button" class="btn btn-success" data-toggle="modal">Signup</a>
     </div>
 
     <!--Register Section-->
     <div ng-controller="LoginController">
         <login-form handlerid="LogInForm"></login-form>
-        <a href="#{{showLoginWindow()}}" role="button" class="btn btn-success" data-toggle="modal">LogIn</a>
     </div>
 
 
     <div class="AuthFooter">
-        <div class="container-fluid SetContent">
+        <div class="container SetContent">
             <div class="col-lg-12">
                 <div class="col-lg-4">
                     <div class="row">

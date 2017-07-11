@@ -1,16 +1,35 @@
+@font-face {
+    font-family: Pacifico;
+    src: url(../fonts/Pacifico.ttf);
+}
+
 .AuthNavBarCSS{
     background-color: #23629f;
     color: #4cae4c;
 }
-.AuthNavBarCSS .container-fluid .navbar-header .AuthNavBarCSSBand{
+
+.AuthNavBarCSS .container .navbar-header .AuthNavBarCSSBand{
     font-size: 24px;
+    font-family: Pacifico;
     color: #cccccc;
-    margin-left: 50px;
 }
-.AuthNavBarCSS .container-fluid .collapse .nav .AuthNavBarDesc{
+.AuthNavBarCSS .container .collapse .nav .AuthNavBarDesc{
     color: #cccccc;
-    margin-right: 50px;
+    text-align: center;
+    width: 100px;
 }
+
+.AuthNavBarCSS .container .collapse .nav #signin:hover{
+    color: white;
+    /*background: #276caf;*/
+    background: #1f588f;
+}
+
+.AuthNavBarCSS .container .collapse .nav #signup:hover{
+    color: white;
+    background: #1f588f;
+}
+
 .AuthFooter{
     position:absolute;
     bottom: 0;
@@ -22,8 +41,8 @@
 .AuthFooter .SetContent{
     color: #23629f;
     margin-top: 40px;
-    margin-left: 50px;
-    margin-right: 50px;
+    /*margin-left: 50px;*/
+    /*margin-right: 50px;*/
     background-color: #fafafa
 }
 
