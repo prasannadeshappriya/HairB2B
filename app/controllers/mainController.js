@@ -3,15 +3,11 @@
  */
 
 app.controller('MainController',['$scope','$http', function ($scope, $http) {
-    $scope.test = 'Tesasdadasdt';
-    //Show Signup Dialog
-    $scope.showSignUpWindow = function () {
-        return "RegForm";
-    };
+    $scope.tesst = false;
 
-    //Show Login Dialog
-    $scope.showLoginWindow = function () {
-        return "LogInForm";
+    $scope.buu = function () {
+        console.log('asdasdadsasdsa');
+        $scope.test = true
     };
 }]);
 

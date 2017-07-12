@@ -13,11 +13,19 @@
     <script src="assets/js/bootstrap.js"></script>
     <script src="app/vendor/angular.js"></script>
 
-    <!--Import custom javascript files-->
-    <script src="app/app.js"></script>
+    <!--Import AnglerJS App module -->
+    <script src="app/app.modules.js"></script>
+
+    <!--Import AnglerJS Controllers -->
     <script src="app/controllers/mainController.js"></script>
-    <script src="app/directives/registerForm.js"></script>
-    <script src="app/directives/loginForm.js"></script>
+
+    <!--Import AnglerJS component modules -->
+    <script src="app/components/signin/signin.module.js"></script>
+    <script src="app/components/signup/signup.module.js"></script>
+
+    <!--Import AnglerJS components -->
+    <script src="app/components/signin/signin.component.js"></script>
+    <script src="app/components/signup/signup.component.js"></script>
 
 </head>
 <body ng-app="app" ng-controller="MainController" background="assets/img/sl02.jpg">
@@ -34,28 +42,22 @@
             <!--User Login/Register/Visitor-->
             <div class="collapse navbar-collapse" id="MainAuthNavBar">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#{{showSignUpWindow()}}" data-toggle="modal" class="AuthNavBarDesc" id="signup"> Sign up </a> </li>
+                    <li><a href="#signup_model" data-toggle="modal" class="AuthNavBarDesc" id="signup"> Sign up </a> </li>
                     <li><a href="#" style="color: white; font-size: 20px">|</a> </li>
-                    <li><a href="#{{showLoginWindow()}}"  data-toggle="modal" class="AuthNavBarDesc" id="signin"> Log in </a></li>
+                    <li><a href="#signin_model"  data-toggle="modal" class="AuthNavBarDesc" id="signin"> Log in </a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
     <!--Register Section-->
-    <div ng-controller="RegisterController">
-        <regform handlerid="SignupForm"></regform>
-    </div>
-
+    <sign-up></sign-up>
     <!--Register Section-->
-    <div ng-controller="LoginController">
-        <login-form handlerid="LogInForm"></login-form>
-    </div>
+    <sign-in></sign-in>
 
     <div class="container box" style="margin-top: 150px">
         <h1 class="text-center" style="padding: 120px">Search Place</h1>
     </div>
-
 
     <div class="AuthFooter">
         <div class="container SetContent">
