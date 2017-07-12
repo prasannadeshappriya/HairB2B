@@ -3,15 +3,25 @@
  */
 angular.module('app')
     .factory('AuthService',['$localStorage', '$http', function ($localStorage, $http) {
-        var service = {};
         var isLogin = false;
+        var service = {};
 
         service.Login = login;
         service.Logout = logout;
         service.getUser = getUser;
         service.isLogin = isLogin;
+        service.setIsLogin = setIsLogin;
+        service.isLogins = isLogins;
 
         return service;
+
+        function isLogins() {
+            return isLogin;
+        }
+
+        function setIsLogin(flag) {
+            isLogin = flag;
+        }
 
         function getUser() {
             if($localStorage.currentUser){
@@ -25,22 +35,19 @@ angular.module('app')
         function login(auth_token, email, callback) {
             try {
                 $localStorage.currentUser = {email: email, token: auth_token};
-                console.log($localStorage.currentUser);
                 $http.defaults.headers.common.Authorization = 'JWT ' + auth_token;
-                isLogin = true;
-                console.log('service:' + isLogin);
+                setIsLogin(true);
                 callback(true);
             }catch  (err){
-                isLogin = false;
+                setIsLogin(false);
                 console.log('error writing local storage');
-                callback(false);
+                callback(false, false);
             }
         }
 
         function logout() {
-            isLogin = false;
+            setIsLogin(false);
             delete $localStorage.currentUser;
-            console.log('service:' + isLogin);
             $http.defaults.headers.common.Authorization = '';
         }
     }]);

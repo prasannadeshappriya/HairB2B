@@ -10,11 +10,16 @@ angular.module('app')
             $scope.server_error = false;    //Check connection Errors
             $scope.isLoading = false;       //Processing image gif while server response
             $scope.handler = 'LogInForm';   //Show the window
-            $scope.flag = AuthService;
+            $scope.auth_error = false;
 
             $scope.resetSubmitted = function () {
                 $scope.submitted = false;
                 $scope.server_error = false;
+                $scope.auth_error = false;
+            };
+
+            $scope.testt = function () {
+
             };
 
             $scope.validate = function () {
@@ -23,18 +28,10 @@ angular.module('app')
                 $scope.isComplete = true;
             };
 
-            $scope.example = function () {
-                console.log(AuthService.getUser().token);
-            };
-            $scope.example2 = function () {
-                AuthService.Logout();
-                console.log('example2: ' + AuthService.isLogin);
-                console.log('example2: ' + $scope.$parent.login_status);
-            };
-
             $scope.login = function () {
                 //Reset the server error flag
                 $scope.server_error = false;
+                $scope.auth_error = false;
                 //Let angular know data will start sending ton the server
                 $scope.submitted = true;
                 if(!($scope.loginForm.email.$valid)) {return;}
@@ -54,15 +51,18 @@ angular.module('app')
                         console.log(resData.data.token);
 
                         AuthService.Login(resData.data.token, resData.data.email, function (callback) {
-                            console.log('request: ' + callback);
-                            console.log('request: ' + AuthService.isLogin);
-                            console.log('request: ' + $scope.$parent.login_status);
+                            $('#signin_model').modal('hide');
+                            console.log('Authentication Successful');
+                            window.location.reload();
                         });
+
                     }else{
-                        console.log('Username or password is invalid');
+                        $scope.message = "Username or password is invalid";
+                        $scope.auth_error = true;
                     }
                 },function (error){
                     $scope.isLoading = false;
+                    $scope.auth_error = false;
                     $scope.server_error = true;
                     $scope.message = "Server connection error";
                 });

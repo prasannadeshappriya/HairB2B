@@ -43,16 +43,13 @@
                             <img src="assets/img/svg/loading.svg" style="height: 35px" ng-show="isLoading">
                             <small class="text-info" style="color: red; text-align: center" ng-show="!(server_error) && isLoading">Connecting ...</small>
                             <small class="text-info" style="color: red; text-align: center" ng-show="server_error">{{message}}</small>
+                            <small class="text-info" style="color: red; text-align: center" ng-show="auth_error">{{message}}</small>
                         </div>
 
                         <div class="form-group text-center">
                             Don't have an account?
                             <a href="#signup_model" data-toggle="modal" data-dismiss="modal">Sign Up</a>
                         </div>
-                        <input type="button" class="btn btn-info" ng-click="example()">
-                        <input type="button" class="btn btn-info" ng-click="example2()" value="fk">
-                        <h1 style="color: black; margin-top: 10px" ng-show="flag.isLogin">Helloooooo</h1>
-                        <h1 style="color: black; margin-top: 10px">hiii {{flag.isLogin}}</h1>
                     </form>
                 </div>
             </div>
