@@ -50,6 +50,7 @@ angular.module('signup')
                     if(resData.data.status==="success"){
                         //Create session with the server
                         //Get the token
+
                     }else{
                         $scope.isEmailExist = true;
                     }

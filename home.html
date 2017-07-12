@@ -11,13 +11,17 @@
     <!--Import javascript framework files-->
     <script src="assets/js/jquery-3.2.1.min.js"></script>
     <script src="assets/js/bootstrap.js"></script>
+
+    <!--Import AnglerJS files -->
     <script src="app/vendor/angular.js"></script>
+    <script src="app/vendor/ngStorage.min.js"></script>
+    <script src="app/vendor/angular-ui-router.min.js"></script>
 
     <!--Import AnglerJS App module -->
     <script src="app/app.modules.js"></script>
 
     <!--Import AnglerJS Controllers -->
-    <script src="app/controllers/mainController.js"></script>
+    <script src="app/controllers/main.controller.js"></script>
 
     <!--Import AnglerJS component modules -->
     <script src="app/components/signin/signin.module.js"></script>
@@ -26,6 +30,8 @@
     <!--Import AnglerJS components -->
     <script src="app/components/signin/signin.component.js"></script>
     <script src="app/components/signup/signup.component.js"></script>
+
+    <script src="app/services/auth.service.js"></script>
 
 </head>
 <body ng-app="app" ng-controller="MainController" background="assets/img/sl02.jpg">
@@ -58,6 +64,10 @@
     <div class="container box" style="margin-top: 150px">
         <h1 class="text-center" style="padding: 120px">Search Place</h1>
     </div>
+
+    <h1 style="color: white; margin-top: 10px" ng-show="AuthService.isLogin">Helloooooo</h1>
+
+    <h1 style="color: white; margin-top: 10px" >asdasdsadasds {{AuthService.isLogin}}</h1>
 
     <div class="AuthFooter">
         <div class="container SetContent">
