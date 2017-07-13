@@ -11,11 +11,11 @@ angular.module('app')
         service.getUser = getUser;
         service.isLogin = isLogin;
         service.setIsLogin = setIsLogin;
-        service.isLogins = isLogins;
+        service.isLoginStatus = isLoginStatus;
 
         return service;
 
-        function isLogins() {
+        function isLoginStatus() {
             return isLogin;
         }
 
@@ -32,9 +32,14 @@ angular.module('app')
             }
         }
 
-        function login(auth_token, email, callback) {
+        function login(auth_token, email, firstname, lastname, callback) {
             try {
-                $localStorage.currentUser = {email: email, token: auth_token};
+                $localStorage.currentUser = {
+                    email: email,
+                    token: auth_token,
+                    firstname: firstname,
+                    lastname: lastname
+                };
                 $http.defaults.headers.common.Authorization = 'JWT ' + auth_token;
                 setIsLogin(true);
                 callback(true);

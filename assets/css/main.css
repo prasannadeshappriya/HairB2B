@@ -9,12 +9,19 @@
     color: #4cae4c;
 }
 
-.box{
+.Box{
     border: black;
     background-color: #000000;
     color: white;
     background-color: rgba(0,0,0,0.4);
-    margin-top: 100px";
+}
+
+.SearchBox{
+    border: black;
+    background-color: #000000;
+    color: white;
+    background-color: rgba(0,0,0,0.4);
+    margin-top: 100px;
 }
 
 .AuthNavBarCSS .container .navbar-header .AuthNavBarCSSBand{

@@ -7,12 +7,12 @@ app.controller('MainController',['$scope','$http','AuthService', '$localStorage'
 
     var user = AuthService.getUser();
     if (user) {
-        $scope.username = user.email;
+        $scope.username = user.firstname + " " + user.lastname;
     }else {
         $scope.username = '';
     }
 
-    $scope.$watch(AuthService.isLogins, function (newValue) {
+    $scope.$watch(AuthService.isLoginStatus, function (newValue) {
         $scope.authenticated = newValue;
     },true);
 
@@ -26,7 +26,9 @@ app.controller('MainController',['$scope','$http','AuthService', '$localStorage'
 //Run when refresh the page
 app.run(['$localStorage','AuthService', '$http',function ($localStorage,AuthService, $http) {
     if ($localStorage.currentUser) {
+        console.log('inside');
         AuthService.setIsLogin(true);
         $http.defaults.headers.common.Authorization = 'JWT ' + $localStorage.currentUser.token;
     }
+    console.log('outside');
 }]);

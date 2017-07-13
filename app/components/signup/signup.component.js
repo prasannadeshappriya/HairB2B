@@ -4,7 +4,7 @@
 angular.module('signup')
     .component('signUp',{
         templateUrl : 'app/components/signup/signup.template.html',
-        controller : function ($scope, $http) {
+        controller : function ($scope, $http, AuthService) {
             $scope.isEmailExist = false;    //Email exist error
             $scope.isComplete = false;      //Check all the fields are filled
             $scope.submitted = false;       //Error showing only after submit button clicked
@@ -13,7 +13,12 @@ angular.module('signup')
             $scope.isLoading = false;       //Processing image gif while server response
             $scope.handler = 'RegForm';     //Show the window
 
+            //-------------------------Let user know required fields---------------
+            $scope.password_chr_error = false;
+            //---------------------------------------------------------------------
+
             $scope.setRePass = function (repassword) {
+                console.log('repassword');
                 if(repassword==="" || typeof repassword==="undefined"){$scope.repass = false;}
                 else {$scope.repass = true;}
             };
@@ -22,6 +27,16 @@ angular.module('signup')
                 $scope.submitted = false;
                 $scope.isEmailExist = false;
                 $scope.server_error = false;
+                try {
+                    if ($scope.password.length !== 'undefined') {
+                        if ($scope.password.length >= 8) {
+                            $scope.password_chr_error = false;
+                        } else {
+                            $scope.password_chr_error = true;
+                        }
+                    }
+                }catch (err){
+                    $scope.password_chr_error = false;}
             };
 
             $scope.validate = function () {
@@ -35,8 +50,11 @@ angular.module('signup')
             };
 
             $scope.register = function () {
-                $scope.server_error = false;
                 $scope.submitted = true;
+                $scope.server_error = false;
+                if($scope.password_chr_error){
+                    return;
+                }
                 if(!($scope.regForm.email.$valid)) {return;}
                 $scope.isLoading = true;
                 $http({
@@ -48,9 +66,21 @@ angular.module('signup')
                     $scope.isLoading = false;
                     if(typeof resData.data.status==="undefined"){return $scope.message = "Server connection error";}
                     if(resData.data.status==="success"){
+                        $scope.isEmailExist = false;
                         //Create session with the server
                         //Get the token
-
+                        AuthService.Login(
+                            resData.data.token,
+                            resData.data.email,
+                            resData.data.firstname,
+                            resData.data.lastname,
+                            function (callback) {
+                                $('#signup_model').modal('hide');
+                                console.log(callback);
+                                console.log('Authentication Successful');
+                                window.location.reload();
+                            }
+                        );
                     }else{
                         $scope.isEmailExist = true;
                     }

@@ -68,9 +68,13 @@
     <!--Register Section-->
     <sign-in></sign-in>
 
-    <div class="container box" style="margin-top: 150px">
+    <div ng-include="'views/emailverifybox.html'" ng-show="(authenticated)"></div>
+
+    <div class="container SearchBox">
         <h1 class="text-center" style="padding: 120px">Search Place</h1>
     </div>
+
+
 
     <div class="AuthFooter">
         <div class="container SetContent">

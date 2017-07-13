@@ -50,11 +50,17 @@ angular.module('app')
 
                         console.log(resData.data.token);
 
-                        AuthService.Login(resData.data.token, resData.data.email, function (callback) {
-                            $('#signin_model').modal('hide');
-                            console.log('Authentication Successful');
-                            window.location.reload();
-                        });
+                        AuthService.Login(
+                            resData.data.token,
+                            resData.data.email,
+                            resData.data.firstname,
+                            resData.data.lastname,
+                            function (callback) {
+                                $('#signin_model').modal('hide');
+                                console.log('Authentication Successful');
+                                window.location.reload();
+                            }
+                        );
 
                     }else{
                         $scope.message = "Username or password is invalid";
