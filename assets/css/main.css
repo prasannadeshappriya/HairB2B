@@ -5,7 +5,8 @@
 
 .AuthNavBarCSS{
     /*background-color: #23629f;*/
-    background-color: rgba(0,0,0,0.4);
+    /*background-color: rgba(0,0,0,0.4);*/
+    background-color: #0f0f0f;
     color: #4cae4c;
 }
 
@@ -27,8 +28,13 @@
 .AuthNavBarCSSBand{
     font-size: 24px;
     font-family: Pacifico;
+    color: #ffffff !important;
+}
+
+#nav_header a:hover{
     color: #ffffff;
 }
+
 .AuthNavBarDesc{
     color: #ffffff;
     text-align: center;
@@ -46,14 +52,19 @@
     background: #323232;
 }
 
+#search:hover{
+    color: #cccccc;
+    background: #323232;
+}
+
 #profile_dropdown a:hover{
     color: #cccccc;
     background: #323232;
 }
 
 .AuthFooter{
-    position:absolute;
-    bottom: 0;
+    padding-top: 1px;
+    margin-top: 338px;
     width:100%;
     min-height:220px;
     background:#fafafa;"

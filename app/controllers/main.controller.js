@@ -4,6 +4,21 @@
 
 app.controller('MainController',['$scope','$http','AuthService', '$localStorage', function ($scope, $http, AuthService, $localStorage) {
     $scope.authenticated = false;
+    $scope.background_image = 'url(assets/img/sl02.jpg)';
+    $scope.profile_section = false;
+    $scope.search_section = true;
+
+    $scope.showSearchSection = function(){
+        $scope.background_image = 'url(assets/img/sl02.jpg)';
+        $scope.profile_section = false;
+        $scope.search_section = true;
+    };
+
+    $scope.showProfileSection = function(){
+        $scope.background_image = '';
+        $scope.profile_section = true;
+        $scope.search_section = false;
+    };
 
     var user = AuthService.getUser();
     if (user) {
@@ -31,4 +46,13 @@ app.run(['$localStorage','AuthService', '$http',function ($localStorage,AuthServ
         $http.defaults.headers.common.Authorization = 'JWT ' + $localStorage.currentUser.token;
     }
     console.log('outside');
+}]);
+
+app.config(['$routeProvider',function($routeProvider){
+    console.log('asdasdasdasd');
+    $routeProvider
+        .when("/AddNewOrder", {
+            templateUrl : '<p style="font-size: 100px; margin-top: 100px;">asdadadsasdasd</p>'
+        });
+    $routeProvider.otherwise( { redirectTo: '/' });
 }]);

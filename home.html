@@ -6,7 +6,7 @@
 
     <!--Import CSS files-->
     <link rel="stylesheet" href="assets/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/main.css">
 
     <!--Import javascript framework files-->
     <script src="assets/js/jquery-3.2.1.min.js"></script>
@@ -14,6 +14,7 @@
 
     <!--Import AnglerJS files -->
     <script src="app/vendor/angular.js"></script>
+    <script src="app/vendor/angular-route.js"></script>
     <script src="app/vendor/ngStorage.min.js"></script>
     <script src="app/vendor/angular-ui-router.min.js"></script>
 
@@ -34,26 +35,31 @@
     <script src="app/services/auth.service.js"></script>
 
 </head>
-<body ng-app="app" ng-controller="MainController" background="assets/img/sl02.jpg">
+<!-- background="assets/img/sl02.jpg" id="asd"-->
+<body ng-app="app" ng-controller="MainController"
+      ng-style="{'background':background_image}">
     <nav class="navbar navbar-inverse navbar-fixed-top AuthNavBarCSS" >
         <div class="container">
-            <div class="navbar-header">
+            <div class="navbar-header" id="nav_header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#MainAuthNavBar" aria-expanded="false">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="#" class="navbar-brand AuthNavBarCSSBand">HairB2B</a>
+                <a href="#" class="AuthNavBarCSSBand navbar-brand">HairB2B</a>
             </div>
             <!--User Login/Register/Visitor-->
             <div class="collapse navbar-collapse" id="MainAuthNavBar">
+                <ul class="nav navbar-nav navbar-left">
+                    <li ng-hide="!(authenticated)" style="margin-left: 80px"><a href="#" class="AuthNavBarDesc" id="search"> Search </a> </li>
+                </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown" ng-hide="!(authenticated)" id="profile_dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <img src="assets/img/default_profile_pic.png" style="width: 30px; margin: -10px 10px -10px 21px; right: 0">
                                     {{username}} <span class="caret"></span></a>
                         <ul class="dropdown-menu" style="background-color: black;">
-                            <li><a style="color: white" href="#">Profile</a></li>
+                            <li><a style="color: white" href="#" ng-click="showProfileSection()">Profile</a></li>
                             <li><a style="color: white" href="#">My Orders</a></li>
                             <li><a style="color: white" href="#">Revenue</a></li>
                             <li><a style="color: white" href="#">Help</a></li>
@@ -69,18 +75,24 @@
         </div>
     </nav>
 
-    <!--Register Section-->
-    <sign-up></sign-up>
-    <!--Register Section-->
-    <sign-in></sign-in>
+    <div class="container" style="min-width: 1451px">
+        <!--Register Section-->
+        <sign-up></sign-up>
+        <!--Register Section-->
+        <sign-in></sign-in>
+        <h1><a href="#AddNewOrder"> Add New Order </a></h1>
 
-    <div ng-include="'views/emailverifybox.html'" ng-show="(authenticated)"></div>
+        <div ng-view></div>
+        <!--<div ng-include="'views/emailverifybox.html'" ng-show="(authenticated)"></div>-->
 
-    <div class="container SearchBox">
-        <h1 class="text-center" style="padding: 120px">Search Place</h1>
+        <div class="container SearchBox" ng-show="search_section">
+            <h1 class="text-center" style="padding: 120px">Search Place</h1>
+        </div>
+
+        <div ng-include="'views/userprofile.html'" style="margin-top: 140px" ng-show="profile_section"></div>
+
+        <h1>{{background_image}}</h1>
     </div>
-
-
 
     <div class="AuthFooter">
         <div class="container SetContent">

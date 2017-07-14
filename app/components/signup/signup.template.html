@@ -14,7 +14,7 @@
                                    ng-change="resetSubmitted(); validate();"
                                    ng-model="firstname">
                             <div style="float: right; margin-right: 10px; margin-top: -28px" ng-show="regForm.firstname.$error.required">
-                                <img src="assets/img/required.jpg">
+                                <img src="assets/img/required.png">
                             </div>
 
                             <small class="help-block" ng-show="(regForm.firstname.$error.required) && (submitted)">First name is required</small>
@@ -29,7 +29,7 @@
                                    ng-model="lastname"
                                    ng-change="resetSubmitted(); validate()">
                             <div style="float: right; margin-right: 10px; margin-top: -28px" ng-show="regForm.lastname.$error.required">
-                                <img src="assets/img/required.jpg">
+                                <img src="assets/img/required.png">
                             </div>
 
                             <small class="help-block" ng-show="(regForm.lastname.$error.required) && (submitted)">Last name is required</small>
@@ -46,7 +46,7 @@
                                    ng-model-options="{'allowInvalid': true}"
                                    ng-change="resetSubmitted(); validate();">
                             <div style="float: right; margin-right: 10px; margin-top: -28px" ng-show="regForm.email.$error.required">
-                                <img src="assets/img/required.jpg">
+                                <img src="assets/img/required.png">
                             </div>
 
                             <small class="help-block" ng-show="isEmailExist">Email address is already taken.</small>
@@ -63,7 +63,7 @@
                                    ng-model="password"
                                    ng-change="resetSubmitted(); validate()">
                             <div style="float: right; margin-right: 10px; margin-top: -28px" ng-show="regForm.password.$error.required">
-                                <img src="assets/img/required.jpg">
+                                <img src="assets/img/required.png">
                             </div>
 
                             <small class="help-block" ng-show="(regForm.password.$error.required) && (submitted)">Password is required</small>
@@ -79,7 +79,7 @@
                                    ng-model="repassword"
                                    ng-change="resetSubmitted(); setRePass(repassword); validate()">
                             <div style="float: right; margin-right: 10px; margin-top: -28px" ng-show="regForm.repassword.$error.required">
-                                <img src="assets/img/required.jpg">
+                                <img src="assets/img/required.png">
                             </div>
 
                             <small class="help-block" ng-show="(regForm.password.$error.required) && (submitted)">Retype your password</small>

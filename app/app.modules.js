@@ -4,6 +4,7 @@
 var app = angular.module('app',[
     'ngStorage',
     'ui.router',
+    'ngRoute',
     'signin',
     'signup'
 ]);
