@@ -48,11 +48,17 @@
             <!--User Login/Register/Visitor-->
             <div class="collapse navbar-collapse" id="MainAuthNavBar">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown" ng-hide="!(authenticated)" >
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{username}} <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
+                    <li class="dropdown" ng-hide="!(authenticated)" id="profile_dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <img src="assets/img/default_profile_pic.png" style="width: 30px; margin: -10px 10px -10px 21px; right: 0">
+                                    {{username}} <span class="caret"></span></a>
+                        <ul class="dropdown-menu" style="background-color: black;">
+                            <li><a style="color: white" href="#">Profile</a></li>
+                            <li><a style="color: white" href="#">My Orders</a></li>
+                            <li><a style="color: white" href="#">Revenue</a></li>
+                            <li><a style="color: white" href="#">Help</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#" ng-click="sign_out()">Sign Out</a></li>
+                            <li><a style="color: white" href="#" ng-click="sign_out()">Sign Out</a></li>
                         </ul>
                     </li>
                     <li ng-hide="(authenticated)"><a href="#signup_model" data-toggle="modal" class="AuthNavBarDesc" id="signup"> Sign up </a> </li>

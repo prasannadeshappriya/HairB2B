@@ -24,24 +24,29 @@
     margin-top: 100px;
 }
 
-.AuthNavBarCSS .container .navbar-header .AuthNavBarCSSBand{
+.AuthNavBarCSSBand{
     font-size: 24px;
     font-family: Pacifico;
     color: #ffffff;
 }
-.AuthNavBarCSS .container .collapse .nav .AuthNavBarDesc{
+.AuthNavBarDesc{
     color: #ffffff;
     text-align: center;
     width: 100px;
 }
 
-.AuthNavBarCSS .container .collapse .nav #signin:hover{
+#signin:hover{
     color: #cccccc;
     /*background: #276caf;*/
     background: #323232;
 }
 
-.AuthNavBarCSS .container .collapse .nav #signup:hover{
+#signup:hover{
+    color: #cccccc;
+    background: #323232;
+}
+
+#profile_dropdown a:hover{
     color: #cccccc;
     background: #323232;
 }
