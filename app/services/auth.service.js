@@ -4,24 +4,30 @@
 angular.module('app')
     .factory('AuthService',['$localStorage', '$http', function ($localStorage, $http) {
         var isLogin = false;
+        isEmailVerifyed = false;
         var service = {};
 
         service.Login = login;
         service.Logout = logout;
         service.getUser = getUser;
+
         service.isLogin = isLogin;
+        service.isEmailVerifyed = isEmailVerifyed;
+
         service.setIsLogin = setIsLogin;
+        service.setEmailVerifyed = setEmailVerifyed;
         service.isLoginStatus = isLoginStatus;
+        service.isEmailVerifyedStatus = isEmailVerifyedStatus;
 
         return service;
 
-        function isLoginStatus() {
-            return isLogin;
-        }
+        //For Watchers in other controllers
+        function isLoginStatus() {return isLogin;}
+        function isEmailVerifyedStatus() {return isEmailVerifyed;}
 
-        function setIsLogin(flag) {
-            isLogin = flag;
-        }
+        //Set the variable values
+        function setIsLogin(flag) {isLogin = flag;}
+        function setEmailVerifyed(flag) {isEmailVerifyed = flag;}
 
         function getUser() {
             if($localStorage.currentUser){

@@ -89,13 +89,12 @@
         <sign-in></sign-in>
 
         <!--Show Email Verify Box-->
-        <!--<div ng-include="'views/emailverifybox.html'" ng-show="(authenticated)"></div>-->
+        <div ng-include="'views/emailverifybox.html'" ng-show="(authenticated) && !(email_verify)"
+             style="margin-bottom: -30px; margin-top: -20px"></div>
 
         <!--Show Route Sections-->
         <div ng-view></div>
     </div>
-
-
 
     <div class="AuthFooter">
         <div class="container SetContent">

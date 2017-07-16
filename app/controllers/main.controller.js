@@ -5,6 +5,7 @@
 app.controller('MainController',['$scope','$http','AuthService', '$localStorage', '$rootScope',
     function ($scope, $http, AuthService, $localStorage,$rootScope) {
         $scope.authenticated = false;
+        $scope.email_verify = false;
         $scope.background_image = 'url(assets/img/sl02.jpg)';
         $scope.profile_section = false;
         $scope.search_section = true;
@@ -32,6 +33,10 @@ app.controller('MainController',['$scope','$http','AuthService', '$localStorage'
 
         $scope.$watch(AuthService.isLoginStatus, function (newValue) {
             $scope.authenticated = newValue;
+        },true);
+
+        $scope.$watch(AuthService.isEmailVerifyedStatus, function (newValue) {
+            $scope.email_verify = newValue;
         },true);
 
         $scope.sign_out = function () {
