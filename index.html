@@ -40,7 +40,7 @@
 </head>
 <!-- background="assets/img/sl02.jpg" id="asd"-->
 <body ng-app="app" ng-controller="MainController"
-      ng-style="{'background':background_image}">
+      ng-style="{'background':background_image, 'background-repeat': backgroung_image_repeat}">
     <nav class="navbar navbar-inverse navbar-fixed-top AuthNavBarCSS" >
         <div class="container">
             <div class="navbar-header" id="nav_header">
@@ -91,7 +91,6 @@
         <!--Show Email Verify Box-->
         <div ng-include="'views/emailverifybox.html'" ng-show="(authenticated) && !(email_verify)"
              style="margin-bottom: -30px; margin-top: -20px"></div>
-
         <!--Show Route Sections-->
         <div ng-view></div>
     </div>

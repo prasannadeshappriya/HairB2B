@@ -7,6 +7,8 @@ angular.module('app')
         isEmailVerifyed = false;
         var service = {};
 
+        service.getToken = getToken;
+
         service.Login = login;
         service.Logout = logout;
         service.getUser = getUser;
@@ -54,6 +56,13 @@ angular.module('app')
                 console.log('error writing local storage');
                 callback(false, false);
             }
+        }
+
+        function getToken(){
+            if($localStorage.currentUser){
+                return $localStorage.currentUser.token;
+            }
+            return '';
         }
 
         function logout() {
