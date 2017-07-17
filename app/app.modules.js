@@ -6,6 +6,7 @@ var app = angular.module('app',[
     'ui.router',
     'ngRoute',
     'signin',
-    'signup'
+    'signup',
+    'ui.rCalendar'
 ]);
 
