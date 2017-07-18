@@ -1,4 +1,4 @@
-<div class="container-fluid" style="min-width: 1100px;">
+<div class="container-fluid" style="min-width: 1100px;" ng-controller="ProfileController">
     <div class="col-xs-12">
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
@@ -40,22 +40,29 @@
             <div class="col-lg-8">
                 <div class="col-lg-12" style="margin-bottom: 20px; margin-top: 20px">
                     <h1 style="display: inline">John Washington</h1>
-                    <input type="button" value="Edit" class="btn btn-default" style="float: right; display: inline; margin-top: 5px; width: 80px">
+                    <input id="editBtn" type="button" value="Edit" class="btn btn-default" style="float: right; display: inline; margin-top: 5px; width: 80px">
                     <p>john.123@gmail.com</p>
                 </div>
-                <p>this is a test this is a test this is a test this is a test this is a test this is a test this is a test
-                    this is a test this is a test this is a test this is a test this is a test this is a test this is a test
-                    this is a test this is a test this is a test this is a test this is a test this is a test this is a test
-                    this is a test this is a test this is a test this is a test this is a test this is a test this is a test </p>
+                <div class="col-lg-12">
+                        <p id="description">this is a test this is a test this is a test this is a test this is a test this is a test this is a test
+                        this is a test this is a test this is a test this is a test this is a test this is a test this is a test
+                        this is a test this is a test this is a test this is a test this is a test this is a test this is a test
+                        this is a test this is a test this is a test this is a test this is a test this is a test this is a test </p>
+                </div>
             </div>
         </div>
     </div>
     <hr>
     <div class="container">
-        <calendar-temp></calendar-temp>
-        <h4 class="text-info"><b>Skills</b></h4>
-        <h4 class="text-info">Stylist</h4>
-        <p>Hair Stylist,    </p>
-
+        <div class="col-lg-12">
+            <div class="col-lg-4" style="margin-left: 15px">
+                <h4 class="text-info"><b>Skills</b></h4>
+                <h4 class="text-info">Stylist</h4>
+                <p>Hair Stylist,    </p>
+            </div>
+            <div class="col-lg-8" style="margin-top: -150px; float: right">
+                <calendar-temp></calendar-temp>
+            </div>
+        </div>
     </div>
 </div>

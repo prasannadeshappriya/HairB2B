@@ -87,3 +87,29 @@ body .container .signup_page .form-group .SubmitButton{
     /*transform: translate(-50%,-50%);*/
     /*margin-top: 18px;*/
 }
+
+.headline{
+    font-size: 2em;
+    text-align: center;
+}
+
+button {
+    border: none;
+    padding: 0.8em;
+    background: #F96;
+    border-radius: 3px;
+    color: white;
+    font-weight: bold;
+    margin: 0 0 1em;
+}
+
+button:hover, button:focus {
+    cursor: pointer;
+    outline: none;
+}
+
+#editor {
+    padding: 1em;
+    background: #E6E6E6;
+    border-radius: 3px;
+}

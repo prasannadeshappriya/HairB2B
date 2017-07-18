@@ -24,12 +24,10 @@
     <!--</button>-->
     <!--</div>-->
     <!--</div>-->
-    <div class="col-lg-6">
-        <div class="well well-sm" style="max-height: 330px">
+    <div class="well well-sm" style="max-height: 330px; background-color: white !important;">
             <calendar ng-model="currentDate" calendar-mode="mode" event-source="eventSource"
                       range-changed="reloadSource(startTime, endTime)"
                       event-selected="onEventSelected(event)"
                       time-selected="onTimeSelected(selectedTime, events)"></calendar>
-        </div>
     </div>
 </div>
