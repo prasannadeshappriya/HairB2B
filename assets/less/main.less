@@ -1,0 +1,73 @@
+@snow: #ddd;
+@green: #7aba01;
+
+fieldset {
+  padding: 20px;
+  position: relative;
+  border: 0;
+}
+
+fieldset.checkboxes {
+
+}
+
+fieldset.checkboxes > strong {
+  display: block;
+  padding-bottom: 10px;
+  font-weight: 500;
+}
+
+label[checkbox] {
+  display: inline-block;
+  font-size: 1em;
+  position: relative;
+  padding: 12px 16px;
+  padding-left: 32px;
+  border: 1px @snow solid;
+  cursor: pointer;
+}
+
+label[checkbox]:before {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  bottom: 10px;
+  width: 16px;
+  text-align: center;
+  line-height: 28px;
+  color: fade(@snow, 45%);
+  background: none;
+  content: "\2713";
+  font-family: Arial, sans-serif;
+}
+
+label[checkbox].checked {
+  color: @green;
+  border-color: @green;
+}
+
+label[checkbox].checked:before {
+  color: @green;
+  animation-name: animate-label-checkbox-before;
+  animation-duration: .5s;
+  animation-iteration-count: 1;
+}
+
+label input[type=checkbox] {
+  display: none;
+}
+
+@keyframes animate-label-checkbox-before {
+  from {
+    color: fade(@snow, 45%);
+    transform: rotateY(0deg)
+  }
+  to {
+    color: @green;
+    transform: rotateY(360deg)
+  }
+}
+
+//
+
+@import url(https://fonts.googleapis.com/css?family=Lato:400,100,300,700);

@@ -1,0 +1,41 @@
+<div ng-include="'views/carousel.html'"></div>
+<h2 class="text-info text-center">Complete your profile</h2>
+<div class="container">
+    <div class="col-xs-12">
+        <hr  class="col-lg-12">
+        <div class="col-lg-4">
+            <div class="col-lg-12">
+                <img src="assets/img/default_profile_pic.png" style="height: 140px; margin-bottom: 10px" class="center-block">
+            </div>
+            <input type="button" value="Change" class="center-block btn btn-default" style="width: 140px">
+        </div>
+        <div class="col-lg-8">
+            <div class="col-lg-12" style="margin-bottom: 20px;">
+                <h1 style="display: inline">John Washington</h1>
+                <p>john.123@gmail.com</p>
+                <label for="description" class="text-info">Description</label>
+                <textarea id="description" style="resize: none; height: 80px" class="col-lg-12"></textarea>
+            </div>
+
+        </div>
+        <hr class="col-lg-12">
+    </div>
+    <div class="col-lg-12 center-block" style="text-align: center">
+        <p class="text-info" style="text-align: left; margin-left: 165px">Select your qualifications</p>
+        <fieldset class="checkboxes" style="margin-left: -22px; margin-top: -10px">
+            <label checkbox="myCheckbox" style="width: 250px; text-align: left">
+                <input type="checkbox" ng-model="myCheckbox">
+                Educator
+            </label>
+            <label checkbox="myCheckbox_2" style="width: 250px; text-align: left" >
+                <input type="checkbox" ng-model="myCheckbox_2">
+                Stylist
+            </label>
+            <label checkbox="myCheckbox_3" style="width: 250px; text-align: left" >
+                <input type="checkbox" ng-model="myCheckbox_3">
+                Assistant
+            </label>
+        </fieldset>
+        <hr class="col-lg-12">
+    </div>
+</div>
