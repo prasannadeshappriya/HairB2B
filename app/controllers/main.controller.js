@@ -2,8 +2,13 @@
  * Created by prasanna_d on 7/6/2017.
  */
 
-app.controller('MainController',['$scope','$http','AuthService', '$localStorage', '$rootScope',
-    function ($scope, $http, AuthService, $localStorage,$rootScope) {
+app.controller('MainController',[
+    '$scope','$http','AuthService', '$localStorage',
+    '$rootScope', '$location',
+    function (
+        $scope, $http, AuthService,
+        $localStorage,$rootScope,$location) {
+
         $scope.authenticated = false;
         $scope.email_verify = false;
         $scope.background_image = 'url(assets/img/sl02.jpg)';
@@ -11,19 +16,62 @@ app.controller('MainController',['$scope','$http','AuthService', '$localStorage'
         $scope.profile_section = false;
         $scope.search_section = true;
 
+        $scope.getProfile = function () {
+            $http({
+                method: "GET",
+                url: "http://localhost:3000/profile/getProfile"
+            }).then(function (resData){
+                console.log(resData);
+                // $scope.isLoading = false;
+                // if(typeof resData.data.status==="undefined"){return $scope.message = "Server connection error";}
+                // if(resData.data.status==="success"){
+                //     //Create session with the server
+                //     //Get the token
+                //
+                //     console.log(resData.data.token);
+                //
+                // $location.path('profile'); ********************
+                //     AuthService.Login(
+                //         resData.data.token,
+                //         resData.data.email,
+                //         resData.data.firstname,
+                //         resData.data.lastname,
+                //         function (callback) {
+                //             $('#signin_model').modal('hide');
+                //             console.log('Authentication Successful');
+                //             window.location.reload();
+                //         }
+                //     );
+                //
+                // }else{
+                //     $scope.message = "Username or password is invalid";
+                //     $scope.auth_error = true;
+                // }
+            },function (error){
+                if(error.status===404){
+                    console.log('No Profile is created for the current user');
+                }
+            });
+        };
+
         $rootScope.$on('$routeChangeStart', function (next, last) {
-            console.log('Redirect to: ' + last.$$route.templateUrl);
-            // if(last.$$route.templateUrl==="views/userprofile.html"){
-            if(last.$$route.templateUrl==="views/search.html"){
-                $scope.background_image = 'url(assets/img/sl02.jpg)';
-                $scope.backgroung_image_repeat = 'no-repeat';
-                $scope.profile_section = false;
-                $scope.search_section = true;
-            }else{
-                $scope.background_image = '';
-                $scope.backgroung_image_repeat = '';
-                $scope.profile_section = true;
-                $scope.search_section = false;
+            try {
+                console.log('Redirect to: ' + last.$$route.templateUrl);
+                // if(last.$$route.templateUrl==="views/userprofile.html"){
+                if (last.$$route.templateUrl === "views/search.html") {
+                    $scope.background_image = 'url(assets/img/sl02.jpg)';
+                    $scope.backgroung_image_repeat = 'no-repeat';
+                    $scope.profile_section = false;
+                    $scope.search_section = true;
+                } else {
+                    $scope.background_image = '';
+                    $scope.backgroung_image_repeat = '';
+                    $scope.profile_section = true;
+                    $scope.search_section = false;
+                }
+            }catch (err){
+                 console.log('Error: ' + err);
+                 $location.path('/');
             }
         });
 

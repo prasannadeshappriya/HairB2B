@@ -19,9 +19,6 @@
     <script src="app/vendor/ngStorage.min.js"></script>
     <script src="app/vendor/angular-ui-router.min.js"></script>
 
-    <!--Calender Template-->
-    <script src="assets/js/calendar-tpls.js"></script>
-
     <!--Import AnglerJS App module and config files-->
     <script src="app/app.modules.js"></script>
     <script src="app/app.config.js"></script>
@@ -39,9 +36,11 @@
     <script src="app/components/signin/signin.component.js"></script>
     <script src="app/components/signup/signup.component.js"></script>
     <script src="app/components/calendar/calendar.component.js"></script>
+    <script src="app/components/create.profile/profile.create.component.js"></script>
 
     <script src="app/services/auth.service.js"></script>
 
+    <!--Calender Template-->
     <link rel="stylesheet" href="assets/css/calendar.css"/>
     <script src="assets/js/calendar-tpls.js"></script>
 
@@ -71,7 +70,7 @@
                             <img src="assets/img/default_profile_pic.png" style="width: 30px; margin: -10px 10px -10px 21px; right: 0">
                                     {{username}} <span class="caret"></span></a>
                         <ul class="dropdown-menu" style="background-color: black;">
-                            <li><a style="color: white" href="#!/profile">Profile</a></li>
+                            <li><a style="color: white" href ng-click="getProfile()">Profile</a></li>
                             <li><a style="color: white" href="#">My Orders</a></li>
                             <li><a style="color: white" href="#">Revenue</a></li>
                             <li><a style="color: white" href="#">Help</a></li>
@@ -96,6 +95,9 @@
 
         <!--Register Section-->
         <sign-in></sign-in>
+
+        <input type="button" data-toggle="modal" data-target="#profile_create">
+        <create-profile></create-profile>
 
         <!--Show Email Verify Box-->
         <div ng-include="'views/emailverifybox.html'" ng-show="(authenticated) && !(email_verify)"
