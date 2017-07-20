@@ -13,7 +13,26 @@ app.config(['$routeProvider',function($routeProvider){
             controller: 'MainController',
             resolve:{
                 init :function(AuthService, $location, $http){
-
+                    if(AuthService.getUser()===null){
+                        console.log('Unauthorized url request');
+                        $location.path('/');
+                    }else{
+                        $http({
+                            method: "GET",
+                            url: "http://localhost:3000/profile/getProfile"
+                        }).then(function (resData){
+                            console.log('Return Data: ' + resData);
+                            $location.path('/profile');
+                        },function (error){
+                            if(error.status===404){
+                                $location.path('/profile/create');
+                                console.log('No profile found for user, creating now');
+                            }else {
+                                console.log('Sever connection error occurred, redirecting to home');
+                                $location.path('/');
+                            }
+                        });
+                    }
                 }
             }
         })
@@ -31,8 +50,7 @@ app.config(['$routeProvider',function($routeProvider){
                             method: "GET",
                             url: "http://localhost:3000/profile/getProfile"
                         }).then(function (resData){
-                            console.log('test');
-                            console.log(resData);
+                            console.log('Return Data: ' + resData);
                         },function (error){
                             if(error.status===404){
                                 $location.path('/profile/create');
