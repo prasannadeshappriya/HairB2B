@@ -1,7 +1,10 @@
 /**
  * Created by prasanna_d on 7/18/2017.
  */
-app.controller('ProfileController',['$scope','$http',function ($scope,$http) {
+app.controller('ProfileController',
+    ['$scope','$http','AuthService',
+        function ($scope,$http,AuthService) {
+
     var editBtn = document.getElementById('editBtn');
     var editables = document.querySelectorAll('#description');
 
@@ -23,41 +26,34 @@ app.controller('ProfileController',['$scope','$http',function ($scope,$http) {
         }
     });
 
+    //User details
+    $scope.firstname = 'Undefined';
+    $scope.lastname = 'Undefined';
+    $scope.email = 'Undefined';
+    $scope.description = 'Undefined';
+
     $scope.onInit = function () {
-        // $http({
-        //     method: "GET",
-        //     url: "http://localhost:3000/profile/getProfile"
-        // }).then(function (resData){
-        //     console.log(resData);
-        //     // $scope.isLoading = false;
-        //     // if(typeof resData.data.status==="undefined"){return $scope.message = "Server connection error";}
-        //     // if(resData.data.status==="success"){
-        //     //     //Create session with the server
-        //     //     //Get the token
-        //     //
-        //     //     console.log(resData.data.token);
-        //     //
-        //     //     AuthService.Login(
-        //     //         resData.data.token,
-        //     //         resData.data.email,
-        //     //         resData.data.firstname,
-        //     //         resData.data.lastname,
-        //     //         function (callback) {
-        //     //             $('#signin_model').modal('hide');
-        //     //             console.log('Authentication Successful');
-        //     //             window.location.reload();
-        //     //         }
-        //     //     );
-        //     //
-        //     // }else{
-        //     //     $scope.message = "Username or password is invalid";
-        //     //     $scope.auth_error = true;
-        //     // }
-        // },function (error){
-        //     // $scope.isLoading = false;
-        //     // $scope.auth_error = false;
-        //     // $scope.server_error = true;
-        //     // $scope.message = "Server connection error";
-        // });
+        console.log('this is now initializing');
+        var user = AuthService.getUser();
+        if(user){
+            $scope.firstname = user.firstname;
+            $scope.lastname = user.lastname;
+            $scope.email = user.email;
+
+            $http({
+                method: "GET",
+                url: "http://localhost:3000/profile/getProfile"
+            }).then(function (resData){
+                console.log('Server response :');
+                console.log(resData);
+                $scope.description = resData.data.description;
+            },function (error){
+                $location.path('/');
+                console.log('Error occurred: ' + error);
+            });
+
+        }else{
+            $location.path('/');
+        }
     }
 }]);

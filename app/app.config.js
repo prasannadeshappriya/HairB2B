@@ -48,9 +48,9 @@ app.config(['$routeProvider',function($routeProvider){
                     }else{
                         $http({
                             method: "GET",
-                            url: "http://localhost:3000/profile/getProfile"
+                            url: "http://localhost:3000/profile/getProfileStatus"
                         }).then(function (resData){
-                            console.log('Return Data: ' + resData);
+                            console.log('Server status [/profile]: ' + resData.status);
                         },function (error){
                             if(error.status===404){
                                 $location.path('/profile/create');
