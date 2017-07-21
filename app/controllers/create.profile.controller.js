@@ -14,9 +14,9 @@ app.controller('ProfileCreateController',
     $scope.isStartCreate= false;
 
     //User details
-    $scope.firstname = 'Undefined';
-    $scope.lastname = 'Undefined';
-    $scope.email = 'Undefined';
+    $scope.firstname = '';
+    $scope.lastname = '';
+    $scope.email = '';
 
     //Description character count
     $scope.desLength= 0;
