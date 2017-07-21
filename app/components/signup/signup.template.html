@@ -59,7 +59,7 @@
                         <div style="padding: 0 10px 15px 10px"
                              ng-class="{'has-error' : ((regForm.password.$error.required) && (submitted)) || password_chr_error}">
 
-                            <input type="text" name="password" id="password" class="form-control" placeholder="Password" required
+                            <input type="password" name="password" id="password" class="form-control" placeholder="Password" required
                                    ng-model="password"
                                    ng-change="resetSubmitted(); validate()">
                             <div style="float: right; margin-right: 10px; margin-top: -28px" ng-show="regForm.password.$error.required">
@@ -75,7 +75,7 @@
                         <div style="padding: 0 10px 15px 10px"
                              ng-class="{'has-error' : ((regForm.repassword.$error.required) && (submitted)) || ((repassword!==password) && repass)}">
 
-                            <input type="text" name="repassword" id="repassword" class="form-control" placeholder="Retype Password" required
+                            <input type="password" name="repassword" id="repassword" class="form-control" placeholder="Retype Password" required
                                    ng-model="repassword"
                                    ng-change="resetSubmitted(); setRePass(repassword); validate()">
                             <div style="float: right; margin-right: 10px; margin-top: -28px" ng-show="regForm.repassword.$error.required">

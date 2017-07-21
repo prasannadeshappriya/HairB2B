@@ -23,7 +23,7 @@
                         <div style="padding: 0 10px 15px 10px"
                              ng-class="{'has-error' : ((loginForm.password.$error.required) && (submitted))}">
 
-                            <input type="text" name="password" id="password" class="form-control" placeholder="Password" required
+                            <input type="password" name="password" id="password" class="form-control" placeholder="Password" required
                                    ng-model="password"
                                    ng-change="resetSubmitted(); validate()">
 

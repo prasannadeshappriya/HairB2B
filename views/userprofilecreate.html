@@ -14,7 +14,7 @@
                 <h1 style="display: inline">{{firstname}} {{lastname}}</h1>
                 <p> {{email}} </p>
                 <label for="description" class="text-info">Description</label>
-                <textarea id="description" ng-model="description" ng-change="updateDesLength()" style="resize: none; height: 80px" class="col-lg-12"></textarea>
+                <textarea id="description" ng-model="description" ng-change="updateDesLength(); reset_des_error()" style="resize: none; height: 80px" class="col-lg-12"></textarea>
                 <p class="text-info" style="text-align: right"  ng-show="!chrLengthError"> {{characters}} characters remaining</p>
                 <p style="color: red; text-align: right" ng-show="chrLengthError"> {{characters}} characters exceeded</p>
                 <p style="color: red; text-align: right" ng-show="des_error">* Provide a description about yourself</p>
@@ -28,13 +28,13 @@
             <fieldset class="checkboxes" style="margin-left: -22px; margin-top: -10px">
                 <div class="col-lg-4">
                     <label checkbox="myCheckbox" style="width: 250px; text-align: left">
-                        <input type="checkbox" ng-model="myCheckbox">
+                        <input type="checkbox" ng-model="myCheckbox" ng-change="reset_prof_type_error()">
                         Educator
                     </label>
                     <div class="form-group" ng-show="myCheckbox">
                         <div class="input-group" style="margin-left: 85px">
                             <span class="input-group-addon">$</span>
-                            <input ng-model="price1" type="number" class="form-control" style="width: 120px;">
+                            <input ng-model="price1" type="number" ng-change="reset_prof_type_price_error()" class="form-control" style="width: 120px;">
                         </div>
                         <p class="text-info"><span style="color: red">*</span>Your rates per day </p>
                     </div>
@@ -42,13 +42,13 @@
 
                 <div class="col-lg-4">
                     <label checkbox="myCheckbox_2" style="width: 250px; text-align: left" >
-                        <input type="checkbox" ng-model="myCheckbox_2">
+                        <input type="checkbox" ng-model="myCheckbox_2" ng-change="reset_prof_type_error()">
                         Stylist
                     </label>
                     <div class="form-group" ng-show="myCheckbox_2">
                         <div class="input-group" style="margin-left: 85px">
                             <span class="input-group-addon">$</span>
-                            <input ng-model="price2" type="number" class="form-control" style="width: 120px;">
+                            <input ng-model="price2" type="number" ng-change="reset_prof_type_price_error()" class="form-control" style="width: 120px;">
                         </div>
                         <p class="text-info"><span style="color: red">*</span>Your rates per day </p>
                     </div>
@@ -56,13 +56,13 @@
 
                 <div class="col-lg-4">
                     <label checkbox="myCheckbox_3" style="width: 250px; text-align: left" >
-                        <input type="checkbox" ng-model="myCheckbox_3">
+                        <input type="checkbox" ng-model="myCheckbox_3" ng-change="reset_prof_type_error()">
                         Assistant
                     </label>
                     <div class="form-group" ng-show="myCheckbox_3">
                         <div class="input-group" style="margin-left: 85px">
                             <span class="input-group-addon">$</span>
-                            <input ng-model="price3" type="number" class="form-control" style="width: 120px;">
+                            <input ng-model="price3" type="number" ng-change="reset_prof_type_price_error()" class="form-control" style="width: 120px;">
                         </div>
                         <p class="text-info"><span style="color: red">*</span>Your rates per day </p>
                     </div>
@@ -78,21 +78,21 @@
         <div class="col-lg-12">
             <div class="col-lg-4">
                 <div style="margin-left: 50px; float: right">
-                    <input type="checkbox" ng-model="skill1"> &nbsp;&nbsp;&nbsp; Barber <br>
-                    <input type="checkbox" ng-model="skill2"> &nbsp;&nbsp;&nbsp; Makeup <br>
-                    <input type="checkbox" ng-model="skill3"> &nbsp;&nbsp;&nbsp; Dry cutting <br>
-                    <input type="checkbox" ng-model="skill4"> &nbsp;&nbsp;&nbsp; Shaving <br>
-                    <input type="checkbox" ng-model="skill5"> &nbsp;&nbsp;&nbsp; Hair styling <br>
-                    <input type="checkbox" ng-model="skill6"> &nbsp;&nbsp;&nbsp; Wigs cutting <br>
-                    <input type="checkbox" ng-model="skill7"> &nbsp;&nbsp;&nbsp; Curling
+                    <input type="checkbox" ng-model="skill1" ng-change="reset_skill_error()"> &nbsp;&nbsp;&nbsp; Barber <br>
+                    <input type="checkbox" ng-model="skill2" ng-change="reset_skill_error()"> &nbsp;&nbsp;&nbsp; Makeup <br>
+                    <input type="checkbox" ng-model="skill3" ng-change="reset_skill_error()"> &nbsp;&nbsp;&nbsp; Dry cutting <br>
+                    <input type="checkbox" ng-model="skill4" ng-change="reset_skill_error()"> &nbsp;&nbsp;&nbsp; Shaving <br>
+                    <input type="checkbox" ng-model="skill5" ng-change="reset_skill_error()"> &nbsp;&nbsp;&nbsp; Hair styling <br>
+                    <input type="checkbox" ng-model="skill6" ng-change="reset_skill_error()"> &nbsp;&nbsp;&nbsp; Wigs cutting <br>
+                    <input type="checkbox" ng-model="skill7" ng-change="reset_skill_error()"> &nbsp;&nbsp;&nbsp; Curling
                 </div>
             </div>
             <div class="col-lg-4">
                 <div style="float: right">
-                    <input type="checkbox" ng-model="skill8"> &nbsp;&nbsp;&nbsp; Coloring <br>
-                    <input type="checkbox" ng-model="skill9"> &nbsp;&nbsp;&nbsp; Color correction <br>
-                    <input type="checkbox" ng-model="skill10"> &nbsp;&nbsp;&nbsp; Long hair <br>
-                    <input type="checkbox" ng-model="skill11"> &nbsp;&nbsp;&nbsp; Short hair
+                    <input type="checkbox" ng-model="skill8" ng-change="reset_skill_error()"> &nbsp;&nbsp;&nbsp; Coloring <br>
+                    <input type="checkbox" ng-model="skill9" ng-change="reset_skill_error()"> &nbsp;&nbsp;&nbsp; Color correction <br>
+                    <input type="checkbox" ng-model="skill10" ng-change="reset_skill_error()"> &nbsp;&nbsp;&nbsp; Long hair <br>
+                    <input type="checkbox" ng-model="skill11" ng-change="reset_skill_error()"> &nbsp;&nbsp;&nbsp; Short hair
                 </div>
             </div>
         </div>
@@ -104,7 +104,7 @@
         <div class="col-lg-12">
             <div class="form-group" style="margin-left: 225px">
                 <label for="payment" class="control-label">Your PayPal Email Address</label>
-                <input ng-model="paypal_email" type="text" id="payment" class="form-control" style="width: 400px" placeholder="Payment will be sent to this email address">
+                <input ng-model="paypal_email" type="text" id="payment" ng-change="reset_paypal_email_error()" class="form-control" style="width: 400px" placeholder="Payment will be sent to this email address">
             </div>
         </div>
         <p style="color: red; text-align: right; margin-right: 30px" ng-show="paypal_email_error">* PayPal email is required</p>

@@ -33,6 +33,12 @@ app.controller('ProfileCreateController',
         }
     };
 
+    $scope.reset_des_error = function () {$scope.des_error = false;};
+    $scope.reset_skill_error = function () {$scope.skill_error = false;};
+    $scope.reset_prof_type_error = function () {$scope.prof_type_error = false;};
+    $scope.reset_paypal_email_error = function () {$scope.paypal_email_error = false;};
+    $scope.reset_prof_type_price_error = function () {$scope.prof_type_price_error  = false;};
+
     $scope.onInit = function () {
         var user = AuthService.getUser();
         if(user){
