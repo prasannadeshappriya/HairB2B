@@ -24,6 +24,9 @@
             </select>
         </div>
         <div class="col-xs-9" style="border-left: 1px solid lightgray">
+            <div class="alert alert-success" style="margin-top: 25px" ng-show="empty_results">
+                <strong>No stylist found for your requirement!</strong>
+            </div>
             <div ng-repeat="search_data in search_results">
                 <div class="col-xs-12"
                      ng-style="$index < (search_results.length-1) ?
