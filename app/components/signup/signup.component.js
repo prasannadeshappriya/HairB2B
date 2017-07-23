@@ -13,12 +13,11 @@ angular.module('signup')
             $scope.isLoading = false;       //Processing image gif while server response
             $scope.handler = 'RegForm';     //Show the window
 
-            //-------------------------Let user know required fields---------------
+            //-------------------------Password Character Error---------------
             $scope.password_chr_error = false;
             //---------------------------------------------------------------------
 
             $scope.setRePass = function (repassword) {
-                console.log('repassword');
                 if(repassword==="" || typeof repassword==="undefined"){$scope.repass = false;}
                 else {$scope.repass = true;}
             };
@@ -55,6 +54,7 @@ angular.module('signup')
                 if($scope.password_chr_error){
                     return;
                 }
+                if(!$scope.isComplete){return;}
                 if(!($scope.regForm.email.$valid)) {return;}
                 $scope.isLoading = true;
                 $http({
