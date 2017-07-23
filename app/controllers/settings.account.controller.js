@@ -13,8 +13,19 @@ app.controller('AccSettingsController',
             $scope.success = false;
             $scope.danger = false;
 
-            //-------------------------Password Character Error---------------
+            //-------------------------Show Sections
+            $scope.password_reset_section = false;
+            $scope.profile_reset_section = true;
+            $scope.skills_jobtype_section = false;
+            $scope.payment_section = false;
+
+            //-------------------------Password Character Error
             $scope.new_password_chr_error = false;
+
+            //Description character count
+            $scope.desLength= 0;
+            $scope.characters = 1000;
+            $scope.chrLengthError = false;
 
             $scope.resetSubmitted = function () {
                 $scope.submitted = false;
@@ -50,11 +61,35 @@ app.controller('AccSettingsController',
                 $scope.isComplete = true;
             };
 
-            profile_section = function () {
-                console.log('asdasdasd');
+            $scope.profile = function () {
+                $scope.profile_reset_section = true;
+                $scope.password_reset_section = false;
+                $scope.skills_jobtype_section = false;
+                $scope.payment_section = false;
             };
 
-            onInit = function () {
+            $scope.payment = function () {
+                $scope.profile_reset_section = false;
+                $scope.password_reset_section = false;
+                $scope.skills_jobtype_section = false;
+                $scope.payment_section = true;
+            };
+
+            $scope.skills_jobtypes = function () {
+                $scope.profile_reset_section = false;
+                $scope.password_reset_section = false;
+                $scope.skills_jobtype_section = true;
+                $scope.payment_section = false;
+            };
+
+            $scope.password_reset = function () {
+                $scope.password_reset_section = true;
+                $scope.profile_reset_section = false;
+                $scope.skills_jobtype_section = false;
+                $scope.payment_section = false;
+            };
+
+            $scope.onInit = function () {
                 console.log('Initialization completed');
                 $scope.success = false;
                 $scope.danger = false;
@@ -66,5 +101,17 @@ app.controller('AccSettingsController',
                 if($scope.new_password_chr_error){return;}
                 console.log('test');
             };
+
+            $scope.updateDesLength = function () {
+                if($scope.description.length > 1000){
+                    $scope.characters = $scope.description.length - 1000;
+                    $scope.chrLengthError = true;
+                }else{
+                    $scope.characters = 1000 - $scope.description.length;
+                    $scope.chrLengthError = false;
+                }
+            };
+
+            $scope.reset_des_error = function () {$scope.des_error = false;};
         }
 ]);
