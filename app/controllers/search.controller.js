@@ -20,13 +20,15 @@ app.controller('SearchController',
                 $location.path('/search').search({jobtype: jobtype, skilltype: skilltype});
             };
 
+            $scope.viewProfile = function (id) {
+                $location.path('/profile/view').search({userid: id});
+            };
+
             $scope.search_results = [];
             $scope.onInit = function () {
                 var params = $location.search();
                 var job_type = (params.jobtype);
                 var skill_type = (params.skilltype);
-                console.log(job_type);
-                console.log(skill_type);
 
                 var query1 = 'typeid=' + job_type;
                 var query2 = 'skillid=' + skill_type;
@@ -59,6 +61,7 @@ app.controller('SearchController',
                             firstname: users[i][0].firstname,
                             lastname: users[i][0].lastname,
                             acctypes: types,
+                            id: users[i][0].id,
                             price: "$2400",
                             rates: "0.0",
                             location: "Sidney",

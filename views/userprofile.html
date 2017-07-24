@@ -6,12 +6,12 @@
                 <div class="col-lg-12" style="margin-top: 25px">
                     <img src="assets/img/default_profile_pic.png" style="height: 140px; margin-bottom: 10px" class="center-block">
                 </div>
-                <input type="button" value="Change" class="center-block btn btn-default" style="width: 140px">
+                <input type="button" ng-hide="true" value="Change" class="center-block btn btn-default" style="width: 140px">
             </div>
             <div class="col-lg-8">
                 <div class="col-lg-12" style="margin-bottom: 20px; margin-top: 20px">
                     <h1 style="display: inline">{{firstname}} {{lastname}}</h1>
-                    <input id="editBtn" type="button" value="Edit" class="btn btn-default" style="float: right; display: inline; margin-top: 5px; width: 80px">
+                    <input id="editBtn" type="button" value="Edit" ng-hide="true" class="btn btn-default" style="float: right; display: inline; margin-top: 5px; width: 80px">
                     <p>{{email}}</p>
                 </div>
                 <div class="col-lg-12">

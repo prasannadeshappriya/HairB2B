@@ -14,6 +14,17 @@ app.config(['$routeProvider',function($routeProvider){
                 }
             }
         })
+        .when("/profile/view", {
+            //Profile View Page [Edit]
+            templateUrl : "views/profileviewpublic.html",
+            controller: 'MainController',
+            resolve:{
+                init : function () {
+                    //Nothing here for now
+                    console.log('search results route triggered');
+                }
+            }
+        })
         .when("/", {
             //Search Page
             templateUrl : "views/search.html"
