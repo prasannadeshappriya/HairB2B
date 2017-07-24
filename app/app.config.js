@@ -24,24 +24,9 @@ app.config(['$routeProvider',function($routeProvider){
             controller: 'MainController',
             resolve:{
                 init :function(AuthService, $location, $http){
-                    if(AuthService.getUser()===null){
+                    if(AuthService.getUser()===null) {
                         console.log('Unauthorized url request');
                         $location.path('/');
-                    }else{
-                        $http({
-                            method: "GET",
-                            url: "http://localhost:3000/profile/getProfileStatus"
-                        }).then(function (resData){
-                            console.log('Server status [/profile]: ' + resData.status);
-                        },function (error){
-                            if(error.status===404){
-                                $location.path('/profile/create');
-                                console.log('No profile found for user, creating now');
-                            }else {
-                                console.log('Sever connection error occurred, redirecting to home');
-                                $location.path('/');
-                            }
-                        });
                     }
                 }
             }

@@ -89,10 +89,30 @@ app.controller('AccSettingsController',
                 $scope.payment_section = false;
             };
 
+            $scope.accDescription = false;
+            $scope.accSkills = false;
+
             $scope.onInit = function () {
                 console.log('Initialization completed');
                 $scope.success = false;
                 $scope.danger = false;
+                $http({
+                    method: "GET",
+                    url: "http://localhost:3000/profile/getProfileStatus"
+                }).then(function (resData){
+                    //Profile Found
+                    $scope.accDescription = true;
+                    $scope.accSkills = true;
+                },function (error){
+                    if(error.status===404){
+                        //No Profile found
+                        $scope.accDescription = false;
+                        $scope.accSkills = false;
+                    }else {
+                        console.log('Sever connection error occurred, redirecting to home');
+                        $location.path('/');
+                    }
+                });
             };
 
             $scope.submit = function () {

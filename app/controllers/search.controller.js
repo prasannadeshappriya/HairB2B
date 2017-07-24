@@ -12,25 +12,24 @@ app.controller('SearchController',
             $scope.empty_results = false;
 
             $scope.beginSearch = function (skill, jobtype) {
-                console.log($scope.job_types.indexOf(skill));
-                // $location.path('/search?jobtype=2&skilltype=4');
-                $location.path('/search').search({jobtype: $scope.job_types.indexOf(jobtype), skilltype: $scope.skill_types.indexOf(skill)});
+                var jobtype, skilltype;
+                if($scope.job_types.indexOf(jobtype)===3){jobtype = 'all'}
+                else{jobtype = ($scope.job_types.indexOf(jobtype)+1)}
+                if($scope.skill_types.indexOf(skill)===11){skilltype = 'all'}
+                else{skilltype = ($scope.skill_types.indexOf(skill)+1)}
+                $location.path('/search').search({jobtype: jobtype, skilltype: skilltype});
             };
 
             $scope.search_results = [];
             $scope.onInit = function () {
                 var params = $location.search();
-                var job_type = (params.jobtype+1);
-                var skill_type = (params.skilltype+1);
+                var job_type = (params.jobtype);
+                var skill_type = (params.skilltype);
                 console.log(job_type);
                 console.log(skill_type);
 
-                var query1;
-                var query2;
-                if(job_type==4){query1 = 'typeid=all';}
-                else{query1 = 'typeid=' + job_type;}
-                if(skill_type==12){query2 = 'skillid=all';}
-                else{query2 = 'skillid=' + skill_type;}
+                var query1 = 'typeid=' + job_type;
+                var query2 = 'skillid=' + skill_type;
                 console.log("search url: http://localhost:3000/search/simplesearch?"+ query2 + "&" + query1);
                 $http({
                     method: "GET",
