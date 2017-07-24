@@ -12,12 +12,12 @@ app.controller('SearchController',
             $scope.empty_results = false;
 
             $scope.beginSearch = function (skill, jobtype) {
-                var jobtype, skilltype;
-                if($scope.job_types.indexOf(jobtype)===3){jobtype = 'all'}
-                else{jobtype = ($scope.job_types.indexOf(jobtype)+1)}
+                var jobtypes, skilltype;
+                if($scope.job_types.indexOf(jobtype)===3){jobtypes = 'all'}
+                else{jobtypes = ($scope.job_types.indexOf(jobtype)+1)}
                 if($scope.skill_types.indexOf(skill)===11){skilltype = 'all'}
                 else{skilltype = ($scope.skill_types.indexOf(skill)+1)}
-                $location.path('/search').search({jobtype: jobtype, skilltype: skilltype});
+                $location.path('/search').search({jobtype: jobtypes, skilltype: skilltype});
             };
 
             $scope.viewProfile = function (id) {
@@ -27,6 +27,10 @@ app.controller('SearchController',
                 }else {
                     $location.path('/profile/view').search({userid: id});
                 }
+            };
+
+            $scope.placeOrder = function (id) {
+                $location.path('/order/place').search({userid: id});
             };
 
             $scope.search_results = [];
@@ -65,6 +69,12 @@ app.controller('SearchController',
                         if(description.length>200){
                             description = description.substring(0,200) + '....';
                         }
+
+                        var disable = false;
+                        var user = AuthService.getUser();
+                        if(user.id===users[i][0].id){disable=true;}
+                        else {disable=false;}
+
                         $scope.search_results.push({
                             firstname: users[i][0].firstname,
                             lastname: users[i][0].lastname,
@@ -73,7 +83,8 @@ app.controller('SearchController',
                             price: "$2400",
                             rates: "0.0",
                             location: "Sidney",
-                            description: description
+                            description: description,
+                            disable: disable
                         });
                     }
                     if($scope.search_results.length===0){

@@ -3,6 +3,17 @@
  */
 app.config(['$routeProvider',function($routeProvider){
     $routeProvider
+        .when("/order/place", {
+            //Profile View Page [Edit]
+            templateUrl : "views/order.place.html",
+            controller: 'MainController',
+            resolve:{
+                init : function () {
+                    //Nothing here for now
+                    console.log('search results route triggered');
+                }
+            }
+        })
         .when("/search", {
             //Profile View Page [Edit]
             templateUrl : "views/searchresults.html",
