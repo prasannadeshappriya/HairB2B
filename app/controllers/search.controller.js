@@ -21,7 +21,12 @@ app.controller('SearchController',
             };
 
             $scope.viewProfile = function (id) {
-                $location.path('/profile/view').search({userid: id});
+                var user = AuthService.getUser();
+                if(user.id===id){
+                    $location.path('/profile');
+                }else {
+                    $location.path('/profile/view').search({userid: id});
+                }
             };
 
             $scope.search_results = [];
@@ -56,6 +61,9 @@ app.controller('SearchController',
                                     types=types + ', ' + $scope.job_types[(userTypes[j].job_id)-1];
                                 }
                             }
+                        }
+                        if(description.length>200){
+                            description = description.substring(0,200) + '....';
                         }
                         $scope.search_results.push({
                             firstname: users[i][0].firstname,

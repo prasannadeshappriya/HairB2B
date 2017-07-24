@@ -40,9 +40,10 @@ angular.module('app')
             }
         }
 
-        function login(auth_token, email, firstname, lastname, callback) {
+        function login(id,auth_token, email, firstname, lastname, callback) {
             try {
                 $localStorage.currentUser = {
+                    id: id,
                     email: email,
                     token: auth_token,
                     firstname: firstname,

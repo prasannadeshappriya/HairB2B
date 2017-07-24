@@ -70,6 +70,7 @@ angular.module('signup')
                         //Create session with the server
                         //Get the token
                         AuthService.Login(
+                            resData.data.id,
                             resData.data.token,
                             resData.data.email,
                             resData.data.firstname,

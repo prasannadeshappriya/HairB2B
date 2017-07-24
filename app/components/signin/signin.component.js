@@ -18,10 +18,6 @@ angular.module('app')
                 $scope.auth_error = false;
             };
 
-            $scope.testt = function () {
-
-            };
-
             $scope.validate = function () {
                 if(typeof $scope.email==="undefined" || $scope.email===""){$scope.isComplete = false;return;}
                 if(typeof $scope.password==="undefined" || $scope.password===""){$scope.isComplete = false;return;}
@@ -47,10 +43,8 @@ angular.module('app')
                     if(resData.data.status==="success"){
                         //Create session with the server
                         //Get the token
-
-                        console.log(resData.data.token);
-
                         AuthService.Login(
+                            resData.data.userid,
                             resData.data.token,
                             resData.data.email,
                             resData.data.firstname,
