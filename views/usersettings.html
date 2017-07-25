@@ -149,6 +149,9 @@
             <div class="alert alert-danger" style="margin-top: 25px" ng-show="danger || server_error">
                 <strong>Server Error!</strong>
             </div>
+            <div class="alert alert-danger" style="margin-top: 25px" ng-show="password_save_error">
+                <strong>{{message}}</strong>
+            </div>
             <form name="change_pass">
                 <div class="form-group center-block" style="width: 350px;">
                     <div ng-class="{'has-error' : ((change_pass.current_pass.$error.required) && (submitted))}">
@@ -180,7 +183,7 @@
                     </div>
                 </div>
                 <input type="button" class="btn btn-success" value="Change Password" style="width: 150px; float: right; margin-bottom: 40px"
-                    ng-click="submit()">
+                    ng-click="changePassword()">
             </form>
         </div>
     </div>

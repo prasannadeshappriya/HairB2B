@@ -12,6 +12,8 @@ app.controller('AccSettingsController',
             //-------------------------Show Success/Danger alert boxes
             $scope.success = false;
             $scope.danger = false;
+            $scope.password_save_error = false;
+            $scope.message = '';
 
             //-------------------------Show Sections
             $scope.password_reset_section = false;
@@ -115,11 +117,37 @@ app.controller('AccSettingsController',
                 });
             };
 
-            $scope.submit = function () {
+            $scope.changePassword = function () {
                 $scope.submitted = true;
                 if(!$scope.isComplete){return;}
                 if($scope.new_password_chr_error){return;}
-                console.log('test');
+                if($scope.password===$scope.newPassword){
+                    $scope.password_save_error = true;
+                    return;
+                }else{$scope.password_save_error = false;}
+                $http({
+                    method: "POST",
+                    url: "http://localhost:3000/profile/changePassword",
+                    data: {curPassword: $scope.password, newPassword: $scope.newPassword}
+                }).then(function (resData){
+                    console.log(resData);
+                    if(resData.status===200){
+                        $scope.success = true;
+                        $scope.danger = false;
+                        $scope.password_save_error = false;
+                    }
+                },function (error){
+                    if(error.status===401){
+                        $scope.success = false;
+                        $scope.danger = false;
+                        $scope.message = "New password must be different from old password";
+                        $scope.password_save_error = true;
+                    }else {
+                        $scope.success = false;
+                        $scope.danger = true;
+                        $scope.password_save_error = false;
+                    }
+                });
             };
 
             $scope.updateDesLength = function () {
