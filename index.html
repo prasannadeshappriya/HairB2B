@@ -37,6 +37,9 @@
     <script src="app/controllers/search.controller.js"></script>
     <script src="app/controllers/profile.view.controller.js"></script>
     <script src="app/controllers/order.place.controller.js"></script>
+    <script src="app/controllers/help.controller.js"></script>
+    <script src="app/controllers/order.view.controller.js"></script>
+    <script src="app/controllers/profile.revenue.controller.js"></script>
 
     <!--Import AnglerJS component modules -->
     <script src="app/components/signin/signin.module.js"></script>
@@ -81,9 +84,9 @@
                                     {{username}} <span class="caret"></span></a>
                         <ul class="dropdown-menu" style="background-color: black;">
                             <li><a style="color: white" href="#!/profile">Profile</a></li>
-                            <li><a style="color: white" href="#">My Orders</a></li>
-                            <li><a style="color: white" href="#">Revenue</a></li>
-                            <li><a style="color: white" href="#">Help</a></li>
+                            <li><a style="color: white" href="#!/order/view">My Orders</a></li>
+                            <li><a style="color: white" href="#!/profile/revenue">Revenue</a></li>
+                            <li><a style="color: white" href="#!/help">Help</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a style="color: white" href="#!/profile/edit">Account and Settings</a></li>
                             <li><a style="color: white" href="#" ng-click="sign_out()">Sign Out</a></li>

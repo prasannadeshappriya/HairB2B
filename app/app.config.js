@@ -10,7 +10,18 @@ app.config(['$routeProvider',function($routeProvider){
             resolve:{
                 init : function () {
                     //Nothing here for now
-                    console.log('search results route triggered');
+                    console.log('order place route triggered');
+                }
+            }
+        })
+        .when("/order/view", {
+            //Profile View Page [Edit]
+            templateUrl : "views/order.view.html",
+            controller: 'MainController',
+            resolve:{
+                init : function () {
+                    //Nothing here for now
+                    console.log('order view route triggered');
                 }
             }
         })
@@ -33,6 +44,28 @@ app.config(['$routeProvider',function($routeProvider){
                 init : function () {
                     //Nothing here for now
                     console.log('search results route triggered');
+                }
+            }
+        })
+        .when("/help", {
+            //Profile View Page [Edit]
+            templateUrl : "views/help.html",
+            controller: 'MainController',
+            resolve:{
+                init : function () {
+                    //Nothing here for now
+                    console.log('help route triggered');
+                }
+            }
+        })
+        .when("/profile/revenue", {
+            //Profile View Page [Edit]
+            templateUrl : "views/profile.revenue.html",
+            controller: 'MainController',
+            resolve:{
+                init : function () {
+                    //Nothing here for now
+                    console.log('profile revenue route triggered');
                 }
             }
         })
