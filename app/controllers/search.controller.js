@@ -22,15 +22,22 @@ app.controller('SearchController',
 
             $scope.viewProfile = function (id) {
                 var user = AuthService.getUser();
-                if(user.id===id){
-                    $location.path('/profile');
-                }else {
-                    $location.path('/profile/view').search({userid: id});
-                }
+                if(user) {
+                    if (user.id === id) {
+                        $location.path('/profile');
+                    } else {
+                        $location.path('/profile/view').search({userid: id});
+                    }
+                }else{$location.path('/profile/view').search({userid: id});}
             };
 
             $scope.placeOrder = function (id) {
-                $location.path('/order/place').search({userid: id});
+                var user = AuthService.getUser();
+                if(user) {
+                    $location.path('/order/place').search({userid: id});
+                }else{
+                    $('#signin_model').modal('show');
+                }
             };
 
             $scope.search_results = [];
@@ -72,8 +79,10 @@ app.controller('SearchController',
 
                         var disable = false;
                         var user = AuthService.getUser();
-                        if(user.id===users[i][0].id){disable=true;}
-                        else {disable=false;}
+                        if(user) {
+                            if (user.id === users[i][0].id) {disable = true;}
+                            else {disable = false;}
+                        }
 
                         $scope.search_results.push({
                             firstname: users[i][0].firstname,

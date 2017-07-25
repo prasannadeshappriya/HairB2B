@@ -15,6 +15,15 @@ app.controller('ProfileViewController',
             $scope.type1 = false; $scope.type2 = false; $scope.type3 = false;
             $scope.price1 = ''; $scope.price2 = ''; $scope.price3 = '';
 
+            $scope.placeOrder = function (id) {
+                var user = AuthService.getUser();
+                if(user) {
+                    $location.path('/order/place').search({userid: id});
+                }else{
+                    $('#signin_model').modal('show');
+                }
+            };
+
             $scope.onInit = function () {
                 var params = $location.search();
                 var user_id = (params.userid);
