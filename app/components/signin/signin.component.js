@@ -39,8 +39,8 @@ angular.module('app')
                     headers: {'Content-Type': 'application/json'}
                 }).then(function (resData){
                     $scope.isLoading = false;
-                    if(typeof resData.data.status==="undefined"){return $scope.message = "Server connection error";}
-                    if(resData.data.status==="success"){
+                    if(typeof resData.status==="undefined"){return $scope.message = "Server connection error";}
+                    if(resData.status===200){
                         //Create session with the server
                         //Get the token
                         AuthService.Login(
@@ -56,15 +56,28 @@ angular.module('app')
                             }
                         );
 
+                    }else if(resData.status===400) {
+                        $scope.message = "Email address is not associated to any account";
+                        $scope.auth_error = true;
                     }else{
                         $scope.message = "Username or password is invalid";
                         $scope.auth_error = true;
                     }
                 },function (error){
-                    $scope.isLoading = false;
-                    $scope.auth_error = false;
-                    $scope.server_error = true;
-                    $scope.message = "Server connection error";
+                    if(error.status===400){
+                        $scope.isLoading = false;
+                        $scope.server_error = true;
+                        return $scope.message = error.data.error;
+                    }else if(error.status===401) {
+                        $scope.isLoading = false;
+                        $scope.message = "Username or password is invalid";
+                        return $scope.auth_error = true;
+                    }else {
+                        $scope.isLoading = false;
+                        $scope.auth_error = false;
+                        $scope.server_error = true;
+                        $scope.message = "Server connection error";
+                    }
                 });
             };
         }

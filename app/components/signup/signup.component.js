@@ -64,8 +64,8 @@ angular.module('signup')
                     headers: {'Content-Type': 'application/json'}
                 }).then(function (resData){
                     $scope.isLoading = false;
-                    if(typeof resData.data.status==="undefined"){return $scope.message = "Server connection error";}
-                    if(resData.data.status==="success"){
+                    if(typeof resData.status==="undefined"){return $scope.message = "Server connection error";}
+                    if(resData.status===201){
                         $scope.isEmailExist = false;
                         //Create session with the server
                         //Get the token
@@ -82,13 +82,24 @@ angular.module('signup')
                                 window.location.reload();
                             }
                         );
-                    }else{
-                        $scope.isEmailExist = true;
                     }
                 },function (error){
-                    $scope.isLoading = false;
-                    $scope.server_error = true;
-                    $scope.message = "Server connection error";
+                    if(error.status===400) {
+                        $scope.server_error = true;
+                        $scope.isLoading = false;
+                        return $scope.message = "Email address is invalid";
+                    }else if(error.status===409){
+                        $scope.isLoading = false;
+                        return $scope.isEmailExist = true;
+                    }else if(error.status===504){
+                        $scope.isLoading = false;
+                        $scope.server_error = true;
+                        return $scope.message = "Server connection error";
+                    }else {
+                        $scope.isLoading = false;
+                        $scope.server_error = true;
+                        $scope.message = "Server connection error";
+                    }
                 });
             };
         }
