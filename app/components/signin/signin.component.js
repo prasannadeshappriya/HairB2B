@@ -67,7 +67,7 @@ angular.module('app')
                     if(error.status===400){
                         $scope.isLoading = false;
                         $scope.server_error = true;
-                        return $scope.message = error.data.error;
+                        return $scope.message = "Email address is not associated to any account";
                     }else if(error.status===401) {
                         $scope.isLoading = false;
                         $scope.message = "Username or password is invalid";
