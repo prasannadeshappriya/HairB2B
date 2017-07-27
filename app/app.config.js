@@ -91,14 +91,14 @@ app.config(['$routeProvider',function($routeProvider){
             templateUrl : "views/userprofilecreate.html",
             controller: 'MainController',
             resolve:{
-                init :function(AuthService, $location, $http){
+                init :function(AuthService, $location, $http,host_url){
                     if(AuthService.getUser()===null){
                         console.log('Unauthorized url request');
                         $location.path('/');
                     }else{
                         $http({
                             method: "GET",
-                            url: "http://localhost:3000/profile/getProfileStatus"
+                            url: host_url + "profile/getProfileStatus"
                         }).then(function (resData){
                             console.log('Return Data: ' + resData);
                             $location.path('/profile');
@@ -120,14 +120,14 @@ app.config(['$routeProvider',function($routeProvider){
             templateUrl : "views/userprofile.html",
             controller: 'MainController',
             resolve:{
-                init :function(AuthService, $location, $http){
+                init :function(AuthService, $location, $http, host_url){
                     if(AuthService.getUser()===null){
                         console.log('Unauthorized url request');
                         $location.path('/');
                     }else{
                         $http({
                             method: "GET",
-                            url: "http://localhost:3000/profile/getProfileStatus"
+                            url: host_url + "profile/getProfileStatus"
                         }).then(function (resData){
                             console.log('Server status [/profile]: ' + resData.status);
                         },function (error){
