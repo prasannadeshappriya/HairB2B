@@ -2,8 +2,8 @@
  * Created by prasanna_d on 7/18/2017.
  */
 app.controller('ProfileController',
-    ['$scope','$http','AuthService',
-        function ($scope,$http,AuthService) {
+    ['$scope','$http','AuthService','$location',
+        function ($scope,$http,AuthService,$location) {
 
     var editBtn = document.getElementById('editBtn');
     var editables = document.querySelectorAll('#description');

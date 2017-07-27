@@ -87,7 +87,8 @@ angular.module('signup')
                     if(error.status===400) {
                         $scope.server_error = true;
                         $scope.isLoading = false;
-                        return $scope.message = "Email address is invalid";
+                        console.log(error);
+                        return $scope.message = error.data.error;
                     }else if(error.status===409){
                         $scope.isLoading = false;
                         return $scope.isEmailExist = true;
