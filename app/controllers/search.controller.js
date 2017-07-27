@@ -2,8 +2,8 @@
  * Created by prasanna on 7/23/17.
  */
 app.controller('SearchController',
-    ['$scope','$http','AuthService','$location',
-        function ($scope,$http,AuthService,$location) {
+    ['$scope','$http','AuthService','$location','host_url',
+        function ($scope,$http,AuthService,$location,host_url) {
             $scope.job_types = ["Stylist", "Educator", "Assistant", "Select All"];
             $scope.skill_types = ["Barber", "Makeup", "Dry cutting", "Shaving", "Hair styling",
                 "Wigs cutting", "Curling", "Coloring", "Color correction", "Long hair", "Short hair", "Select All"];
@@ -51,7 +51,7 @@ app.controller('SearchController',
                 console.log("search url: http://localhost:3000/search/simplesearch?"+ query2 + "&" + query1);
                 $http({
                     method: "GET",
-                    url: "http://localhost:3000/search/simplesearch?"+ query2 + "&" + query1
+                    url: host_url + "search/simplesearch?"+ query2 + "&" + query1
                 }).then(function (resData){
                     console.log(resData);
                     var users = resData.data.users;

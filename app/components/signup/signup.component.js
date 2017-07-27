@@ -4,7 +4,7 @@
 angular.module('signup')
     .component('signUp',{
         templateUrl : 'app/components/signup/signup.template.html',
-        controller : function ($scope, $http, AuthService) {
+        controller : function ($scope, $http, AuthService,host_url) {
             $scope.isEmailExist = false;    //Email exist error
             $scope.isComplete = false;      //Check all the fields are filled
             $scope.submitted = false;       //Error showing only after submit button clicked
@@ -59,7 +59,7 @@ angular.module('signup')
                 $scope.isLoading = true;
                 $http({
                     method: "POST",
-                    url: "http://localhost:3000/auth/register",
+                    url: host_url + "auth/register",
                     data: {firstname: $scope.firstname, lastname: $scope.lastname, email: $scope.email, password: $scope.password},
                     headers: {'Content-Type': 'application/json'}
                 }).then(function (resData){

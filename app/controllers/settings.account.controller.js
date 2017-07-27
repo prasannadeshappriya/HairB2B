@@ -2,8 +2,8 @@
  * Created by prasanna on 7/23/17.
  */
 app.controller('AccSettingsController',
-    ['$scope','$http','AuthService',
-        function ($scope,$http,AuthService) {
+    ['$scope','$http','AuthService','host_url',
+        function ($scope,$http,AuthService,host_url) {
             $scope.submitted = false;       //Error showing only after submit button clicked
             $scope.server_error = false;    //Check connection Errors
             $scope.isComplete = false;      //Check all the fields are filled
@@ -95,12 +95,11 @@ app.controller('AccSettingsController',
             $scope.accSkills = false;
 
             $scope.onInit = function () {
-                console.log('Initialization completed');
                 $scope.success = false;
                 $scope.danger = false;
                 $http({
                     method: "GET",
-                    url: "http://localhost:3000/profile/getProfileStatus"
+                    url: host_url + "profile/getProfileStatus"
                 }).then(function (resData){
                     //Profile Found
                     $scope.accDescription = true;
@@ -127,7 +126,7 @@ app.controller('AccSettingsController',
                 }else{$scope.password_save_error = false;}
                 $http({
                     method: "POST",
-                    url: "http://localhost:3000/profile/changePassword",
+                    url: host_url + "profile/changePassword",
                     data: {curPassword: $scope.password, newPassword: $scope.newPassword}
                 }).then(function (resData){
                     console.log(resData);

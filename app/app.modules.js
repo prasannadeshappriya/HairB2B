@@ -8,5 +8,9 @@ var app = angular.module('app',[
     'signin',
     'signup',
     'ui.rCalendar'
-]);
+])
+    .constant('host_url', 'http://localhost:3000/')
+;
 
+// 'https://hairbtob-server.herokuapp.com/'
+// 'http://localhost:3000/'

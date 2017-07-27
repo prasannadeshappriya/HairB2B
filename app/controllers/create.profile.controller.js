@@ -2,8 +2,8 @@
  * Created by prasanna_d on 7/19/2017.
  */
 app.controller('ProfileCreateController',
-    ['$scope','$http','$location', 'AuthService',
-        function ($scope,$http,$location, AuthService) {
+    ['$scope','$http','$location', 'AuthService', 'host_url',
+        function ($scope,$http,$location, AuthService, host_url) {
 
     //Error showing flags
     $scope.des_error = false;
@@ -135,7 +135,7 @@ app.controller('ProfileCreateController',
 
             $http({
                 method: "POST",
-                url: "http://localhost:3000/profile/createProfile",
+                url: host_url + "profile/createProfile",
                 data: {description: description, skills: skills, job_types: job_types, payment_email: payment_email, price_job_types: price_job_types}
             }).then(function (resData){
                 console.log(resData);

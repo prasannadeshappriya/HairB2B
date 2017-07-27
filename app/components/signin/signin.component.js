@@ -4,7 +4,7 @@
 angular.module('app')
     .component('signIn',{
         templateUrl : 'app/components/signin/signin.template.html',
-        controller : function ($scope, $http, AuthService) {
+        controller : function ($scope, $http, AuthService,host_url) {
             $scope.isComplete = false;      //Check all the fields are filled
             $scope.submitted = false;       //Error showing only after submit button clicked
             $scope.server_error = false;    //Check connection Errors
@@ -34,7 +34,7 @@ angular.module('app')
                 $scope.isLoading = true;
                 $http({
                     method: "POST",
-                    url: "http://localhost:3000/auth/login",
+                    url: host_url + "auth/login",
                     data: {email: $scope.email, password: $scope.password},
                     headers: {'Content-Type': 'application/json'}
                 }).then(function (resData){

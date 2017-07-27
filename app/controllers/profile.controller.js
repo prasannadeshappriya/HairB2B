@@ -2,8 +2,8 @@
  * Created by prasanna_d on 7/18/2017.
  */
 app.controller('ProfileController',
-    ['$scope','$http','AuthService','$location',
-        function ($scope,$http,AuthService,$location) {
+    ['$scope','$http','AuthService','$location','host_url',
+        function ($scope,$http,AuthService,$location,host_url) {
 
     var editBtn = document.getElementById('editBtn');
     var editables = document.querySelectorAll('#description');
@@ -48,7 +48,7 @@ app.controller('ProfileController',
 
             $http({
                 method: "GET",
-                url: "http://localhost:3000/profile/getProfile"
+                url: host_url + "profile/getProfile"
             }).then(function (resData){
                 console.log('Server response :');
                 console.log(resData);

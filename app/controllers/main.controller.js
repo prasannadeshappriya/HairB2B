@@ -4,10 +4,10 @@
 
 app.controller('MainController',[
     '$scope','$http','AuthService', '$localStorage',
-    '$rootScope', '$location',
+    '$rootScope', '$location', 'host_url',
     function (
         $scope, $http, AuthService,
-        $localStorage,$rootScope,$location) {
+        $localStorage,$rootScope,$location,host_url) {
 
         $scope.authenticated = false;
         $scope.email_verify = false;
@@ -19,7 +19,7 @@ app.controller('MainController',[
         $scope.getProfile = function () {
             $http({
                 method: "GET",
-                url: "http://localhost:3000/profile/getProfile"
+                url: host_url + "profile/getProfile"
             }).then(function (resData){
                 console.log(resData);
                 // $scope.isLoading = false;
@@ -79,7 +79,7 @@ app.controller('MainController',[
             console.log(AuthService.getToken());
             $http({
                 method: "POST",
-                url: "http://localhost:3000/auth/resendVerifyLink",
+                url: host_url + "auth/resendVerifyLink",
                 data: {token: AuthService.getToken()}
             }).then(function (resData){
                 console.log(resData.status);

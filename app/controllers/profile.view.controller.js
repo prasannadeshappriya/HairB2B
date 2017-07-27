@@ -2,8 +2,8 @@
  * Created by prasanna_d on 7/24/2017.
  */
 app.controller('ProfileViewController',
-    ['$scope','$http','AuthService','$location',
-        function ($scope,$http,AuthService,$location) {
+    ['$scope','$http','AuthService','$location','host_url',
+        function ($scope,$http,AuthService,$location,host_url) {
             $scope.firstname = '';
             $scope.lastname = '';
             $scope.description = '';
@@ -29,7 +29,7 @@ app.controller('ProfileViewController',
                 var user_id = (params.userid);
                 $http({
                     method: "GET",
-                    url: "http://localhost:3000/profile/getProfilePublic?id="+ user_id
+                    url: host_url + "profile/getProfilePublic?id="+ user_id
                 }).then(function (resData){
                     if(resData){
                         $scope.firstname = resData.data.user[0].firstname;
