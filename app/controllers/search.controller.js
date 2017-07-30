@@ -84,7 +84,6 @@ app.controller('SearchController',
                         console.log('Invalid skill type:' + skill_type);
                     }
                 }
-                console.log('asdasmsojasoidfjkasfd: ' + $scope.skill_types[0].name);
                 var query1 = 'typeid=' + job_type;
                 var query2 = 'skillid=' + skill_type;
                 console.log("search url: http://localhost:3000/search/simplesearch?"+ query2 + "&" + query1);
@@ -103,17 +102,25 @@ app.controller('SearchController',
                         if(typeof stylists[i].description==="undefined"){description = stylists[i][0].description;}
                         else{ description = stylists[i].description;}
                         var types= '';
-                        console.log('---------------------');
-                        console.log(userTypes);
-                        console.log('---------------------');
                         for(var j=0; j<userTypes.length; j++){
-                            if(userTypes[j].user_id===id){
-                                if(types===''){
-                                    types=$scope.job_types[(userTypes[j].job_id)-1].name;
-                                }else{
-                                    types=types + ', ' + $scope.job_types[(userTypes[j].job_id)-1].name;
+                            try {
+                                var user_id = userTypes[j].user_id;
+                                var job_id = userTypes[j].job_id;
+                                if (typeof userTypes[j].user_id === 'undefined') {
+                                    user_id = userTypes[j][0].user_id;
+                                    job_id = userTypes[j][0].job_id;
+                                } else {
+                                    user_id = userTypes[j].user_id;
+                                    job_id = userTypes[j].job_id;
                                 }
-                            }
+                                if (user_id === id) {
+                                    if (types === '') {
+                                        types = $scope.job_types[(job_id) - 1].name;
+                                    } else {
+                                        types = types + ', ' + $scope.job_types[(job_id) - 1].name;
+                                    }
+                                }
+                            }catch (err){}
                         }
                         if(description.length>200){
                             description = description.substring(0,200) + '....';
