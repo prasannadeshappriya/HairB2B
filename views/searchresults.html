@@ -15,14 +15,14 @@
             <label for="job_types">Job Types</label>
             <div style="margin-left: 30px" id="job_types">
                 <div ng-repeat="item in job_types">
-                    <input type="checkbox" id="job_type{{item.name}}" ng-click="test(item.name)" ng-model="item.value">
+                    <input type="checkbox" id="job_type{{item.name}}" ng-click="dynamicSearch()" ng-model="item.value">
                     <label for="job_type{{item.name}}">{{item.name}}</label>
                 </div>
             </div>
             <label for="skill_types">Skills</label>
             <div style="margin-left: 30px" id="skill_types">
                 <div ng-repeat="item in skill_types">
-                    <input type="checkbox" id="skill_type{{item.name}}" ng-click="test(item.name)" ng-model="item.value">
+                    <input type="checkbox" id="skill_type{{item.name}}" ng-click="dynamicSearch()" ng-model="item.value">
                     <label for="skill_type{{item.name}}">{{item.name}}</label>
                 </div>
             </div>

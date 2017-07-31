@@ -16,9 +16,38 @@ app.controller('SearchController',
             $scope.selectedSkillName = $scope.skill_types[0].name;
             $scope.empty_results = false;
 
-            $scope.test = function (test) {
-                // console.log('asdasda: ' + test);
-                    // console.log($scope.job);
+            $scope.dynamicSearch = function () {
+                var job_types=[];
+                var i;
+                if($scope.job_types[3].value){
+                    job_types.push('all');
+                }else{
+                    for(i=0; i<$scope.job_types.length; i++){
+                        if($scope.job_types[i].value){
+                            job_types.push(i);
+                        }
+                    }
+                }
+                var skill_types=[];
+                if($scope.skill_types[11].value){
+                    skill_types.push('all');
+                }else{
+                    for(i=0; i<$scope.skill_types.length; i++){
+                        if($scope.skill_types[i].value){
+                            skill_types.push(i);
+                        }
+                    }
+                }
+                console.log(job_types);
+                console.log(skill_types);
+                $http({
+                    method: "GET",
+                    url: host_url + "search/dynamicSearch?jobtype="+ job_types + "&skilltype=" + skill_types
+                }).then(function (resData){
+                    console.log(resData);
+                },function (error){
+                    console.log('Error on searching profile: ' + error);
+                });
             };
 
             $scope.beginSearch = function (skill, jobtype) {
@@ -71,7 +100,7 @@ app.controller('SearchController',
                 if(job_type==='all'){$scope.job_types[3].value = true}
                 else{
                     try {
-                        $scope.job_types[(job_type)].value = true
+                        $scope.job_types[(job_type)-1].value = true
                     }catch (err){
                         console.log(err);
                         console.log('Invalid job type:' + job_type);
@@ -80,7 +109,7 @@ app.controller('SearchController',
                 if(skill_type==='all'){$scope.skill_types[11].value = true}
                 else{
                     try {
-                        $scope.skill_types[(job_type)].value = true
+                        $scope.skill_types[(job_type)-1].value = true
                     }catch (err){
                         console.log(err);
                         console.log('Invalid skill type:' + skill_type);
