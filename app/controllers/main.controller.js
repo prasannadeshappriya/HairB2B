@@ -16,6 +16,12 @@ app.controller('MainController',[
         $scope.profile_section = false;
         $scope.search_section = true;
 
+        $scope.getEmail = function () {
+            var user = AuthService.getUser();
+            if(user){return user.email;}
+            return 'your email address'
+        };
+
         $scope.getProfile = function () {
             $http({
                 method: "GET",

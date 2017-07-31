@@ -38,10 +38,12 @@ app.controller('SearchController',
                 $location.path('/search').search({jobtype: jobtypes, skilltype: skilltype});
             };
 
-            $scope.viewProfile = function (id) {
+            $scope.viewProfile = function (email,id) {
                 var user = AuthService.getUser();
                 if(user) {
-                    if (user.id === id) {
+                    console.log(user.email);
+                    console.log(email);
+                    if (user.email === email) {
                         $location.path('/profile');
                     } else {
                         $location.path('/profile/view').search({userid: id});
@@ -129,7 +131,7 @@ app.controller('SearchController',
                         var disable = false;
                         var user = AuthService.getUser();
                         if(user) {
-                            if (user.id === users[i][0].id) {disable = true;}
+                            if (user.email === users[i][0].email) {disable = true;}
                             else {disable = false;}
                         }
 
@@ -137,6 +139,7 @@ app.controller('SearchController',
                             firstname: users[i][0].firstname,
                             lastname: users[i][0].lastname,
                             acctypes: types,
+                            email: users[i][0].email,
                             id: users[i][0].id,
                             price: "$2400",
                             rates: "0.0",

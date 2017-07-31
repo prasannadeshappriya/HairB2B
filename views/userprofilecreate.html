@@ -1,4 +1,7 @@
 <div ng-include="'views/carousel.html'"></div>
+<!--Show Email Verify Box-->
+<div ng-include="'views/emailverifybox.html'" ng-show="(authenticated) && !(email_verify)"
+     style="margin-bottom: -10px; margin-top: -35px"></div>
 <div class="container" ng-controller="ProfileCreateController" ng-init="onInit()">
     <h3 class="text-info" style="margin-left: 80px">Your profile is incomplete. Complete your profile to get started</h3>
     <div class="col-xs-12">

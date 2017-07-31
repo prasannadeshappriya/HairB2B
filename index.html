@@ -99,22 +99,11 @@
             </div>
         </div>
     </nav>
-
-
-
     <div class="container" style="min-width: 1451px; margin-top: 50px">
-
         <!--Register Section-->
         <sign-up></sign-up>
-
         <!--Register Section-->
         <sign-in></sign-in>
-
-        <!--Show Email Verify Box-->
-        <div ng-include="'views/emailverifybox.html'" ng-show="(authenticated) && !(email_verify)"
-             style="margin-bottom: -30px; margin-top: -20px"></div>
-        <!--Show Route Sections-->
-
     </div>
 
     <div ng-view></div>
