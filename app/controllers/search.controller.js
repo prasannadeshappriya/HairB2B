@@ -47,6 +47,7 @@ app.controller('SearchController',
                     console.log('Dynamic search triggered');
                     var users = resData.data.users;
                     var stylists = resData.data.stylists;
+                    var jobtypes = resData.data.jobtypes;
                     $scope.search_results = [];
                     for(var i=0; i<users.length; i++){
                         var description = '';
@@ -72,13 +73,31 @@ app.controller('SearchController',
                                 else{types = types + ', ' + $scope.job_types[k].name}
                             }
                         }
+                        var price = 0.0;
+                        for(var l=0; l<stylists.length; l++){
+                            if(users[i][0].id===stylists[l].user_id){
+                                for(var p=0; p<jobtypes.length; p++){
+                                    console.log('asdfasdfasdf: ' + jobtypes[p][0]);
+                                    console.log('asdfasdfasdf: ' + stylists[l].id);
+                                    if(jobtypes[p][0]===stylists[l].id){
+                                        if (price===0){
+                                            price=jobtypes[p][1];
+                                        }else{
+                                            if(price>jobtypes[p][1]){
+                                                price=jobtypes[p][1];
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                         $scope.search_results.push({
                             firstname: users[i][0].firstname,
                             lastname: users[i][0].lastname,
                             acctypes: types,
                             email: users[i][0].email,
                             id: users[i][0].id,
-                            price: "$2400",
+                            price: price,
                             rates: "0.0",
                             location: "Sidney",
                             description: description,
