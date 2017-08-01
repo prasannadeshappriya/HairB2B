@@ -3,11 +3,11 @@
  */
 
 app.controller('MainController',[
-    '$scope','$http','AuthService', '$localStorage',
+    '$scope','$http','AuthService', 'SearchService',
     '$rootScope', '$location', 'host_url',
     function (
-        $scope, $http, AuthService,
-        $localStorage,$rootScope,$location,host_url) {
+        $scope, $http, AuthService,SearchService,
+        $rootScope,$location,host_url) {
 
         $scope.authenticated = false;
         $scope.email_verify = false;
@@ -20,6 +20,10 @@ app.controller('MainController',[
             var user = AuthService.getUser();
             if(user){return user.email;}
             return 'your email address'
+        };
+
+        $scope.clear_history = function () {
+            SearchService.clearHistory();
         };
 
         $scope.getProfile = function () {

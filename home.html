@@ -52,12 +52,14 @@
 
     <script src="app/directives/checkbox.js"></script>
     <script src="app/services/auth.service.js"></script>
+    <script src="app/services/search.service.js"></script>
 
     <!--Calender Template-->
     <link rel="stylesheet" href="assets/css/calendar.css"/>
     <script src="assets/js/calendar-tpls.js"></script>
 
-    <base href="/HairB2B/">
+    <base href="/">
+    <!--<base href="/HairB2B/">-->
 </head>
 <!-- background="assets/img/sl02.jpg" id="asd"-->
 <body ng-app="app" ng-controller="MainController"
@@ -75,7 +77,7 @@
             <!--User Login/Register/Visitor-->
             <div class="collapse navbar-collapse" id="MainAuthNavBar">
                 <ul class="nav navbar-nav navbar-left">
-                    <li style="margin-left: 80px"><a href="#!/" class="AuthNavBarDesc" id="search"> Search </a> </li>
+                    <li style="margin-left: 80px"><a href="#!/" ng-click="clear_history()" class="AuthNavBarDesc" id="search"> Search </a> </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown" ng-hide="!(authenticated)" id="profile_dropdown">
