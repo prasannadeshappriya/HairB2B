@@ -27,10 +27,10 @@
             <p><b>Set your account type</b></p>
             <hr class="col-xs-12" style="margin-top: -5px; margin-bottom: -15px">
             <fieldset class="checkboxes" style="margin-left: -22px; margin-top: -10px">
-                <div class="col-lg-4">
+                <div class="col-lg-4" ng-repeat="item in job_types">
                     <label checkbox="myCheckbox" style="width: 250px; text-align: left">
-                        <input type="checkbox" ng-model="myCheckbox" ng-change="reset_prof_type_error()">
-                        Educator
+                        <input type="checkbox" ng-model="true" ng-change="reset_prof_type_error()">
+                        {{item.name}}
                     </label>
                     <div class="form-group" ng-show="myCheckbox">
                         <div class="input-group" style="margin-left: 85px">
@@ -41,33 +41,33 @@
                     </div>
                 </div>
 
-                <div class="col-lg-4">
-                    <label checkbox="myCheckbox_2" style="width: 250px; text-align: left" >
-                        <input type="checkbox" ng-model="myCheckbox_2" ng-change="reset_prof_type_error()">
-                        Stylist
-                    </label>
-                    <div class="form-group" ng-show="myCheckbox_2">
-                        <div class="input-group" style="margin-left: 85px">
-                            <span class="input-group-addon">$</span>
-                            <input ng-model="price2" type="number" ng-change="reset_prof_type_price_error()" class="form-control" style="width: 120px;">
-                        </div>
-                        <p class="text-info"><span style="color: red">*</span>Your rates per day </p>
-                    </div>
-                </div>
+                <!--<div class="col-lg-4">-->
+                    <!--<label checkbox="myCheckbox_2" style="width: 250px; text-align: left" >-->
+                        <!--<input type="checkbox" ng-model="myCheckbox_2" ng-change="reset_prof_type_error()">-->
+                        <!--Stylist-->
+                    <!--</label>-->
+                    <!--<div class="form-group" ng-show="myCheckbox_2">-->
+                        <!--<div class="input-group" style="margin-left: 85px">-->
+                            <!--<span class="input-group-addon">$</span>-->
+                            <!--<input ng-model="price2" type="number" ng-change="reset_prof_type_price_error()" class="form-control" style="width: 120px;">-->
+                        <!--</div>-->
+                        <!--<p class="text-info"><span style="color: red">*</span>Your rates per day </p>-->
+                    <!--</div>-->
+                <!--</div>-->
 
-                <div class="col-lg-4">
-                    <label checkbox="myCheckbox_3" style="width: 250px; text-align: left" >
-                        <input type="checkbox" ng-model="myCheckbox_3" ng-change="reset_prof_type_error()">
-                        Assistant
-                    </label>
-                    <div class="form-group" ng-show="myCheckbox_3">
-                        <div class="input-group" style="margin-left: 85px">
-                            <span class="input-group-addon">$</span>
-                            <input ng-model="price3" type="number" ng-change="reset_prof_type_price_error()" class="form-control" style="width: 120px;">
-                        </div>
-                        <p class="text-info"><span style="color: red">*</span>Your rates per day </p>
-                    </div>
-                </div>
+                <!--<div class="col-lg-4">-->
+                    <!--<label checkbox="myCheckbox_3" style="width: 250px; text-align: left" >-->
+                        <!--<input type="checkbox" ng-model="myCheckbox_3" ng-change="reset_prof_type_error()">-->
+                        <!--Assistant-->
+                    <!--</label>-->
+                    <!--<div class="form-group" ng-show="myCheckbox_3">-->
+                        <!--<div class="input-group" style="margin-left: 85px">-->
+                            <!--<span class="input-group-addon">$</span>-->
+                            <!--<input ng-model="price3" type="number" ng-change="reset_prof_type_price_error()" class="form-control" style="width: 120px;">-->
+                        <!--</div>-->
+                        <!--<p class="text-info"><span style="color: red">*</span>Your rates per day </p>-->
+                    <!--</div>-->
+                <!--</div>-->
             </fieldset>
             <p style="margin-top: 0px"><b>Select your skills</b></p>
             <hr class="col-xs-12" style="margin-top: -5px">

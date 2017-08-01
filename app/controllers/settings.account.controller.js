@@ -2,8 +2,16 @@
  * Created by prasanna on 7/23/17.
  */
 app.controller('AccSettingsController',
-    ['$scope','$http','AuthService','host_url',
-        function ($scope,$http,AuthService,host_url) {
+    ['$scope','$http','AuthService','host_url','$location',
+        function ($scope,$http,AuthService,host_url,$location) {
+            $scope.job_types = [{name: "Stylist", value: true, price: 0.0}, {name: "Educator", value: false, price: 0.0},
+                {name: "Assistant", value: false, price: 0.0}];
+
+            $scope.skill_types = [{name: "Barber",value: false}, {name: "Makeup",value: false}, {name: "Dry cutting",value: false},
+                {name: "Shaving",value: false}, {name: "Hair styling",value: false}, {name: "Wigs cutting",value: false},
+                {name: "Curling",value: false}, {name: "Coloring",value: false}, {name: "Color correction",value: false},
+                {name: "Long hair",value: false}, {name: "Short hair",value: false}];
+
             $scope.submitted = false;       //Error showing only after submit button clicked
             $scope.server_error = false;    //Check connection Errors
             $scope.isComplete = false;      //Check all the fields are filled
@@ -82,6 +90,43 @@ app.controller('AccSettingsController',
                 $scope.password_reset_section = false;
                 $scope.skills_jobtype_section = true;
                 $scope.payment_section = false;
+
+                var user = AuthService.getUser();
+                if(user){
+                    $http({
+                        method: "GET",
+                        url: host_url + "profile/getAccountAndSettings"
+                    }).then(function (resData){
+                        console.log('Server response :');
+                        console.log(resData);
+                        // $scope.description = resData.data.description;
+                        // for(var i=0; i<resData.data.job_types.length; i++){
+                        //     if(resData.data.job_types[i]===1){$scope.type1=true;}
+                        //     if(resData.data.job_types[i]===2){$scope.type2=true;}
+                        //     if(resData.data.job_types[i]===3){$scope.type3=true;}
+                        // }
+                        // for(var j=0; j<resData.data.skills.length; j++){
+                        //     if(resData.data.skills[j]===1){$scope.skill1=true;}
+                        //     if(resData.data.skills[j]===2){$scope.skill2=true;}
+                        //     if(resData.data.skills[j]===3){$scope.skill3=true;}
+                        //     if(resData.data.skills[j]===4){$scope.skill4=true;}
+                        //     if(resData.data.skills[j]===5){$scope.skill5=true;}
+                        //     if(resData.data.skills[j]===6){$scope.skill6=true;}
+                        //     if(resData.data.skills[j]===7){$scope.skill7=true;}
+                        //     if(resData.data.skills[j]===8){$scope.skill8=true;}
+                        //     if(resData.data.skills[j]===9){$scope.skill9=true;}
+                        //     if(resData.data.skills[j]===10){$scope.skill10=true;}
+                        //     if(resData.data.skills[j]===11){$scope.skill11=true;}
+                        // }
+                    },function (error){
+                        $location.path('/');
+                        console.log('Error occurred: ' + error);
+                    });
+
+                }else{
+                    $location.path('/');
+                }
+
             };
 
             $scope.password_reset = function () {
