@@ -151,8 +151,10 @@ app.controller('SearchController',
             $scope.init_options = function () {
                 var history = SearchService.getSearchHistory();
                 if(history){
-                    $scope.selectedName = $scope.job_types[(history.type_id)-1].name;
-                    $scope.selectedSkillName = $scope.skill_types[(history.skill_id)-1].name;
+                    try {
+                        $scope.selectedName = $scope.job_types[(history.type_id) - 1].name;
+                        $scope.selectedSkillName = $scope.skill_types[(history.skill_id) - 1].name;
+                    }catch (err){'Error on reading local storage'}
                 }
             };
 
@@ -214,10 +216,13 @@ app.controller('SearchController',
                                 }
 
                                 if (user_id === id) {
-                                    if(userTypes[j].price!=='undefined'){
+                                    console.log(userTypes[j].price);
+                                    if(typeof userTypes[j].price==='undefined'){
+                                        console.log('here');
                                         if(price===0){price = parseInt(userTypes[j][0].price);}
                                         else{if(price>(parseInt(userTypes[j][0].price))){price = parseInt(userTypes[j][0].price);}}
                                     }else {
+                                        console.log('here else');
                                         if(price===0){price = parseInt(userTypes[j].price);}
                                         else{if(price>(parseInt(userTypes[j].price))){price = parseInt(userTypes[j].price);}}
                                     }
