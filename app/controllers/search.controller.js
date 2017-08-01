@@ -38,13 +38,53 @@ app.controller('SearchController',
                         }
                     }
                 }
-                console.log(job_types);
-                console.log(skill_types);
+
                 $http({
                     method: "GET",
                     url: host_url + "search/dynamicSearch?jobtype="+ job_types + "&skilltype=" + skill_types
                 }).then(function (resData){
-                    console.log(resData);
+                    // console.log(resData);
+                    console.log('Dynamic search triggered');
+                    var users = resData.data.users;
+                    var stylists = resData.data.stylists;
+                    $scope.search_results = [];
+                    for(var i=0; i<users.length; i++){
+                        var description = '';
+                        for(var j=0; j<stylists.length; j++){
+                            if(users[i][0].id===stylists[j].user_id){
+                                description = stylists[j].description;
+                                break;
+                            }
+                        }
+                        if(description.length>200){
+                            description = description.substring(0,200) + '....';
+                        }
+                        var disable = false;
+                        var user = AuthService.getUser();
+                        if(user) {
+                            if (user.email === users[i][0].email) {disable = true;}
+                            else {disable = false;}
+                        }
+                        var types= '';
+                        for(var k=0; k<$scope.job_types.length; k++){
+                            if($scope.job_types[k].value){
+                                if(types===''){types=$scope.job_types[k].name}
+                                else{types = types + ', ' + $scope.job_types[k].name}
+                            }
+                        }
+                        $scope.search_results.push({
+                            firstname: users[i][0].firstname,
+                            lastname: users[i][0].lastname,
+                            acctypes: types,
+                            email: users[i][0].email,
+                            id: users[i][0].id,
+                            price: "$2400",
+                            rates: "0.0",
+                            location: "Sidney",
+                            description: description,
+                            disable: disable
+                        });
+                    }
                 },function (error){
                     console.log('Error on searching profile: ' + error);
                 });
@@ -109,7 +149,7 @@ app.controller('SearchController',
                 if(skill_type==='all'){$scope.skill_types[11].value = true}
                 else{
                     try {
-                        $scope.skill_types[(job_type)-1].value = true
+                        $scope.skill_types[(skill_type)-1].value = true
                     }catch (err){
                         console.log(err);
                         console.log('Invalid skill type:' + skill_type);
@@ -133,10 +173,10 @@ app.controller('SearchController',
                         if(typeof stylists[i].description==="undefined"){description = stylists[i][0].description;}
                         else{ description = stylists[i].description;}
                         var types= '';
+                        var price = 0;
                         for(var j=0; j<userTypes.length; j++){
+                            console.log(userTypes[j]);
                             try {
-                                var user_id = userTypes[j].user_id;
-                                var job_id = userTypes[j].job_id;
                                 if (typeof userTypes[j].user_id === 'undefined') {
                                     user_id = userTypes[j][0].user_id;
                                     job_id = userTypes[j][0].job_id;
@@ -144,7 +184,16 @@ app.controller('SearchController',
                                     user_id = userTypes[j].user_id;
                                     job_id = userTypes[j].job_id;
                                 }
+                                console.log(userTypes[j][0].price);
+
                                 if (user_id === id) {
+                                    if(userTypes[j].price!=='undefined'){
+                                        if(price===0){price = parseInt(userTypes[j][0].price);}
+                                        else{if(price>(parseInt(userTypes[j][0].price))){price = parseInt(userTypes[j][0].price);}}
+                                    }else {
+                                        if(price===0){price = parseInt(userTypes[j].price);}
+                                        else{if(price>(parseInt(userTypes[j].price))){price = parseInt(userTypes[j].price);}}
+                                    }
                                     if (types === '') {
                                         types = $scope.job_types[(job_id) - 1].name;
                                     } else {
@@ -153,6 +202,7 @@ app.controller('SearchController',
                                 }
                             }catch (err){}
                         }
+                        console.log('price is: ' + price);
                         if(description.length>200){
                             description = description.substring(0,200) + '....';
                         }
@@ -170,7 +220,7 @@ app.controller('SearchController',
                             acctypes: types,
                             email: users[i][0].email,
                             id: users[i][0].id,
-                            price: "$2400",
+                            price: price,
                             rates: "0.0",
                             location: "Sidney",
                             description: description,
