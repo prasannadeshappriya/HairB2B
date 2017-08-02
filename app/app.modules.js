@@ -9,7 +9,7 @@ var app = angular.module('app',[
     'signup',
     'ui.rCalendar'
 ])
-    .constant('host_url', 'https://hairbtob-server.herokuapp.com/')
+    .constant('host_url', 'http://localhost:3000/')
 ;
 
 // 'https://hairbtob-server.herokuapp.com/'

@@ -31,7 +31,7 @@ app.controller('MainController',[
             setTimeout(function () {
                 $scope.show_error_box = true;
                 $scope.$apply();
-            },2000)
+            },10)
         };
 
         $scope.getProfile = function () {
