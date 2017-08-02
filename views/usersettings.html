@@ -27,75 +27,39 @@
             <p><b>Set your account type</b></p>
             <hr class="col-xs-12" style="margin-top: -5px; margin-bottom: -15px">
             <fieldset class="checkboxes" style="margin-left: -22px; margin-top: -10px">
+                <!--ng-repeat="item in job_types"-->
                 <div class="col-lg-4" ng-repeat="item in job_types">
-                    <label checkbox="myCheckbox" style="width: 250px; text-align: left">
-                        <input type="checkbox" ng-model="true" ng-change="reset_prof_type_error()">
+                    <label checkbox="item.value" style="width: 250px; text-align: left">
+                        <input type="checkbox" ng-model="item.value">
+                        <!--<input type="checkbox" ng-model="checkbox{{item.name}}" ng-change="reset_prof_type_error()">-->
                         {{item.name}}
                     </label>
-                    <div class="form-group" ng-show="myCheckbox">
+                    <div class="form-group" ng-show="item.value">
                         <div class="input-group" style="margin-left: 85px">
                             <span class="input-group-addon">$</span>
-                            <input ng-model="price1" type="number" ng-change="reset_prof_type_price_error()" class="form-control" style="width: 120px;">
+                            <!--<input ng-model="price1" type="number" ng-change="reset_prof_type_price_error()" class="form-control" style="width: 120px;">-->
+                            <input type="number" ng-value="item.price" class="form-control" style="width: 120px;">
                         </div>
                         <p class="text-info"><span style="color: red">*</span>Your rates per day </p>
                     </div>
                 </div>
-
-                <!--<div class="col-lg-4">-->
-                    <!--<label checkbox="myCheckbox_2" style="width: 250px; text-align: left" >-->
-                        <!--<input type="checkbox" ng-model="myCheckbox_2" ng-change="reset_prof_type_error()">-->
-                        <!--Stylist-->
-                    <!--</label>-->
-                    <!--<div class="form-group" ng-show="myCheckbox_2">-->
-                        <!--<div class="input-group" style="margin-left: 85px">-->
-                            <!--<span class="input-group-addon">$</span>-->
-                            <!--<input ng-model="price2" type="number" ng-change="reset_prof_type_price_error()" class="form-control" style="width: 120px;">-->
-                        <!--</div>-->
-                        <!--<p class="text-info"><span style="color: red">*</span>Your rates per day </p>-->
-                    <!--</div>-->
-                <!--</div>-->
-
-                <!--<div class="col-lg-4">-->
-                    <!--<label checkbox="myCheckbox_3" style="width: 250px; text-align: left" >-->
-                        <!--<input type="checkbox" ng-model="myCheckbox_3" ng-change="reset_prof_type_error()">-->
-                        <!--Assistant-->
-                    <!--</label>-->
-                    <!--<div class="form-group" ng-show="myCheckbox_3">-->
-                        <!--<div class="input-group" style="margin-left: 85px">-->
-                            <!--<span class="input-group-addon">$</span>-->
-                            <!--<input ng-model="price3" type="number" ng-change="reset_prof_type_price_error()" class="form-control" style="width: 120px;">-->
-                        <!--</div>-->
-                        <!--<p class="text-info"><span style="color: red">*</span>Your rates per day </p>-->
-                    <!--</div>-->
-                <!--</div>-->
             </fieldset>
             <p style="margin-top: 0px"><b>Select your skills</b></p>
             <hr class="col-xs-12" style="margin-top: -5px">
             <div class="col-xs-12">
                 <div class="col-xs-4">
                     <div style="margin-left: 50px; float: right">
-                        <input type="checkbox" ng-model="skill1" ng-change="reset_skill_error()"> &nbsp;&nbsp;&nbsp; Barber <br>
-                        <input type="checkbox" ng-model="skill2" ng-change="reset_skill_error()"> &nbsp;&nbsp;&nbsp; Makeup <br>
-                        <input type="checkbox" ng-model="skill3" ng-change="reset_skill_error()"> &nbsp;&nbsp;&nbsp; Dry cutting <br>
-                        <input type="checkbox" ng-model="skill4" ng-change="reset_skill_error()"> &nbsp;&nbsp;&nbsp; Shaving <br>
-                        <input type="checkbox" ng-model="skill5" ng-change="reset_skill_error()"> &nbsp;&nbsp;&nbsp; Hair styling <br>
-                        <input type="checkbox" ng-model="skill6" ng-change="reset_skill_error()"> &nbsp;&nbsp;&nbsp; Wigs cutting <br>
-                        <input type="checkbox" ng-model="skill7" ng-change="reset_skill_error()"> &nbsp;&nbsp;&nbsp; Curling
-                    </div>
-                </div>
-                <div class="col-xs-4">
-                    <div style="float: right">
-                        <input type="checkbox" ng-model="skill8" ng-change="reset_skill_error()"> &nbsp;&nbsp;&nbsp; Coloring <br>
-                        <input type="checkbox" ng-model="skill9" ng-change="reset_skill_error()"> &nbsp;&nbsp;&nbsp; Color correction <br>
-                        <input type="checkbox" ng-model="skill10" ng-change="reset_skill_error()"> &nbsp;&nbsp;&nbsp; Long hair <br>
-                        <input type="checkbox" ng-model="skill11" ng-change="reset_skill_error()"> &nbsp;&nbsp;&nbsp; Short hair
+                        <div ng-repeat="item in skill_types">
+                            <input type="checkbox" id="skill_type{{item.name}}" ng-model="item.value">
+                            <label for="skill_type{{item.name}}" style="font-weight: normal !important;">{{item.name}}</label>
+                        </div>
                     </div>
                 </div>
             </div>
             <p style="color: red; text-align: right; margin-right: 30px" ng-show="skill_error">* Select at least one qualification</p>
             <hr class="col-xs-12">
             <div style="margin-bottom: 50px">
-                <input type="button" class="btn btn-success" value="Save Changes" style="width: 150px; float: right">
+                <input type="button" class="btn btn-success" value="Save Changes" ng-click="thisissample()" style="width: 150px; float: right">
             </div>
         </div>
         <!--Profile Option-->

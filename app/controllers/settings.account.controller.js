@@ -4,7 +4,7 @@
 app.controller('AccSettingsController',
     ['$scope','$http','AuthService','host_url','$location',
         function ($scope,$http,AuthService,host_url,$location) {
-            $scope.job_types = [{name: "Stylist", value: true, price: 0.0}, {name: "Educator", value: false, price: 0.0},
+            $scope.job_types = [{name: "Stylist", value: false, price: 0.0}, {name: "Educator", value: false, price: 0.0},
                 {name: "Assistant", value: false, price: 0.0}];
 
             $scope.skill_types = [{name: "Barber",value: false}, {name: "Makeup",value: false}, {name: "Dry cutting",value: false},
@@ -97,27 +97,24 @@ app.controller('AccSettingsController',
                         method: "GET",
                         url: host_url + "profile/getAccountAndSettings"
                     }).then(function (resData){
-                        console.log('Server response :');
-                        console.log(resData);
-                        // $scope.description = resData.data.description;
-                        // for(var i=0; i<resData.data.job_types.length; i++){
-                        //     if(resData.data.job_types[i]===1){$scope.type1=true;}
-                        //     if(resData.data.job_types[i]===2){$scope.type2=true;}
-                        //     if(resData.data.job_types[i]===3){$scope.type3=true;}
-                        // }
-                        // for(var j=0; j<resData.data.skills.length; j++){
-                        //     if(resData.data.skills[j]===1){$scope.skill1=true;}
-                        //     if(resData.data.skills[j]===2){$scope.skill2=true;}
-                        //     if(resData.data.skills[j]===3){$scope.skill3=true;}
-                        //     if(resData.data.skills[j]===4){$scope.skill4=true;}
-                        //     if(resData.data.skills[j]===5){$scope.skill5=true;}
-                        //     if(resData.data.skills[j]===6){$scope.skill6=true;}
-                        //     if(resData.data.skills[j]===7){$scope.skill7=true;}
-                        //     if(resData.data.skills[j]===8){$scope.skill8=true;}
-                        //     if(resData.data.skills[j]===9){$scope.skill9=true;}
-                        //     if(resData.data.skills[j]===10){$scope.skill10=true;}
-                        //     if(resData.data.skills[j]===11){$scope.skill11=true;}
-                        // }
+                        console.log('Getting user saved information');
+                        // console.log(resData);
+                        var jobtypes = resData.data.jobtypes;
+                        var skilltypes = resData.data.skilltypes;
+                        var i=0;
+                        for(i=0; i<$scope.job_types.length; i++){
+                            $scope.job_types[i].value = false;
+                        }
+                        for(i=0; i<jobtypes.length; i++){
+                            $scope.job_types[(jobtypes[i].job_id)-1].value = true;
+                            $scope.job_types[(jobtypes[i].job_id)-1].price = jobtypes[i].price;
+                        }
+                        for(i=0; i<$scope.skill_types.length; i++){
+                            $scope.skill_types[i].value = false;
+                        }
+                        for(i=0; i<skilltypes.length; i++){
+                            $scope.skill_types[(skilltypes[i].skill_id)-1].value = true;
+                        }
                     },function (error){
                         $location.path('/');
                         console.log('Error occurred: ' + error);
