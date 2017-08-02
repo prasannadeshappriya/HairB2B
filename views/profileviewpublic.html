@@ -1,4 +1,4 @@
-<div ng-include="'views/emailverifybox.html'" ng-show="(authenticated) && !(email_verify)"
+<div ng-include="'views/emailverifybox.html'" ng-init="onInitVerify()" ng-show="(authenticated) && !(email_verify) && (show_error_box)"
      style="margin-bottom: -10px; margin-top: -35px"></div>
 <div class="container" ng-controller="ProfileViewController" ng-init="onInit()">
     <div class="col-xs-12" style="margin-top: 50px">

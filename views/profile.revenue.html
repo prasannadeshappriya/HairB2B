@@ -1,5 +1,5 @@
 <!--Show Email Verify Box-->
-<div ng-include="'views/emailverifybox.html'" ng-show="(authenticated) && !(email_verify)"
+<div ng-include="'views/emailverifybox.html'" ng-init="onInitVerify()" ng-show="(authenticated) && !(email_verify) && (show_error_box)"
      style="margin-bottom: -30px; margin-top: -20px"></div>
 <div class="container" ng-controller="ProfileRevenueController" ng-init="onInit()" style="min-height: 600px">
     <div style="text-align: center; margin-top: 25%" class="text-info">

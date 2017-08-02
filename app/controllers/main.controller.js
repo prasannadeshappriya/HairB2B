@@ -14,7 +14,8 @@ app.controller('MainController',[
         $scope.background_image = 'url(assets/img/sl02.jpg)';
         $scope.backgroung_image_repeat = 'no-repeat';
         $scope.profile_section = false;
-        $scope.search_section = false;
+        $scope.search_section = true;
+        $scope.show_error_box = false;
 
         $scope.getEmail = function () {
             var user = AuthService.getUser();
@@ -24,6 +25,13 @@ app.controller('MainController',[
 
         $scope.clear_history = function () {
             SearchService.clearHistory();
+        };
+
+        $scope.onInitVerify = function () {
+            setTimeout(function () {
+                $scope.show_error_box = true;
+                $scope.$apply();
+            },2000)
         };
 
         $scope.getProfile = function () {
@@ -72,7 +80,7 @@ app.controller('MainController',[
                     $scope.background_image = 'url(assets/img/sl02.jpg)';
                     $scope.backgroung_image_repeat = 'no-repeat';
                     $scope.profile_section = false;
-                    $scope.search_section = false;
+                    $scope.search_section = true;
                 } else {
                     $scope.background_image = '';
                     $scope.backgroung_image_repeat = '';
