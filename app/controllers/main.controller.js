@@ -14,7 +14,7 @@ app.controller('MainController',[
         $scope.background_image = 'url(assets/img/sl02.jpg)';
         $scope.backgroung_image_repeat = 'no-repeat';
         $scope.profile_section = false;
-        $scope.search_section = true;
+        $scope.search_section = false;
 
         $scope.getEmail = function () {
             var user = AuthService.getUser();
@@ -72,7 +72,7 @@ app.controller('MainController',[
                     $scope.background_image = 'url(assets/img/sl02.jpg)';
                     $scope.backgroung_image_repeat = 'no-repeat';
                     $scope.profile_section = false;
-                    $scope.search_section = true;
+                    $scope.search_section = false;
                 } else {
                     $scope.background_image = '';
                     $scope.backgroung_image_repeat = '';
