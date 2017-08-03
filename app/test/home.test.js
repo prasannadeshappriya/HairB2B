@@ -1,9 +1,9 @@
 /**
  * Created by prasanna_d on 8/3/2017.
  */
-
 casper.test.begin('Testing Home Page', 7, function(test){
     casper.start('http://localhost:63342/HairB2B/#!/');
+
     //To get the x path
     var x = require('casper').selectXPath;
 
@@ -41,18 +41,38 @@ casper.test.begin('Testing Home Page', 7, function(test){
     });
 
     casper.then(function() {
-        this.click(x('//*[@id="signin"]'));
+        // this.clickLabel('Log in', 'a');
+        // this.clickLabel('TEST', 'a');
+        // this.click(x('//*[@id="signin"]'));
         this.wait(200);
-        this.capture('aaaaaaa.png');
-
-        this.clickLabel('Log in','a');
-        this.sendKeys('#email', 'prasannadeshappriya@gmail.com');
-        this.sendKeys('#password', 'aaaaaa');
-        this.click(x('//*[@id="signin_model"]/div/div/div/div/form/div[4]/input'));
-        //Give timeout and take screenshots
-        this.wait(3000);
-        this.capture('sample.png');
+        this.capture('jashdfasfhasjidfh.png');
+        //.click('a[data-lp-signin-nav="1"]');
     });
+    casper.then(function() {
+        this.capture('modal.png');
+        this.sendKeys('#email', "prasannadeshappriya@gmail.com");
+        this.sendKeys('#password', "12345678");
+        // this.click(x('//*[@id="signin_model"]/div/div/div/div/form/div[4]/input'));
+        // this.clickLabel('TEST', 'a');
+    });
+    casper.then(function() {
+        this.wait(3000);
+        this.capture('logged_in.png');
+    });
+
+    // casper.then(function() {
+    //     this.click(x('//*[@id="signin"]'));
+    //     this.wait(200);
+    //     this.capture('aaaaaaa.png');
+    //
+    //     this.clickLabel('Log in','a');
+    //     this.sendKeys('#email', 'prasannadeshappriya@gmail.com');
+    //     this.sendKeys('#password', 'aaaaaa');
+    //     this.click(x('//*[@id="signin_model"]/div/div/div/div/form/div[4]/input'));
+    //     //Give timeout and take screenshots
+    //     this.wait(3000);
+    //     this.capture('sample.png');
+    // });
 
     casper.run(function(){
         test.done();

@@ -7,6 +7,9 @@ app.controller('SearchController',
             $scope.job_types = [{name: "Stylist", value: false}, {name: "Educator", value: false},
                 {name: "Assistant", value: false}, {name: "Select All", value: false}];
 
+            $scope.isLoading = false;
+            $scope.search_results = [];
+
             $scope.skill_types = [{name: "Barber",value: false}, {name: "Makeup",value: false}, {name: "Dry cutting",value: false},
                 {name: "Shaving",value: false}, {name: "Hair styling",value: false}, {name: "Wigs cutting",value: false},
                 {name: "Curling",value: false}, {name: "Coloring",value: false}, {name: "Color correction",value: false},
@@ -17,6 +20,8 @@ app.controller('SearchController',
             $scope.empty_results = false;
 
             $scope.dynamicSearch = function () {
+                $scope.isLoading = true;
+                $scope.search_results = [];
                 var i;
 
                 var job_types=[];
@@ -32,12 +37,11 @@ app.controller('SearchController',
                         skill_types.push(i);
                     }
                 }
-
-
                 $http({
                     method: "GET",
                     url: host_url + "search/dynamicSearch?jobtype="+ job_types + "&skilltype=" + skill_types
                 }).then(function (resData){
+                    $scope.isLoading = false;
                     // console.log(resData);
                     console.log('Dynamic search triggered');
                     var users = resData.data.users;
@@ -101,6 +105,7 @@ app.controller('SearchController',
                         $scope.empty_results = true;
                     }else{$scope.empty_results = false;}
                 },function (error){
+                    $scope.isLoading = false;
                     console.log('Error on searching profile: ' + error);
                 });
             };
@@ -158,8 +163,10 @@ app.controller('SearchController',
                 }
             };
 
-            $scope.search_results = [];
+
             $scope.onInit = function () {
+                $scope.isLoading = true;
+                $scope.search_results = [];
                 var params = $location.search();
                 var job_type = (params.jobtype);
                 var skill_type = (params.skilltype);
@@ -192,6 +199,7 @@ app.controller('SearchController',
                     method: "GET",
                     url: host_url + "search/simplesearch?"+ query2 + "&" + query1
                 }).then(function (resData){
+                    $scope.isLoading = false;
                     // console.log(resData);
                     console.log('Static search triggered');
                     var users = resData.data.users;
@@ -262,6 +270,7 @@ app.controller('SearchController',
                         $scope.empty_results = true;
                     }else{$scope.empty_results = false;}
                 },function (error){
+                    $scope.isLoading = false;
                     console.log('Error on searching profile: ' + error);
                 });
             };
