@@ -21,7 +21,7 @@ app.controller('SearchController',
 
             $scope.dynamicSearch = function () {
                 $scope.isLoading = true;
-                $scope.search_results = [];
+                // $scope.search_results = [];
                 var i;
 
                 var job_types=[];
