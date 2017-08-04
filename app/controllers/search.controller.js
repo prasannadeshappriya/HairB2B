@@ -224,13 +224,10 @@ app.controller('SearchController',
                                 }
 
                                 if (user_id === id) {
-                                    console.log(userTypes[j].price);
                                     if(typeof userTypes[j].price==='undefined'){
-                                        console.log('here');
                                         if(price===0){price = parseInt(userTypes[j][0].price);}
                                         else{if(price>(parseInt(userTypes[j][0].price))){price = parseInt(userTypes[j][0].price);}}
                                     }else {
-                                        console.log('here else');
                                         if(price===0){price = parseInt(userTypes[j].price);}
                                         else{if(price>(parseInt(userTypes[j].price))){price = parseInt(userTypes[j].price);}}
                                     }
