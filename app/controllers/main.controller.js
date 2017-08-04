@@ -28,10 +28,10 @@ app.controller('MainController',[
         };
 
         $scope.onInitVerify = function () {
-            setTimeout(function () {
-                $scope.show_error_box = true;
-                $scope.$apply();
-            },1000)
+            // setTimeout(function () {
+            //     $scope.show_error_box = true;
+            //     $scope.$apply();
+            // },1000)
         };
 
         $scope.getProfile = function () {
@@ -103,6 +103,10 @@ app.controller('MainController',[
 
         $scope.$watch(AuthService.isEmailVerifyedStatus, function (newValue) {
             $scope.email_verify = newValue;
+            setTimeout(function () {
+                $scope.show_error_box = !(newValue);
+                $scope.$apply();
+            },10)
         },true);
 
         $scope.sign_out = function () {
