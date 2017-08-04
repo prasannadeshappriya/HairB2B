@@ -7,6 +7,7 @@ app.controller('ProfileViewController',
             $scope.firstname = '';
             $scope.lastname = '';
             $scope.description = '';
+            $scope.email = '';
 
             $scope.skill1 = false; $scope.skill4 = false; $scope.skill7 = false; $scope.skill9 = false;
             $scope.skill2 = false; $scope.skill5 = false; $scope.skill8 = false; $scope.skill10 = false;
@@ -24,6 +25,17 @@ app.controller('ProfileViewController',
                 }
             };
 
+            $scope.$watch(AuthService.isLoginStatus, function (newValue) {
+                if(newValue){
+                    var user = AuthService.getUser();
+                    if(user){
+                        if(user.email === $scope.email){
+                            $location.path('/profile');
+                        }
+                    }
+                }
+            },true);
+
             $scope.onInit = function () {
                 var params = $location.search();
                 var user_id = (params.userid);
@@ -35,6 +47,7 @@ app.controller('ProfileViewController',
                         $scope.firstname = resData.data.user[0].firstname;
                         $scope.lastname = resData.data.user[0].lastname;
                         $scope.description = resData.data.stylist[0].description;
+                        $scope.email = resData.data.user[0].email;
                         var jobtypeArr = resData.data.jobtypes[0];
                         for(var i=0; i<jobtypeArr.length; i++){
                             if(jobtypeArr[i].job_id===1){$scope.type1=true; $scope.price1 = jobtypeArr[i].price;}

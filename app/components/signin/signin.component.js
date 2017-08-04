@@ -52,7 +52,10 @@ angular.module('app')
                             function (callback) {
                                 $('#signin_model').modal('hide');
                                 console.log('Authentication Successful');
-                                window.location.reload();
+                                setTimeout(function () {
+                                    $scope.$digest()
+                                },1000);
+                                // window.location.reload();
                             }
                         );
 

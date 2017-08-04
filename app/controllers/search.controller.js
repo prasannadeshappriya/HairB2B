@@ -110,6 +110,24 @@ app.controller('SearchController',
                 });
             };
 
+            $scope.$watch(AuthService.isLoginStatus, function (newValue) {
+                if(newValue){
+                    var disable = false;
+                    var user = AuthService.getUser();
+                    if(user) {
+                        for(var i=0; i<$scope.search_results.length; i++){
+                            if (user.email === $scope.search_results[i].email) {
+                                $scope.search_results[i].disable = true;}
+                            else {$scope.search_results[i].disable = false;}
+                        }
+                    }
+                }else{
+                    for(var i=0; i<$scope.search_results.length; i++){
+                        $scope.search_results[i].disable = false;
+                    }
+                }
+            },true);
+
             $scope.beginSearch = function (skill, jobtype) {
                 var jobtypes, skilltype, index;
                 for(index=0; index<$scope.job_types.length; index++){
