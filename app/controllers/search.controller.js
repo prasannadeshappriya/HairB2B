@@ -42,7 +42,7 @@ app.controller('SearchController',
                     url: host_url + "search/dynamicSearch?jobtype="+ job_types + "&skilltype=" + skill_types
                 }).then(function (resData){
                     $scope.isLoading = false;
-                    // console.log(resData);
+                    console.log(resData);
                     console.log('Dynamic search triggered');
                     var users = resData.data.users;
                     var stylists = resData.data.stylists;
