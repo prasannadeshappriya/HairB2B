@@ -5,8 +5,8 @@ app.controller('ProfileController',
     ['$scope','$http','AuthService','$location','host_url',
         function ($scope,$http,AuthService,$location,host_url) {
 
-    var editBtn = document.getElementById('editBtn');
-    var editables = document.querySelectorAll('#description');
+    // var editBtn = document.getElementById('editBtn');
+    // var editables = document.querySelectorAll('#description');
 
     // editBtn.addEventListener('click', function(e) {
     //     console.log(editables[0]);
@@ -39,7 +39,6 @@ app.controller('ProfileController',
     $scope.type1 = false; $scope.type2 = false; $scope.type3 = false;
 
     $scope.onInit = function () {
-        console.log('this is now initializing');
         var user = AuthService.getUser();
         if(user){
             $scope.firstname = user.firstname;
@@ -50,7 +49,7 @@ app.controller('ProfileController',
                 method: "GET",
                 url: host_url + "profile/getProfile"
             }).then(function (resData){
-                console.log('Server response :');
+                // console.log('Server response :');
                 // console.log(resData);
                 $scope.description = resData.data.description;
                 for(var i=0; i<resData.data.job_types.length; i++){
