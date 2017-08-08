@@ -248,7 +248,7 @@ app.controller('AccSettingsController',
                 }
 
                 if(!($scope.job_type_err) && !($scope.skill_error)){
-                    console.log('Can Update');
+                    // console.log('Can Update');
                     var skill_types_arr = [];
                     for(i=0; i<$scope.skill_types.length; i++){
                         if($scope.skill_types[i].value){skill_types_arr.push(i+1);}
@@ -266,7 +266,7 @@ app.controller('AccSettingsController',
                         url: host_url + "profile/updateProfileSkillsTypes",
                         data: {job_types_arr: job_types_arr, skill_types_arr: skill_types_arr}
                     }).then(function (resData){
-                        console.log(resData);
+                        // console.log(resData);
                         if(resData.status===200){
                             $scope.success = true;
                             $scope.message = "Profile updated successfully!";
