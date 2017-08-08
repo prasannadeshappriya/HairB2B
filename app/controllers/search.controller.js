@@ -142,16 +142,31 @@ app.controller('SearchController',
                         break;
                     }
                 }
+                SearchService.clearDynamicHistory();
                 SearchService.writeSearchHistory(jobtypes,skilltype,function (callback) {
                     if(callback){
                         $location.path('/search').search({jobtype: jobtypes, skilltype: skilltype});
                     }else{
                         console.log('Error detected when writing to local storage');
+                        $location.path('/search').search({jobtype: jobtypes, skilltype: skilltype});
                     }
                 })
             };
 
             $scope.viewProfile = function (email,id) {
+                var jobtypes_d = [], skilltype_d = [], i=0;
+                for(i=0; i<$scope.job_types.length; i++){
+                    if($scope.job_types[i].value){jobtypes_d.push(i);}
+                }
+                for(i=0; i<$scope.skill_types.length; i++){
+                    if($scope.skill_types[i].value){skilltype_d.push(i);}
+                }
+                if(jobtypes_d.length!==0 && skilltype_d.length!==0) {
+                    SearchService.writeDynamicSearchHistory(jobtypes_d, skilltype_d, function (callback) {
+                        if (callback) {console.log('History logged to local storage')}
+                        else {console.log('Error detected when writing to local storage');}
+                    });
+                }
                 var user = AuthService.getUser();
                 if(user) {
                     if (user.email === email) {
@@ -165,7 +180,23 @@ app.controller('SearchController',
             $scope.placeOrder = function (id) {
                 var user = AuthService.getUser();
                 if(user) {
-                    $location.path('/order/place').search({userid: id});
+                    var jobtypes_d = [], skilltype_d = [], i=0;
+                    for(i=0; i<$scope.job_types.length; i++){
+                        if($scope.job_types[i].value){jobtypes_d.push(i);}
+                    }
+                    for(i=0; i<$scope.skill_types.length; i++){
+                        if($scope.skill_types[i].value){skilltype_d.push(i);}
+                    }
+                    if(jobtypes_d.length!==0 && skilltype_d.length!==0) {
+                        SearchService.writeDynamicSearchHistory(jobtypes_d, skilltype_d, function (callback) {
+                            if (callback) {
+                                $location.path('/order/place').search({userid: id});
+                            } else {
+                                console.log('Error detected when writing to local storage');
+                                $location.path('/order/place').search({userid: id});
+                            }
+                        });
+                    }
                 }else{
                     $('#signin_model').modal('show');
                 }
@@ -177,7 +208,7 @@ app.controller('SearchController',
                     try {
                         $scope.selectedName = $scope.job_types[(history.type_id) - 1].name;
                         $scope.selectedSkillName = $scope.skill_types[(history.skill_id) - 1].name;
-                    }catch (err){'Error on reading local storage'}
+                    }catch (err){console.log('Error on reading local storage'); SearchService.clearHistory();}
                 }
             };
 
@@ -185,6 +216,22 @@ app.controller('SearchController',
             $scope.onInit = function () {
                 $scope.isLoading = true;
                 $scope.search_results = [];
+
+                var dynamic_history = SearchService.getDynamicSearchHistory();
+                if(dynamic_history){
+                    try {
+                        var jobtypes_d = dynamic_history.type_id, skilltype_d = dynamic_history.skill_id, i=0;
+                        for(i=0; i<jobtypes_d.length; i++){
+                            $scope.job_types[parseInt(jobtypes_d[i])].value =true;
+                        }
+                        for(i=0; i<skilltype_d.length; i++){
+                            $scope.skill_types[parseInt(skilltype_d[i])].value =true;
+                        }
+                        $scope.dynamicSearch();
+                        return;
+                    }catch (err){console.log('Error on reading local storage');SearchService.clearDynamicHistory();}
+                }
+
                 var params = $location.search();
                 var job_type = (params.jobtype);
                 var skill_type = (params.skilltype);

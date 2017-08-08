@@ -13,14 +13,13 @@ app.controller('AccSettingsController',
                 {name: "Long hair",value: false}, {name: "Short hair",value: false}];
 
             $scope.submitted = false;       //Error showing only after submit button clicked
-            $scope.server_error = false;    //Check connection Errors
             $scope.isComplete = false;      //Check all the fields are filled
             $scope.repass = false;          //Check password match only after user retype password
+            $scope.des_error = false;       //Check account description is empty or not
 
             //-------------------------Show Success/Danger alert boxes
             $scope.success = false;
             $scope.danger = false;
-            $scope.password_save_error = false;
             $scope.message = '';
 
             //-------------------------Show Sections
@@ -39,7 +38,6 @@ app.controller('AccSettingsController',
 
             $scope.resetSubmitted = function () {
                 $scope.submitted = false;
-                $scope.server_error = false;
                 try {
                     if ($scope.newPassword.length !== 'undefined') {
                         if ($scope.newPassword.length === 0) {
@@ -69,6 +67,12 @@ app.controller('AccSettingsController',
                 }
                 if($scope.newPassword !== $scope.reNewPassword){$scope.isComplete = false;return;}
                 $scope.isComplete = true;
+            };
+
+            $scope.resetAlertBoxes = function () {
+                $scope.success = false;
+                $scope.danger = false;
+                $scope.message = '';
             };
 
             $scope.profile = function () {
@@ -146,6 +150,18 @@ app.controller('AccSettingsController',
                     //Profile Found
                     $scope.accDescription = true;
                     $scope.accSkills = true;
+
+                    $http({
+                        method: "GET",
+                        url: host_url + "profile/getProfileForEdit"
+                    }).then(function (resData) {
+                        //Profile Found
+                        $scope.description = resData.data.stylist.description;
+                        $scope.characters = (1000-$scope.description.length);
+                    },function (error) {
+                        console.log('Sever error occurred, redirecting to home');
+                        $location.path('/');
+                    });
                 },function (error){
                     if(error.status===404){
                         //No Profile found
@@ -158,14 +174,36 @@ app.controller('AccSettingsController',
                 });
             };
 
+            $scope.saveProfile = function () {
+                $scope.des_error = false;
+                if($scope.description.length===0 || typeof $scope.description==='undefined'){
+                    $scope.des_error = true;
+                }
+                if(!($scope.des_error) && !($scope.chrLengthError)) {
+                    $http({
+                        method: "POST",
+                        url: host_url + "profile/updateProfile",
+                        data: {description: $scope.description}
+                    }).then(function (resData) {
+                        $scope.success = true;
+                        $scope.message = 'Profile updated successfully!';
+                    }, function (error) {
+                        console.log('Error: ' + error);
+                    });
+                }
+            };
+
             $scope.changePassword = function () {
+                $scope.success = false;
+                $scope.danger = false;
                 $scope.submitted = true;
                 if(!$scope.isComplete){return;}
                 if($scope.new_password_chr_error){return;}
                 if($scope.password===$scope.newPassword){
-                    $scope.password_save_error = true;
+                    $scope.danger = true;
+                    $scope.message = "New password must be different from old password";
                     return;
-                }else{$scope.password_save_error = false;}
+                }
                 $http({
                     method: "POST",
                     url: host_url + "profile/changePassword",
@@ -174,21 +212,72 @@ app.controller('AccSettingsController',
                     console.log(resData);
                     if(resData.status===200){
                         $scope.success = true;
+                        $scope.message = "Your password changed successfully!";
                         $scope.danger = false;
-                        $scope.password_save_error = false;
+                        //Reset all password fields
+                        $scope.submitted = false;
+                        $scope.password = "";
+                        $scope.newPassword = "";
+                        $scope.reNewPassword = "";
+
                     }
                 },function (error){
                     if(error.status===401){
                         $scope.success = false;
-                        $scope.danger = false;
-                        $scope.message = "New password must be different from old password";
-                        $scope.password_save_error = true;
+                        $scope.danger = true;
+                        $scope.message = "Current password is invalid!";
                     }else {
                         $scope.success = false;
                         $scope.danger = true;
-                        $scope.password_save_error = false;
+                        $scope.message = "Server Error";
                     }
                 });
+            };
+
+            $scope.job_type_err = false;
+            $scope.skill_error = false;
+            $scope.saveSkillsJobTypes = function () {
+                var i;
+                $scope.job_type_err = true;
+                for(i=0; i<$scope.job_types.length; i++){
+                    if($scope.job_types[i].value){$scope.job_type_err = false;break;}
+                }
+                $scope.skill_error = true;
+                for(i=0; i<$scope.skill_types.length; i++){
+                    if($scope.skill_types[i].value){$scope.skill_error = false;break;}
+                }
+
+                if(!($scope.job_type_err) && !($scope.skill_error)){
+                    console.log('Can Update');
+                    var skill_types_arr = [];
+                    for(i=0; i<$scope.skill_types.length; i++){
+                        if($scope.skill_types[i].value){skill_types_arr.push(i+1);}
+                    }
+                    var job_types_arr = [];
+                    for(i=0; i<$scope.job_types.length; i++){
+                        if($scope.job_types[i].value){
+                            var tmp = [];
+                            tmp.push(i+1, $scope.job_types[i].price);
+                            job_types_arr.push(tmp);
+                        }
+                    }
+                    $http({
+                        method: "POST",
+                        url: host_url + "profile/updateProfileSkillsTypes",
+                        data: {job_types_arr: job_types_arr, skill_types_arr: skill_types_arr}
+                    }).then(function (resData){
+                        console.log(resData);
+                        if(resData.status===200){
+                            $scope.success = true;
+                            $scope.message = "Profile updated successfully!";
+                            $scope.danger = false;
+                        }
+                    },function (error){
+                        $scope.success = false;
+                        $scope.danger = true;
+                        $scope.message = "Server Error";
+                    });
+                }
             };
 
             $scope.updateDesLength = function () {

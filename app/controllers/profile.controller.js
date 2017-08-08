@@ -8,23 +8,23 @@ app.controller('ProfileController',
     var editBtn = document.getElementById('editBtn');
     var editables = document.querySelectorAll('#description');
 
-    editBtn.addEventListener('click', function(e) {
-        console.log(editables[0]);
-        if (!editables[0].isContentEditable) {
-            console.log('asdasd');
-            editables[0].contentEditable = 'true';
-            editBtn.value="Save";
-        } else {
-            // Disable Editing
-            editables[0].contentEditable = 'false';
-            // Change Button Text and Color
-            editBtn.value="Edit";
-            // Save the data in localStorage
-            for (var i = 0; i < editables.length; i++) {
-                localStorage.setItem(editables[i].getAttribute('id'), editables[i].innerHTML);
-            }
-        }
-    });
+    // editBtn.addEventListener('click', function(e) {
+    //     console.log(editables[0]);
+    //     if (!editables[0].isContentEditable) {
+    //         console.log('asdasd');
+    //         editables[0].contentEditable = 'true';
+    //         editBtn.value="Save";
+    //     } else {
+    //         // Disable Editing
+    //         editables[0].contentEditable = 'false';
+    //         // Change Button Text and Color
+    //         editBtn.value="Edit";
+    //         // Save the data in localStorage
+    //         for (var i = 0; i < editables.length; i++) {
+    //             localStorage.setItem(editables[i].getAttribute('id'), editables[i].innerHTML);
+    //         }
+    //     }
+    // });
 
     //User details
     $scope.firstname = '';
@@ -51,7 +51,7 @@ app.controller('ProfileController',
                 url: host_url + "profile/getProfile"
             }).then(function (resData){
                 console.log('Server response :');
-                console.log(resData);
+                // console.log(resData);
                 $scope.description = resData.data.description;
                 for(var i=0; i<resData.data.job_types.length; i++){
                     if(resData.data.job_types[i]===1){$scope.type1=true;}

@@ -25,6 +25,7 @@ app.controller('MainController',[
 
         $scope.clear_history = function () {
             SearchService.clearHistory();
+            SearchService.clearDynamicHistory();
         };
 
         $scope.onInitVerify = function () {
@@ -110,6 +111,8 @@ app.controller('MainController',[
         },true);
 
         $scope.sign_out = function () {
+            SearchService.clearDynamicHistory();
+            SearchService.clearHistory();
             AuthService.Logout();
         };
 
