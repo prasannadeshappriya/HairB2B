@@ -7,7 +7,8 @@ var app = angular.module('app',[
     'ngRoute',
     'signin',
     'signup',
-    'ui.rCalendar'
+    'ui.rCalendar',
+    'multipleDatePicker'
 ])
     .constant('host_url', 'http://localhost:3000/')
     // .constant('host_url', 'https://hairbtob-server.herokuapp.com/')

@@ -5,26 +5,40 @@ app.controller('ProfileController',
     ['$scope','$http','AuthService','$location','host_url',
         function ($scope,$http,AuthService,$location,host_url) {
 
-    // var editBtn = document.getElementById('editBtn');
-    // var editables = document.querySelectorAll('#description');
+    //Calendar
+    $scope.date_count = 0;
+    var busy_dates = [];
 
-    // editBtn.addEventListener('click', function(e) {
-    //     console.log(editables[0]);
-    //     if (!editables[0].isContentEditable) {
-    //         console.log('asdasd');
-    //         editables[0].contentEditable = 'true';
-    //         editBtn.value="Save";
-    //     } else {
-    //         // Disable Editing
-    //         editables[0].contentEditable = 'false';
-    //         // Change Button Text and Color
-    //         editBtn.value="Edit";
-    //         // Save the data in localStorage
-    //         for (var i = 0; i < editables.length; i++) {
-    //             localStorage.setItem(editables[i].getAttribute('id'), editables[i].innerHTML);
-    //         }
-    //     }
-    // });
+    $scope.today = moment();
+    console.log($scope.today._d);
+    $scope.myMonth = moment().add(1, 'MONTH');
+
+
+    $scope.highlightDays = [
+        // {date: moment().date(2), css: 'holiday', selectable: false, title: 'Busy'},
+        // {date: moment().date(14), css: 'holiday', selectable: false, title: 'Busy'}
+    ];
+
+    // $scope.myArrayOfDates = [moment().date(4), moment().date(5), moment().date(8)];
+    $scope.myArrayOfDates = [];
+
+    $scope.$watch('myArrayOfDates', function (newValue) {
+        if (newValue) {
+            $scope.date_count = newValue.length;
+            if($scope.date_count>0){
+                //Might have to check other conditions here
+                $scope.btnBusyEnable = true;
+            }else{$scope.btnBusyEnable = false;}
+        }
+    }, true);
+
+    $scope.logMonthChanged = function(newMonth, oldMonth){
+        console.log(newMonth + ' ' + oldMonth);
+    };
+
+    $scope.markAsBusy = function () {
+           console.log($scope.myArrayOfDates);
+    };
 
     //User details
     $scope.firstname = '';
@@ -38,6 +52,7 @@ app.controller('ProfileController',
 
     $scope.type1 = false; $scope.type2 = false; $scope.type3 = false;
 
+    $scope.btnBusyEnable = false; //Enable the button
     $scope.onInit = function () {
         var user = AuthService.getUser();
         if(user){

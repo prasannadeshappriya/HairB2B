@@ -52,8 +52,13 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-8" style=" float: right; margin-top: -50px">
-                <calendar-temp></calendar-temp>
+            <div class="col-lg-8" style=" float: right; margin-top: 0px">
+                <multiple-date-picker
+                        ng-model="myArrayOfDates"
+                        highlight-days="highlightDays"
+                        month="today"
+                        month-changed="logMonthChanged"></multiple-date-picker>
+                <input type="button" value="Mark as busy" ng-disabled="!btnBusyEnable" ng-click="markAsBusy()" style="width: 150px; float: right; margin-top: 15px" class="btn btn-success">
             </div>
         </div>
     </div>

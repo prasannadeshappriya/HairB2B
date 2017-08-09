@@ -12,7 +12,7 @@
             <img src="assets/img/default_profile_pic.png" style="height: 80px; margin-bottom: 2px; margin-top:25px; margin-left: 30px">
         </div>
         <div class="col-xs-7">
-            <h3 style="margin-top: 30px">Prasanna Deshappriya</h3>
+            <h3 style="margin-top: 30px">{{first_name}} {{last_name}}</h3>
 
             <p style="margin-top: -15px"><span style="font-size: 25px;">
                     <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
@@ -20,14 +20,66 @@
             <p class="text-info" style="margin-top: -15px">From Sydney</p>
         </div>
     </div>
-    <label class="col-lg-10 col-lg-offset-1" for="job_description">Describe your job</label>
+    <label class="col-lg-10 col-lg-offset-1" for="job_description">Describe your job: </label>
     <div class="col-xs-12">
         <textarea class="col-lg-10 col-lg-offset-1" id="job_description" style="resize: none; height: 150px"></textarea>
     </div>
     <div class="col-xs-10 col-xs-offset-1">
-        <div class="col-xs-6">
-            <label style="margin-right: -15px">asdsad</label>
-            <img src="../HairB2B/assets/img/calender.PNG" style="float: right">
+        <div class="col-xs-6" style="margin-top: 20px">
+            <label style="margin-left: -15px">Dates: </label>
+            <multiple-date-picker
+                    ng-model="myArrayOfDates"
+                    highlight-days="highlightDays"
+                    month="today"
+                    month-changed="logMonthChanged"></multiple-date-picker>
         </div>
+        <div class="col-xs-6" style="margin-top: 20px">
+            <div class="col-xs-12">
+                <div>
+                    <label class="col-xs-2" style="margin-left: -15px; margin-top: 8px">Expire: </label>
+                    <div class="col-lg-8" style="float: right">
+                        <input class="form-control" type="datetime-local" value="2017-05-23T15:00:00">
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12" style="margin-top: 10px">
+                <div>
+                    <label class="col-xs-2" style="margin-left: -15px; margin-top: 8px">Location: </label>
+                    <div class="col-lg-8" style="float: right">
+                        <select  class="form-control" ng-model="selectedLocation" name="size" id="location" >
+                            <option ng-repeat="item in location">{{item.name}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12" style="margin-top: 10px">
+                <div>
+                    <label class="col-xs-2" style="margin-left: -15px; margin-top: 8px">Job: </label>
+                    <div class="col-lg-8" style="float: right">
+                        <select  class="form-control" ng-model="selectedJobType" ng-change="onClickJobType()" name="size" id="jobtype" >
+                            <option ng-repeat="item in JobType" ng-show="item.value">{{item.name}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-10 col-xs-offset-1" style="margin-top: 20px">
+        <div class="col-lg-12" style="background-color: #fafafa; padding: 30px">
+            <div class="col-lg-6 text-right" >
+                Number of dates:<br>
+                Rates:<br>
+                Other(Vat,HairB2B):
+            </div>
+            <div class="col-lg-6 text-left" >
+                {{date_count}}<br>
+                ${{rate}} per day<br>
+                ${{other}}
+            </div>
+            <div class="col-lg-12 text-right">
+                <span style="font-size: 30px">${{total}}</span>
+            </div>
+        </div>
+        <input type="button" value="Proceed" ng-click="proceed()" style="float: right; margin-top: 20px; width: 150px" class="btn btn-success">
     </div>
 </div>
