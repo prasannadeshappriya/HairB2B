@@ -26,6 +26,10 @@
                     <label for="skill_type{{item.name}}" ng-hide="$index === (skill_types.length-1)">{{item.name}}</label>
                 </div>
             </div>
+            <label for="price_filter" style="margin-top: 10px">Price:&nbsp;&nbsp;&nbsp;${{filter_price}}</label>
+            <div id="price_filter">
+                <input type="range" name="range" style="width: 200px" min="{{min_value}}" max="{{max_value}}" ng-model="filter_price" ng-change="update()">
+            </div>
         </div>
         <div class="col-xs-9 col-xs-offset-3" style="border-left: 1px solid lightgray">
             <div class="col-lg-12" style="position: absolute; text-align: center;">

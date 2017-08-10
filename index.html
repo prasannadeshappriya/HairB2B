@@ -93,7 +93,8 @@
                             <img src="assets/img/default_profile_pic.png" style="width: 30px; margin: -10px 10px -10px 21px; right: 0">
                                     {{username}} <span class="caret"></span></a>
                         <ul class="dropdown-menu" style="background-color: black;">
-                            <li><a style="color: white" href="#!/profile">Profile</a></li>
+                            <li ng-show="(profile_status)"><a style="color: white" href="#!/profile">Profile</a></li>
+                            <li ng-show="!(profile_status)"><a style="color: white" href="#!/profile/create">Create Profile</a></li>
                             <li><a style="color: white" href="#!/order/view">My Orders</a></li>
                             <li><a style="color: white" href="#!/profile/revenue">Revenue</a></li>
                             <li><a style="color: white" href="#!/help">Help</a></li>

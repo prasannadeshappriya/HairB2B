@@ -98,8 +98,10 @@ app.controller('ProfileController',
                     console.log('Error occurred: ' + error);
                 });
             },function (error){
-                $location.path('/');
-                console.log('Error occurred: ' + error);
+                if(!(error.status===404)) {
+                    $location.path('/');
+                    console.log('Error occurred: ' + error);
+                }
             });
         }else{
             $location.path('/');

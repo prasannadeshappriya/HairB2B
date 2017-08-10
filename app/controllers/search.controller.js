@@ -24,6 +24,36 @@ app.controller('SearchController',
             $scope.selectedLocationName = $scope.location[0].name;
             $scope.empty_results = false;
 
+            $scope.filter_price = 1000;
+            $scope.min_value = 0;
+            $scope.max_value = 1000;
+            $scope.setMinMaxValues = function () {
+                for(var i=0; i<$scope.search_results_tmp.length; i++){
+                    if(i==0){$scope.max_value=$scope.search_results_tmp[i].price;}
+                    else{
+                        if($scope.max_value<$scope.search_results_tmp[i].price){
+                            $scope.max_value=$scope.search_results_tmp[i].price;
+                        }
+                    }
+                }
+                setTimeout(function () {
+                    console.log($scope.max_value);
+                    console.log($scope.filter_price);
+                    $scope.filter_price = $scope.max_value;
+                    console.log('asdad' + $scope.filter_price);
+                    $scope.$apply();
+                },1);
+            };
+
+            $scope.update = function () {
+                var res = $scope.search_results_tmp.filter(function (el) {
+                    if(el.price <= $scope.filter_price){
+                        return true;
+                    }else{return false;}
+                });
+                $scope.search_results = res;
+            };
+
             $scope.validate_skills = function(index){
                 var con = true;
                 for(var i=0; i<$scope.skill_types.length; i++){
@@ -160,6 +190,7 @@ app.controller('SearchController',
                     }else{$scope.empty_results = false;}
                     $scope.sort();
                     $scope.search_results_tmp = $scope.search_results;
+                    $scope.setMinMaxValues();
                 },function (error){
                     $scope.isLoading = false;
                     console.log('Error on searching profile: ' + error);
@@ -389,6 +420,7 @@ app.controller('SearchController',
                     }else{$scope.empty_results = false;}
                     $scope.sort();
                     $scope.search_results_tmp = $scope.search_results;
+                    $scope.setMinMaxValues();
                 },function (error){
                     $scope.isLoading = false;
                     console.log('Error on searching profile: ' + error);

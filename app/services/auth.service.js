@@ -4,7 +4,8 @@
 angular.module('app')
     .factory('AuthService',['$localStorage', '$http', function ($localStorage, $http) {
         var isLogin = false;
-        isEmailVerifyed = false;
+        var isEmailVerifyed = false;
+        var isProfileExist = false;
         var service = {};
 
         service.getToken = getToken;
@@ -15,11 +16,14 @@ angular.module('app')
 
         service.isLogin = isLogin;
         service.isEmailVerifyed = isEmailVerifyed;
+        service.isProfileExist = isProfileExist;
 
         service.setIsLogin = setIsLogin;
         service.setEmailVerifyed = setEmailVerifyed;
+        service.setProfileStatus = setProfileStatus;
         service.isLoginStatus = isLoginStatus;
         service.isEmailVerifyedStatus = isEmailVerifyedStatus;
+        service.isProfileExistStatus = isProfileExistStatus;
 
         return service;
 
@@ -30,6 +34,9 @@ angular.module('app')
         //Set the variable values
         function setIsLogin(flag) {isLogin = flag;}
         function setEmailVerifyed(flag) {isEmailVerifyed = flag;}
+
+        function setProfileStatus(flag) {isProfileExist = flag;}
+        function isProfileExistStatus() {return isProfileExist;}
 
         function getUser() {
             if($localStorage.currentUser){

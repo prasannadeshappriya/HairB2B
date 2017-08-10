@@ -16,6 +16,7 @@ app.controller('MainController',[
         $scope.profile_section = false;
         $scope.search_section = true;
         $scope.show_error_box = false;
+        $scope.profile_status = false;
 
         $scope.getEmail = function () {
             var user = AuthService.getUser();
@@ -29,10 +30,7 @@ app.controller('MainController',[
         };
 
         $scope.onInitVerify = function () {
-            // setTimeout(function () {
-            //     $scope.show_error_box = true;
-            //     $scope.$apply();
-            // },1000)
+
         };
 
         $scope.getProfile = function () {
@@ -108,6 +106,10 @@ app.controller('MainController',[
                 $scope.show_error_box = !(newValue);
                 $scope.$apply();
             },10)
+        },true);
+
+        $scope.$watch(AuthService.isProfileExistStatus, function (newValue) {
+            $scope.profile_status = newValue;
         },true);
 
         $scope.sign_out = function () {

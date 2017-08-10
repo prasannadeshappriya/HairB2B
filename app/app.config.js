@@ -121,7 +121,7 @@ app.config(['$routeProvider',function($routeProvider){
             controller: 'MainController',
             resolve:{
                 init :function(AuthService, $location, $http, host_url){
-                    if(AuthService.getUser()===null){
+                    if(AuthService.getUser()===null) {
                         console.log('Unauthorized url request');
                         $location.path('/');
                     }else{
@@ -129,7 +129,8 @@ app.config(['$routeProvider',function($routeProvider){
                             method: "GET",
                             url: host_url + "profile/getProfileStatus"
                         }).then(function (resData){
-                            console.log('Server status [/profile]: ' + resData.status);
+                            console.log('Return Data: ' + resData);
+                            $location.path('/profile');
                         },function (error){
                             if(error.status===404){
                                 $location.path('/profile/create');
@@ -143,5 +144,4 @@ app.config(['$routeProvider',function($routeProvider){
                 }
             }
         })
-
 }]);

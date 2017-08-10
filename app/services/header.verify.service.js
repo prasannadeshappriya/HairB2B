@@ -26,6 +26,19 @@ angular.module('app')
                     if(error.status===401){AuthService.Logout();}
                     console.log('error: ' + error);
                 });
+
+                $http({
+                    method: "GET",
+                    url: host_url + "profile/getProfileStatus"
+                }).then(function (resData){
+                    AuthService.setProfileStatus(true);
+                },function (error){
+                    if(error.status===404){
+                        AuthService.setProfileStatus(false);
+                    }else {
+                        console.log('error: ' + error);
+                    }
+                });
             }
         }
 }]);
