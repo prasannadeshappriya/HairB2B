@@ -30,35 +30,38 @@
                 <div class="col-lg-10" style="margin-left: 85px">
                     <h4 class="text-info"><b>Job Types</b></h4>
                     <div style="margin-left: 45px">
-                        <h5 class="text-info" ng-show="type1">Stylist</h5>
-                        <h5 class="text-info" ng-show="type2">Educator</h5>
-                        <h5 class="text-info" ng-show="type3">Assistant</h5>
+                        <div ng-repeat="item in job_types">
+                            <h5 class="text-info" ng-show="item.value">{{item.name}}</h5>
+                        </div>
                     </div>
                     <h4 class="text-info" style="margin-top: 20px"><b>Skills</b></h4>
                         <div style="margin-left: 30px">
                         <div class="col-lg-12">
-                            <h5 class="text-info" ng-show="skill1">Barber</h5>
-                            <h5 class="text-info" ng-show="skill2">Makeup</h5>
-                            <h5 class="text-info" ng-show="skill3">Dry cutting</h5>
-                            <h5 class="text-info" ng-show="skill4">Shaving</h5>
-                            <h5 class="text-info" ng-show="skill5">Hair styling</h5>
-                            <h5 class="text-info" ng-show="skill6">Wigs cutting</h5>
-                            <h5 class="text-info" ng-show="skill7">Curling</h5>
-                            <h5 class="text-info" ng-show="skill8">Coloring</h5>
-                            <h5 class="text-info" ng-show="skill9">Color correction</h5>
-                            <h5 class="text-info" ng-show="skill10">Long hair</h5>
-                            <h5 class="text-info" ng-show="skill11">Short hair</h5>
+                            <div ng-repeat="item in skill_types">
+                                <h5 class="text-info" ng-show="item.value">{{item.name}}</h5>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-8" style=" float: right; margin-top: 0px">
+            <div class="col-lg-8" style="float: right; margin-top: 0px">
+                <div class="col-lg-12">
                 <multiple-date-picker
                         ng-model="myArrayOfDates"
+                        day-click="checkSelection"
                         highlight-days="highlightDays"
                         month="today"
                         month-changed="logMonthChanged"></multiple-date-picker>
-                <input type="button" value="Mark as busy" ng-disabled="!btnBusyEnable" ng-click="markAsBusy()" style="width: 150px; float: right; margin-top: 15px" class="btn btn-success">
+                </div>
+
+                <div class="col-lg-12" style="margin-top: 15px">
+                    <div class="col-lg-3 col-lg-offset-6" style="margin-top: 6px">
+                        <input type="checkbox" ng-model="chkBusy" id="chkBusy">
+                        <label for="chkBusy">Mark as busy</label>
+                    </div>
+                    <input type="button" value="Update" ng-click="update()" style="width: 80px; float: right;" class="btn btn-success col-lg-3">
+                    <input type="button" value="Reset" ng-click="reset()" style="width: 80px; float: right; margin-right: 6px" class="btn btn-success col-lg-3">
+                </div>
             </div>
         </div>
     </div>
