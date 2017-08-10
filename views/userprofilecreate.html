@@ -13,14 +13,9 @@
             <input type="button" value="Change" class="center-block btn btn-default" style="width: 140px">
         </div>
         <div class="col-lg-8">
-            <div class="col-lg-12" style="margin-bottom: 20px;">
+            <div class="col-lg-12" style="margin-top: 7%; margin-left: -12%">
                 <h1 style="display: inline">{{firstname}} {{lastname}}</h1>
                 <p> {{email}} </p>
-                <label for="description" class="text-info">Description</label>
-                <textarea id="description" ng-model="description" ng-change="updateDesLength(); reset_des_error()" style="resize: none; height: 80px" class="col-lg-12"></textarea>
-                <p class="text-info" style="text-align: right"  ng-show="!chrLengthError"> {{characters}} characters remaining</p>
-                <p style="color: red; text-align: right" ng-show="chrLengthError"> {{characters}} characters exceeded</p>
-                <p style="color: red; text-align: right" ng-show="des_error">* Provide a description about yourself</p>
             </div>
         </div>
         <hr class="col-lg-12">
@@ -29,43 +24,18 @@
         <p class="text-info" style="text-align: left; margin-left: 165px">Select your qualifications and rates</p>
         <div class="col-lg-12">
             <fieldset class="checkboxes" style="margin-left: -22px; margin-top: -10px">
-                <div class="col-lg-4">
-                    <label checkbox="myCheckbox" style="width: 250px; text-align: left">
-                        <input type="checkbox" ng-model="myCheckbox" ng-change="reset_prof_type_error()">
-                        Educator
+                <!--ng-repeat="item in job_types"-->
+                <div class="col-lg-4" ng-repeat="item in job_types">
+                    <label checkbox="item.value" style="width: 250px; text-align: left">
+                        <input type="checkbox" ng-model="item.value">
+                        <!--<input type="checkbox" ng-model="checkbox{{item.name}}" ng-change="reset_prof_type_error()">-->
+                        {{item.name}}
                     </label>
-                    <div class="form-group" ng-show="myCheckbox">
+                    <div class="form-group" ng-show="item.value">
                         <div class="input-group" style="margin-left: 85px">
                             <span class="input-group-addon">$</span>
-                            <input ng-model="price1" type="number" ng-change="reset_prof_type_price_error()" class="form-control" style="width: 120px;">
-                        </div>
-                        <p class="text-info"><span style="color: red">*</span>Your rates per day </p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4">
-                    <label checkbox="myCheckbox_2" style="width: 250px; text-align: left" >
-                        <input type="checkbox" ng-model="myCheckbox_2" ng-change="reset_prof_type_error()">
-                        Stylist
-                    </label>
-                    <div class="form-group" ng-show="myCheckbox_2">
-                        <div class="input-group" style="margin-left: 85px">
-                            <span class="input-group-addon">$</span>
-                            <input ng-model="price2" type="number" ng-change="reset_prof_type_price_error()" class="form-control" style="width: 120px;">
-                        </div>
-                        <p class="text-info"><span style="color: red">*</span>Your rates per day </p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4">
-                    <label checkbox="myCheckbox_3" style="width: 250px; text-align: left" >
-                        <input type="checkbox" ng-model="myCheckbox_3" ng-change="reset_prof_type_error()">
-                        Assistant
-                    </label>
-                    <div class="form-group" ng-show="myCheckbox_3">
-                        <div class="input-group" style="margin-left: 85px">
-                            <span class="input-group-addon">$</span>
-                            <input ng-model="price3" type="number" ng-change="reset_prof_type_price_error()" class="form-control" style="width: 120px;">
+                            <!--<input ng-model="price1" type="number" ng-change="reset_prof_type_price_error()" class="form-control" style="width: 120px;">-->
+                            <input type="number" ng-value="item.price" ng-model="item.price" class="form-control" style="width: 120px;">
                         </div>
                         <p class="text-info"><span style="color: red">*</span>Your rates per day </p>
                     </div>
@@ -76,26 +46,37 @@
         </div>
         <hr class="col-lg-12">
     </div>
+    <div class="col-xs-12">
+        <p class="text-info" style="text-align: left; margin-left: 165px">Description</p>
+        <div style="margin-right: 8%; margin-left: 6%">
+            <textarea id="description" ng-model="description" ng-change="updateDesLength(); reset_des_error()" style="resize: none; height: 250px" class="col-lg-12"></textarea>
+            <p class="text-info" style="text-align: right"  ng-show="!chrLengthError"> {{characters}} characters remaining</p>
+            <p style="color: red; text-align: right" ng-show="chrLengthError"> {{characters}} characters exceeded</p>
+            <p style="color: red; text-align: right" ng-show="des_error">* Provide a description about yourself</p>
+        </div>
+        <hr class="col-lg-12">
+    </div>
     <div class="col-lg-12">
         <p class="text-info" style="text-align: left; margin-left: 165px">Select your qualifications</p>
         <div class="col-lg-12">
             <div class="col-lg-4">
                 <div style="margin-left: 50px; float: right">
-                    <input type="checkbox" ng-model="skill1" ng-change="reset_skill_error()"> &nbsp;&nbsp;&nbsp; Barber <br>
-                    <input type="checkbox" ng-model="skill2" ng-change="reset_skill_error()"> &nbsp;&nbsp;&nbsp; Makeup <br>
-                    <input type="checkbox" ng-model="skill3" ng-change="reset_skill_error()"> &nbsp;&nbsp;&nbsp; Dry cutting <br>
-                    <input type="checkbox" ng-model="skill4" ng-change="reset_skill_error()"> &nbsp;&nbsp;&nbsp; Shaving <br>
-                    <input type="checkbox" ng-model="skill5" ng-change="reset_skill_error()"> &nbsp;&nbsp;&nbsp; Hair styling <br>
-                    <input type="checkbox" ng-model="skill6" ng-change="reset_skill_error()"> &nbsp;&nbsp;&nbsp; Wigs cutting <br>
-                    <input type="checkbox" ng-model="skill7" ng-change="reset_skill_error()"> &nbsp;&nbsp;&nbsp; Curling
+                    <div ng-repeat="item in skill_types">
+                        <div ng-if="$index<7">
+                            <input type="checkbox" id="{{item.name}}" ng-model="item.value" ng-change="reset_skill_error()">
+                            <label for="{{item.name}}" style="font-weight: 200">&nbsp;&nbsp;&nbsp; {{item.name}}</label>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div style="float: right">
-                    <input type="checkbox" ng-model="skill8" ng-change="reset_skill_error()"> &nbsp;&nbsp;&nbsp; Coloring <br>
-                    <input type="checkbox" ng-model="skill9" ng-change="reset_skill_error()"> &nbsp;&nbsp;&nbsp; Color correction <br>
-                    <input type="checkbox" ng-model="skill10" ng-change="reset_skill_error()"> &nbsp;&nbsp;&nbsp; Long hair <br>
-                    <input type="checkbox" ng-model="skill11" ng-change="reset_skill_error()"> &nbsp;&nbsp;&nbsp; Short hair
+                    <div ng-repeat="item in skill_types">
+                        <div ng-if="$index>6">
+                            <input type="checkbox" id="{{item.name}}set2" ng-model="item.value" ng-change="reset_skill_error()">
+                            <label for="{{item.name}}set2" style="font-weight: 200">&nbsp;&nbsp;&nbsp; {{item.name}}</label>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

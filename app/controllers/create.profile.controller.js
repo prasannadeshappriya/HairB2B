@@ -33,6 +33,14 @@ app.controller('ProfileCreateController',
         }
     };
 
+    $scope.job_types = [{name: "Stylist", value: false, price: 0.0, id: 1}, {name: "Educator", value: false, price: 0.0, id: 2},
+        {name: "Assistant", value: false, price: 0.0, id: 3}];
+
+    $scope.skill_types = [{name: "Barber",value: false, id: 1}, {name: "Makeup",value: false, id: 2}, {name: "Dry cutting",value: false, id: 3},
+        {name: "Shaving",value: false, id: 4}, {name: "Hair styling",value: false, id: 5}, {name: "Wigs cutting",value: false, id: 6},
+        {name: "Curling",value: false, id: 7}, {name: "Coloring",value: false, id: 8}, {name: "Color correction",value: false, id: 9},
+        {name: "Long hair",value: false, id: 10}, {name: "Short hair",value: false, id: 11}];
+
     $scope.reset_des_error = function () {$scope.des_error = false;};
     $scope.reset_skill_error = function () {$scope.skill_error = false;};
     $scope.reset_prof_type_error = function () {$scope.prof_type_error = false;};
@@ -72,40 +80,36 @@ app.controller('ProfileCreateController',
             isValidate = false;
         }
 
-        if((typeof $scope.myCheckbox === 'undefined' &&
-            typeof $scope.myCheckbox_2 === 'undefined' &&
-            typeof $scope.myCheckbox_3 === 'undefined') ||
-            !($scope.myCheckbox ||
-            $scope.myCheckbox_2 ||
-            $scope.myCheckbox_3)){
+        var i=0;
+        for(i=0; i<$scope.job_types.length; i++){
+            if($scope.job_types[i].value && ($scope.job_types[i].price===null ||
+                                                $scope.job_types[i].price===0.0)){
+                $scope.prof_type_price_error = true;
+                isValidate= false;
+            }
+        }
+        var con = true;    //Check the conditions
+        for(i=0; i<$scope.job_types.length; i++){
+            if($scope.job_types[i].value){
+                con = false;
+                break;
+            }
+        }
+        if(con){
             $scope.prof_type_error = true;
-            isValidate = false;
+            isValidate= false;
         }
 
-        if($scope.myCheckbox && (typeof $scope.price1=== 'undefined' || $scope.price1 ==='')){
-            $scope.prof_type_price_error = true; isValidate= false;
+        con = true;
+        for(i=0; i<$scope.skill_types.length; i++){
+            if($scope.skill_types[i].value){
+                con = false;
+                break;
+            }
         }
-
-        if($scope.myCheckbox_2 && (typeof $scope.price2=== 'undefined' || $scope.price2 ==='')){
-            $scope.prof_type_price_error = true; isValidate= false;
-        }
-
-        if($scope.myCheckbox_3 && (typeof $scope.price3=== 'undefined' || $scope.price3 ==='')){
-            $scope.prof_type_price_error = true; isValidate= false;
-        }
-
-        if((typeof $scope.skill1 === 'undefined' && typeof $scope.skill2 === 'undefined' &&
-            typeof $scope.skill3 === 'undefined' && typeof $scope.skill4 === 'undefined' &&
-            typeof $scope.skill5 === 'undefined' && typeof $scope.skill6 === 'undefined' &&
-            typeof $scope.skill7 === 'undefined' && typeof $scope.skill8 === 'undefined' &&
-            typeof $scope.skill9 === 'undefined' && typeof $scope.skill10 === 'undefined' &&
-            typeof $scope.skill11 === 'undefined') ||
-                        !($scope.skill1 ||
-                        $scope.skill1 || $scope.skill4 || $scope.skill7 || $scope.skill10 ||
-                        $scope.skill2 || $scope.skill5 || $scope.skill8 || $scope.skill11 ||
-                        $scope.skill3 || $scope.skill6 || $scope.skill9)){
+        if(con){
             $scope.skill_error = true;
-            isValidate = false;
+            isValidate= false;
         }
 
         if(typeof $scope.paypal_email === 'undefined' || $scope.paypal_email === ''){
@@ -120,16 +124,18 @@ app.controller('ProfileCreateController',
 
             var description = $scope.description;
 
-            if($scope.myCheckbox){job_types.push(2);price_job_types.push($scope.price1);}
-            if($scope.myCheckbox_2){job_types.push(1);price_job_types.push($scope.price2);}
-            if($scope.myCheckbox_3){job_types.push(3);price_job_types.push($scope.price3);}
+            for(i=0; i<$scope.job_types.length; i++){
+                if($scope.job_types[i].value){
+                    job_types.push($scope.job_types[i].id);
+                    price_job_types.push($scope.job_types[i].price);
+                }
+            }
 
-            if($scope.skill1){skills.push(1);} if($scope.skill2){skills.push(2);}
-            if($scope.skill3){skills.push(3);} if($scope.skill4){skills.push(4);}
-            if($scope.skill5){skills.push(5);} if($scope.skill6){skills.push(6);}
-            if($scope.skill7){skills.push(7);} if($scope.skill8){skills.push(8);}
-            if($scope.skill9){skills.push(9);} if($scope.skill10){skills.push(10);}
-            if($scope.skill11){skills.push(11);}
+            for(i=0; i<$scope.skill_types.length; i++){
+                if($scope.skill_types[i].value){
+                    skills.push($scope.skill_types[i].id);
+                }
+            }
 
             var payment_email = $scope.paypal_email;
 
@@ -138,7 +144,7 @@ app.controller('ProfileCreateController',
                 url: host_url + "profile/createProfile",
                 data: {description: description, skills: skills, job_types: job_types, payment_email: payment_email, price_job_types: price_job_types}
             }).then(function (resData){
-                console.log(resData);
+                // console.log(resData);
                 $scope.isStartCreate = false;
                 $location.path('/profile');
             },function (error){

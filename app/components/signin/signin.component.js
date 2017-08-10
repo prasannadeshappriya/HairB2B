@@ -41,6 +41,7 @@ angular.module('app')
                     $scope.isLoading = false;
                     if(typeof resData.status==="undefined"){return $scope.message = "Server connection error";}
                     if(resData.status===200){
+                        $scope.submitted = false;
                         //Create session with the server
                         //Get the token
                         AuthService.Login(
@@ -51,6 +52,9 @@ angular.module('app')
                             resData.data.lastname,
                             function (callback) {
                                 $('#signin_model').modal('hide');
+                                $scope.password = '';
+                                $scope.email = '';
+                                $scope.rem_me = false;
                                 console.log('Authentication Successful');
                                 setTimeout(function () {
                                     $scope.$digest()

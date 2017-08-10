@@ -29,16 +29,15 @@
             <label style="margin-left: -15px">Dates: </label>
             <multiple-date-picker
                     ng-model="myArrayOfDates"
-                    highlight-days="highlightDays"
-                    month="today"
-                    month-changed="logMonthChanged"></multiple-date-picker>
+                    disable-days-before="today"
+                    highlight-days="highlightDays"></multiple-date-picker>
         </div>
         <div class="col-xs-6" style="margin-top: 20px">
             <div class="col-xs-12">
                 <div>
                     <label class="col-xs-2" style="margin-left: -15px; margin-top: 8px">Expire: </label>
                     <div class="col-lg-8" style="float: right">
-                        <input class="form-control" type="datetime-local" value="2017-05-23T15:00:00">
+                        <input class="form-control" type="datetime-local" value="2017-05-23T15:00:00" min="{{min_date}}">
                     </div>
                 </div>
             </div>
@@ -81,5 +80,6 @@
             </div>
         </div>
         <input type="button" value="Proceed" ng-click="proceed()" style="float: right; margin-top: 20px; width: 150px" class="btn btn-success">
+
     </div>
 </div>

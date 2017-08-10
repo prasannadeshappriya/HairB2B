@@ -8,17 +8,9 @@ app.controller('OrderPlaceController',
             $scope.date_count = 0;
             var busy_dates = [];
 
+            $scope.min_date = moment().utc().format("YYYY-MM-DDTHH:MM:SS");
             $scope.today = moment();
-            console.log($scope.today._d);
-            $scope.myMonth = moment().add(1, 'MONTH');
-
-
-            $scope.highlightDays = [
-                // {date: moment().date(2), css: 'holiday', selectable: false, title: 'Busy'},
-                // {date: moment().date(14), css: 'holiday', selectable: false, title: 'Busy'}
-            ];
-
-            // $scope.myArrayOfDates = [moment().date(4), moment().date(5), moment().date(8)];
+            $scope.highlightDays = [];
             $scope.myArrayOfDates = [];
 
             $scope.$watch('myArrayOfDates', function (newValue) {
@@ -28,10 +20,6 @@ app.controller('OrderPlaceController',
                     $scope.total = (total);
                 }
             }, true);
-
-            $scope.logMonthChanged = function(newMonth, oldMonth){
-                console.log(newMonth + ' ' + oldMonth);
-            };
 
             $scope.location = [{name: 'Sidney'}];
             $scope.selectedLocation = $scope.location[0].name;
@@ -69,12 +57,37 @@ app.controller('OrderPlaceController',
                                 break;
                             }
                         }
+                        $http({
+                            method: "GET",
+                            url: host_url + "profile/getBusyDatesPublic?id="+ user_id
+                        }).then(function (resData){
+                            // console.log(resData);
+                            var busy_dates = resData.data.busy_dates;
+                            $scope.highlightDays = [];
+                            for(var i=0; i<busy_dates.length; i++){
+                                $scope.highlightDays.push({
+                                    date: moment(busy_dates[i]),
+                                    css: 'holiday',
+                                    selectable: false,
+                                    title: 'Busy'
+                                });
+                            }
+                        },function (error){
+                            if(error.status===504){
+                                console.log('404 Not Found [id: ' + user_id);
+                                $location.path('/');
+                            }
+                            console.log('Error on searching profile: ' + error);
+                            $location.path('/');
+                        });
                     }
                 },function (error){
                     if(error.status===504){
                         console.log('404 Not Found [id: ' + user_id);
+                        $location.path('/');
                     }
                     console.log('Error on searching profile: ' + error);
+                    $location.path('/');
                 });
             };
 
@@ -90,9 +103,7 @@ app.controller('OrderPlaceController',
             };
 
             $scope.proceed = function () {
-                // var a = moment().get();
-                // console.log($scope.today._d.getYear());
-                // console.log($scope.today._d.getMonth());
+
             };
         }
 ]);

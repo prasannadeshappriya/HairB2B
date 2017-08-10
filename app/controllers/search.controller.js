@@ -7,8 +7,12 @@ app.controller('SearchController',
             $scope.job_types = [{name: "Stylist", value: false}, {name: "Educator", value: false},
                 {name: "Assistant", value: false}, {name: "Select All", value: false}];
 
+            $scope.location = [{name: "Sidney", value: 1}];
+
+            $scope.sort_value = "0";
             $scope.isLoading = false;
             $scope.search_results = [];
+            $scope.search_results_tmp = [];
 
             $scope.skill_types = [{name: "Barber",value: false}, {name: "Makeup",value: false}, {name: "Dry cutting",value: false},
                 {name: "Shaving",value: false}, {name: "Hair styling",value: false}, {name: "Wigs cutting",value: false},
@@ -17,7 +21,57 @@ app.controller('SearchController',
 
             $scope.selectedName = $scope.job_types[0].name;
             $scope.selectedSkillName = $scope.skill_types[0].name;
+            $scope.selectedLocationName = $scope.location[0].name;
             $scope.empty_results = false;
+
+            $scope.validate_skills = function(index){
+                var con = true;
+                for(var i=0; i<$scope.skill_types.length; i++){
+                    if($scope.skill_types[i].value){
+                        con = false; break;
+                    }
+                }
+                if(con){
+                    $scope.skill_types[index].value = true;
+                }
+            };
+
+            $scope.sort = function () {
+                //Lowest first
+                if($scope.sort_value=="1"){
+                    $scope.search_results.sort(function (a,b) {
+                        return a.price - b.price;
+                    })
+                }
+                //Highest first
+                if($scope.sort_value=="2"){
+                    $scope.search_results.sort(function (a,b) {
+                        return b.price - a.price;
+                    })
+                }
+            };
+
+            $scope.search_name_change = function () {
+                var res = $scope.search_results_tmp.filter(function (el) {
+                    var fullname = el.firstname + ' ' + el.lastname;
+                    if((fullname.toLowerCase()).includes(($scope.search_name).toLowerCase())){
+                        return true;
+                    }else{return false;}
+                });
+                $scope.search_results = res;
+            };
+
+            $scope.validate_jobs = function(index){
+                var con = true;
+                for(var i=0; i<$scope.job_types.length; i++){
+                    if($scope.job_types[i].value){
+                        con = false; break;
+                    }
+                }
+                if(con){
+                    $scope.job_types[index].value = true;
+                }
+            };
 
             $scope.dynamicSearch = function () {
                 $scope.isLoading = true;
@@ -104,6 +158,8 @@ app.controller('SearchController',
                     if($scope.search_results.length===0){
                         $scope.empty_results = true;
                     }else{$scope.empty_results = false;}
+                    $scope.sort();
+                    $scope.search_results_tmp = $scope.search_results;
                 },function (error){
                     $scope.isLoading = false;
                     console.log('Error on searching profile: ' + error);
@@ -331,6 +387,8 @@ app.controller('SearchController',
                     if($scope.search_results.length===0){
                         $scope.empty_results = true;
                     }else{$scope.empty_results = false;}
+                    $scope.sort();
+                    $scope.search_results_tmp = $scope.search_results;
                 },function (error){
                     $scope.isLoading = false;
                     console.log('Error on searching profile: ' + error);

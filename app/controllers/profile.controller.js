@@ -9,9 +9,7 @@ app.controller('ProfileController',
     $scope.date_count = 0;
 
     $scope.today = moment();
-    console.log($scope.today._d);
     $scope.myMonth = moment().add(1, 'MONTH');
-
 
     $scope.highlightDays = [];
 
@@ -27,12 +25,6 @@ app.controller('ProfileController',
             }else{$scope.btnBusyEnable = false;}
         }
     }, true);
-
-    $scope.logMonthChanged = function(newMonth, oldMonth){
-        console.log(newMonth + ' ' + oldMonth);
-    };
-
-
 
     $scope.checkSelection = function(event, date) {
         var i=0;
@@ -81,10 +73,10 @@ app.controller('ProfileController',
                 // console.log(resData);
                 $scope.description = resData.data.description;
                 for(var i=0; i<resData.data.job_types.length; i++){
-                    $scope.job_types[i].value = true;
+                    $scope.job_types[parseInt(resData.data.job_types[i])-1].value = true;
                 }
                 for(var j=0; j<resData.data.skills.length; j++){
-                    $scope.skill_types[j].value=true;
+                    $scope.skill_types[parseInt(resData.data.skills[j])-1].value=true;
                 }
                 $http({
                     method: "GET",
