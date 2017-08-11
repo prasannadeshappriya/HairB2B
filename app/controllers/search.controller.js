@@ -7,7 +7,7 @@ app.controller('SearchController',
             $scope.job_types = [{name: "Stylist", value: false}, {name: "Educator", value: false},
                 {name: "Assistant", value: false}, {name: "Select All", value: false}];
 
-            $scope.location = [{name: "Sidney", value: 1}];
+            $scope.location = [{name: "Sydney", value: 1}];
 
             $scope.sort_value = "0";
             $scope.isLoading = false;
@@ -37,10 +37,7 @@ app.controller('SearchController',
                     }
                 }
                 setTimeout(function () {
-                    console.log($scope.max_value);
-                    console.log($scope.filter_price);
                     $scope.filter_price = $scope.max_value;
-                    console.log('asdad' + $scope.filter_price);
                     $scope.$apply();
                 },1);
             };
@@ -51,7 +48,11 @@ app.controller('SearchController',
                         return true;
                     }else{return false;}
                 });
+                if(res.length===0){
+                    $scope.empty_results = true;
+                }else{$scope.empty_results = false;}
                 $scope.search_results = res;
+                $scope.sort();
             };
 
             $scope.validate_skills = function(index){
@@ -88,7 +89,11 @@ app.controller('SearchController',
                         return true;
                     }else{return false;}
                 });
+                if(res.length===0){
+                    $scope.empty_results = true;
+                }else{$scope.empty_results = false;}
                 $scope.search_results = res;
+                $scope.sort();
             };
 
             $scope.validate_jobs = function(index){

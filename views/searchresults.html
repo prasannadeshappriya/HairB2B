@@ -11,6 +11,10 @@
                 <option value="1">Lowest First</option>
                 <option value="2">Highest First</option>
             </select>
+            <label for="price_filter" style="margin-top: 20px">Price:&nbsp;&nbsp;&nbsp;${{filter_price}}</label>
+            <div id="price_filter">
+                <input type="range" name="range" style="width: 200px" min="{{min_value}}" max="{{max_value}}" ng-model="filter_price" ng-change="update()">
+            </div>
             <br>
             <label for="job_types">Job Types</label>
             <div style="margin-left: 30px" id="job_types">
@@ -25,10 +29,6 @@
                     <input type="checkbox" id="skill_type{{item.name}}" ng-click="dynamicSearch()" ng-change="validate_skills($index)" ng-model="item.value" ng-hide="$index === (skill_types.length-1)">
                     <label for="skill_type{{item.name}}" ng-hide="$index === (skill_types.length-1)">{{item.name}}</label>
                 </div>
-            </div>
-            <label for="price_filter" style="margin-top: 10px">Price:&nbsp;&nbsp;&nbsp;${{filter_price}}</label>
-            <div id="price_filter">
-                <input type="range" name="range" style="width: 200px" min="{{min_value}}" max="{{max_value}}" ng-model="filter_price" ng-change="update()">
             </div>
         </div>
         <div class="col-xs-9" style="border-left: 1px solid lightgray">
@@ -51,7 +51,7 @@
                         <p>{{search_data.acctypes}}</p>
                         <div class="col-xs-12">
                             <div class="col-xs-4">
-                                <p><b>{{search_data.price}}</b> per day</p>
+                                <p><b>${{search_data.price}}</b> per day</p>
                             </div>
                             <div class="col-xs-4">
                                 <p><span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span> &nbsp;&nbsp;{{search_data.rates}}</p>
