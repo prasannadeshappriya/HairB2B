@@ -77,8 +77,14 @@ angular.module('signup')
                             resData.data.lastname,
                             function (callback) {
                                 $('#signup_model').modal('hide');
-                                console.log(callback);
                                 console.log('Authentication Successful');
+                                $scope.firstname = '';
+                                $scope.lastname = '';
+                                $scope.email = '';
+                                $scope.password = '';
+                                $scope.repassword = '';
+                                $scope.chkTerms = false;
+                                $scope.submitted = false;
                                 setTimeout(function () {
                                     $scope.$digest()
                                 },1000);
