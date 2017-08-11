@@ -3,14 +3,14 @@
         <div class="modal-content">
             <div class="modal-body">
                 <div class="signup_page">
-                    <h2 class="text-info text-center" style="margin-bottom: 30px">Sign In</h2>
+                    <h2 class="text-info text-center" id="sign_in" style="margin-bottom: 30px">Sign In</h2>
                     <form name="loginForm" style="width: 300px" class="center-block">
 
                         <!--User Email Input Field-->
                         <div style="padding: 0 10px 15px 10px;"
                              ng-class="{'has-error' : ((loginForm.email.$error.email && (submitted)) || ((loginForm.email.$error.required) && (submitted)))}">
 
-                            <input type="email" name="email" id="email" class="form-control" placeholder="Email" required
+                            <input type="email" name="email" id="uemail" class="form-control" placeholder="Email" required
                                    ng-model="email"
                                    ng-model-options="{'allowInvalid': true}"
                                    ng-change="resetSubmitted(); validate();">
@@ -23,7 +23,7 @@
                         <div style="padding: 0 10px 15px 10px"
                              ng-class="{'has-error' : ((loginForm.password.$error.required) && (submitted))}">
 
-                            <input type="password" name="password" id="password" class="form-control" placeholder="Password" required
+                            <input type="password" name="password" id="upassword" class="form-control" placeholder="Password" required
                                    ng-model="password"
                                    ng-change="resetSubmitted(); validate()">
 
@@ -36,7 +36,7 @@
                         </div>
 
                         <div class="form-group text-center">
-                            <input type="button" ng-disabled="!(isComplete)" ng-click="login()" value="Get Started" class="btn btn-success SubmitButton">
+                            <input type="button" ng-disabled="!(isComplete)" ng-click="login()" value="Sign In" id="usign_in_btn" class="btn btn-success SubmitButton">
                         </div>
 
                         <div class="text-center">
