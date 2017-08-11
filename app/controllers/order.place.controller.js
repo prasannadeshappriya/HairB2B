@@ -14,6 +14,7 @@ app.controller('OrderPlaceController',
             $scope.myArrayOfDates = [];
 
             $scope.$watch('myArrayOfDates', function (newValue) {
+                $scope.orderDateErr = false;
                 if (newValue) {
                     $scope.date_count = newValue.length;
                     var total = (($scope.date_count)*($scope.rate))+($scope.other);
@@ -30,6 +31,24 @@ app.controller('OrderPlaceController',
             $scope.other = 100;
             $scope.total = 0.0;
             $scope.selectedJobType = $scope.JobType[0].name;
+
+            //Description character count
+            $scope.desLength= 0;
+            $scope.characters = 1000;
+            $scope.chrLengthError = false;
+
+            $scope.updateDesLength = function () {
+                if($scope.description.length > 1000){
+                    $scope.characters = $scope.description.length - 1000;
+                    $scope.chrLengthError = true;
+                }else{
+                    $scope.characters = 1000 - $scope.description.length;
+                    $scope.chrLengthError = false;
+                }
+            };
+
+            $scope.reset_des_error = function () {$scope.des_error = false;};
+            $scope.orderDateErr = false;
 
             $scope.first_name = '';
             $scope.last_name = '';
@@ -103,7 +122,18 @@ app.controller('OrderPlaceController',
             };
 
             $scope.proceed = function () {
-
+                var con = true;
+                if($scope.date_count===0){
+                    $scope.orderDateErr = true;
+                    con = false;
+                }
+                if($scope.description==='' || typeof $scope.description==='undefined'){
+                    $scope.des_error = true;
+                    con = false;
+                }
+                if(con){
+                    console.log('Proceed');
+                }
             };
         }
 ]);
