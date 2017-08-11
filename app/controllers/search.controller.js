@@ -106,7 +106,22 @@ app.controller('SearchController',
             $scope.dynamicSearch = function () {
                 $scope.isLoading = true;
                 // $scope.search_results = [];
-                var i;
+                var i, con=true;
+                for(i=0; i<$scope.job_types.length; i++){
+                    if($scope.job_types[i].value){
+                        con = false;
+                        break;
+                    }
+                }
+                if(con){$scope.job_types[0].value=true;}
+                con = true;
+                for(i=0; i<$scope.skill_types.length; i++){
+                    if($scope.skill_types[i].value){
+                        con = false;
+                        break;
+                    }
+                }
+                if(con){$scope.skill_types[0].value=true;}
 
                 var job_types=[];
                 for(i=0; i<$scope.job_types.length; i++){
